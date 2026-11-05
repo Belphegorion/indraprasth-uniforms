@@ -10,6 +10,7 @@ import { env } from './config/env';
 import publicRoutes from './routes/publicRoutes';
 import adminRoutes from './routes/adminRoutes';
 import { notFound, errorHandler } from './middleware/error';
+import { connectDB } from './config/db';
 
 const app: Express = express();
 
@@ -35,7 +36,7 @@ app.use(
       // Allow requests with no origin (like mobile apps, curl, or server-to-server)
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
-      } else if (env.NODE_ENV !== 'production') {
+      } else if (env.NODE_ENV !== 'production' || origin.endsWith('.vercel.app')) {
         callback(null, true);
       } else {
         callback(new Error(`Origin ${origin} not allowed by CORS`));
@@ -44,6 +45,16 @@ app.use(
     credentials: true,
   })
 );
+
+// Ensure MongoDB is connected for serverless invocations
+app.use(async (_req, _res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
 
 // Compression & parsing
 app.use(compression());
@@ -63,8 +74,8 @@ if (env.NODE_ENV !== 'test') {
   );
 }
 
-// Health check endpoint
-app.get('/health', (_req, res) => {
+// Health check endpoint (both /health and /api/health)
+app.get(['/health', '/api/health'], (_req, res) => {
   res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 

@@ -1,19 +1,34 @@
 import mongoose from 'mongoose';
 import { env } from './env';
 
+let cachedPromise: Promise<typeof mongoose> | null = null;
+
 export const connectDB = async (uri?: string): Promise<typeof mongoose> => {
-  const mongoUri = uri || env.MONGODB_URI;
-  try {
-    const conn = await mongoose.connect(mongoUri);
-    console.log(`✅ MongoDB connected: ${conn.connection.host}/${conn.connection.name}`);
-    return conn;
-  } catch (error) {
-    console.error('❌ MongoDB connection error:', error);
-    if (env.NODE_ENV !== 'test') {
-      process.exit(1);
-    }
-    throw error;
+  if (mongoose.connection.readyState === 1) {
+    return mongoose;
   }
+
+  if (cachedPromise) {
+    return cachedPromise;
+  }
+
+  const mongoUri = uri || env.MONGODB_URI;
+  cachedPromise = mongoose
+    .connect(mongoUri)
+    .then((conn) => {
+      console.log(`✅ MongoDB connected: ${conn.connection.host}/${conn.connection.name}`);
+      return conn;
+    })
+    .catch((error) => {
+      cachedPromise = null;
+      console.error('❌ MongoDB connection error:', error);
+      if (env.NODE_ENV !== 'test' && !process.env.VERCEL) {
+        process.exit(1);
+      }
+      throw error;
+    });
+
+  return cachedPromise;
 };
 
 export const disconnectDB = async (): Promise<void> => {
