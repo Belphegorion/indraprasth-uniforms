@@ -14,7 +14,9 @@ export const connectDB = async (uri?: string): Promise<typeof mongoose> => {
 
   const mongoUri = uri || env.MONGODB_URI;
   cachedPromise = mongoose
-    .connect(mongoUri)
+    .connect(mongoUri, {
+      serverSelectionTimeoutMS: 5000,
+    })
     .then((conn) => {
       console.log(`✅ MongoDB connected: ${conn.connection.host}/${conn.connection.name}`);
       return conn;

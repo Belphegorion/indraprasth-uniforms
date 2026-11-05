@@ -8,7 +8,11 @@ dotenv.config();
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   PORT: z.coerce.number().default(5000),
-  MONGODB_URI: z.string().default('mongodb://localhost:27017/indraprasth'),
+  MONGODB_URI: z
+    .string()
+    .default(
+      'mongodb+srv://Vercel-Admin-atlas-bole-candle:a40i7Bz1r66uSegK@atlas-bole-candle.xohkesq.mongodb.net/indraprasth?retryWrites=true&w=majority'
+    ),
   JWT_SECRET: z.string().min(16).default('change-me-32-chars-long-secret-key-indraprasth-uniforms'),
   COOKIE_DOMAIN: z.string().optional().default(''),
   CLIENT_URL: z.string().default('http://localhost:5173'),
