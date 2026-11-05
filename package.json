@@ -1,0 +1,25 @@
+{
+  "name": "indraprasth-uniforms",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "shared",
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "dev": "concurrently -n \"SERVER,CLIENT\" -c \"blue,green\" \"npm run dev -w server\" \"npm run dev -w client\"",
+    "dev:server": "npm run dev -w server",
+    "dev:client": "npm run dev -w client",
+    "build": "npm run build -w shared && npm run build -w server && npm run build -w client",
+    "test": "npm run test -w server && npm run test -w client",
+    "test:server": "npm run test -w server",
+    "test:client": "npm run test -w client",
+    "seed": "npm run seed -w server",
+    "migrate:filters": "npm run migrate:filters -w server",
+    "lint": "npm run lint -w shared && npm run lint -w server && npm run lint -w client"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "device": "desktop",
+  "url": "http://localhost:5173/",
+  "scores": {
+    "accessibility": 95,
+    "bestPractices": 100,
+    "seo": 100,
+    "agenticBrowsing": 50
+  },
+  "passedAudits": 51,
+  "failedAudits": [
+    {
+      "id": "color-contrast",
+      "score": 0,
+      "category": "accessibility",
+      "description": "Background and foreground colors do not have a sufficient contrast ratio.",
+      "nodes": [
+        {
+          "selector": "a.text-navy-700[href='/admin/login']",
+          "label": "Staff Administration Portal",
+          "contrastRatio": 1.64,
+          "expected": 4.5
+        },
+        {
+          "selector": "a.fixed span (WhatsApp pill)",
+          "label": "Order on WhatsApp",
+          "contrastRatio": 1.98,
+          "expected": 4.5
+        },
+        {
+          "selector": "span.text-gold-700",
+          "label": "INSTITUTIONAL EXPERTISE",
+          "contrastRatio": 4.27,
+          "expected": 4.5
+        },
+        {
+          "selector": "button > div > span",
+          "label": "ALL badge",
+          "contrastRatio": 4.44,
+          "expected": 4.5
+        }
+      ]
+    },
+    {
+      "id": "heading-order",
+      "score": 0,
+      "category": "accessibility",
+      "description": "Heading elements are not in a sequentially-descending order",
+      "nodes": [
+        "h3.text-xl (Delhi Public School Official Blazer)",
+        "h4.font-serif (Double-Stitched Seams)"
+      ]
+    },
+    {
+      "id": "label-content-name-mismatch",
+      "score": 0,
+      "category": "accessibility",
+      "description": "Elements with visible text labels do not have matching accessible names (WCAG 2.5.3 Label in Name)",
+      "nodes": [
+        "Add to Bag button with aria-label='Add Dps Winter Tie to bag'"
+      ]
+    },
+    {
+      "id": "cumulative-layout-shift",
+      "score": 0.99,
+      "cls": 0.045
+    }
+  ]
+}

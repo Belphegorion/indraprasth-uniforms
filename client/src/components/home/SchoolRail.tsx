@@ -1,0 +1,244 @@
+import React, { useState, useMemo } from 'react';
+import { Search, GraduationCap, Building2 } from 'lucide-react';
+import { ISchool } from '@indraprasth/shared';
+
+interface SchoolRailProps {
+  schools: (ISchool & { productCount?: number })[];
+  selectedSchoolSlug: string;
+  onSelectSchool: (schoolSlugOrCode: string) => void;
+  totalAllSchoolsCount?: number;
+}
+
+export const SchoolRail: React.FC<SchoolRailProps> = ({
+  schools,
+  selectedSchoolSlug,
+  onSelectSchool,
+  totalAllSchoolsCount = 0,
+}) => {
+  const [filterQuery, setFilterQuery] = useState('');
+
+  // Filter schools list when search query is entered
+  const filteredSchools = useMemo(() => {
+    if (!filterQuery.trim()) return schools;
+    const q = filterQuery.toLowerCase();
+    return schools.filter(
+      (s) =>
+        s.name.toLowerCase().includes(q) ||
+        s.code.toLowerCase().includes(q) ||
+        (s.branchLabel && s.branchLabel.toLowerCase().includes(q))
+    );
+  }, [schools, filterQuery]);
+
+  const isAllSelected = !selectedSchoolSlug || selectedSchoolSlug === 'all';
+
+  return (
+    <>
+      {/* ======================================================== */}
+      {/* DESKTOP RAIL (>=1024px): Sticky left sidebar (≈260px)   */}
+      {/* ======================================================== */}
+      <nav
+        aria-label="Schools"
+        className="hidden lg:block w-[260px] shrink-0 sticky top-28 self-start bg-cream-50 rounded-[10px] border border-sand-300 shadow-subtle p-3.5 space-y-3"
+      >
+        <div className="flex items-center justify-between pb-2 border-b border-sand-300">
+          <div className="flex items-center gap-2">
+            <Building2 className="w-4 h-4 text-blue-600" />
+            <span className="font-serif font-bold text-sm text-navy-800 uppercase tracking-wide">
+              Schools
+            </span>
+          </div>
+          <span className="text-[11px] font-mono font-semibold text-slate bg-sand-200 px-2 py-0.5 rounded-full">
+            {schools.length}
+          </span>
+        </div>
+
+        {/* Search input when school list > 8 */}
+        {schools.length > 8 && (
+          <div className="relative">
+            <Search className="w-3.5 h-3.5 text-taupe-500 absolute left-2.5 top-1/2 -translate-y-1/2" />
+            <input
+              type="text"
+              placeholder="Find school..."
+              value={filterQuery}
+              onChange={(e) => setFilterQuery(e.target.value)}
+              className="w-full text-xs pl-8 pr-2.5 py-1.5 rounded-[8px] border border-sand-300 focus:outline-none focus:ring-2 focus:ring-blue-600 bg-cream-100 text-ink placeholder:text-taupe-500"
+              aria-label="Filter school list"
+            />
+          </div>
+        )}
+
+        {/* School List */}
+        <div
+          role="radiogroup"
+          aria-label="School selection"
+          className="space-y-1 max-h-[calc(100vh-220px)] overflow-y-auto pr-1"
+        >
+          {/* "All Schools" option */}
+          <button
+            type="button"
+            role="radio"
+            aria-checked={isAllSelected}
+            onClick={() => onSelectSchool('all')}
+            className={`w-full flex items-center justify-between px-3 py-2.5 rounded-[8px] text-left text-xs transition-all min-h-[44px] btn-tactile ${
+              isAllSelected
+                ? 'bg-blue-100 border-l-[3px] border-blue-600 text-navy-800 font-bold shadow-xs'
+                : 'hover:bg-sand-200 text-ink'
+            }`}
+          >
+            <div className="flex items-center gap-2.5 min-w-0">
+              <span
+                className={`w-7 h-7 rounded-[6px] flex items-center justify-center shrink-0 text-xs font-mono font-bold ${
+                  isAllSelected
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-sand-200 text-navy-800'
+                }`}
+              >
+                ALL
+              </span>
+              <span className="truncate font-medium">All Schools</span>
+            </div>
+            {totalAllSchoolsCount > 0 && (
+              <span
+                className={`text-[11px] font-mono px-1.5 py-0.5 rounded-full shrink-0 ${
+                  isAllSelected
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-sand-200 text-slate'
+                }`}
+              >
+                {totalAllSchoolsCount}
+              </span>
+            )}
+          </button>
+
+          {/* Individual Schools */}
+          {filteredSchools.map((s) => {
+            const isSelected =
+              selectedSchoolSlug.toLowerCase() === s.slug.toLowerCase() ||
+              selectedSchoolSlug.toLowerCase() === s.code.toLowerCase();
+
+            return (
+              <button
+                key={s._id || s.slug}
+                type="button"
+                role="radio"
+                aria-checked={isSelected}
+                onClick={() => onSelectSchool(s.slug)}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-[8px] text-left text-xs transition-all min-h-[44px] btn-tactile ${
+                  isSelected
+                    ? 'bg-blue-100 border-l-[3px] border-blue-600 text-navy-800 font-bold shadow-xs'
+                    : 'hover:bg-sand-200 text-ink'
+                }`}
+              >
+                <div className="flex items-center gap-2.5 min-w-0">
+                  {s.logoUrl ? (
+                    <img
+                      src={s.logoUrl}
+                      alt={s.code}
+                      className="w-7 h-7 rounded-[6px] object-contain bg-cream-50 border border-sand-300 shrink-0 p-0.5"
+                    />
+                  ) : (
+                    <span
+                      className={`w-7 h-7 rounded-[6px] flex items-center justify-center shrink-0 text-[10px] font-mono font-bold uppercase ${
+                        isSelected
+                          ? 'bg-blue-600 text-white'
+                          : 'bg-sand-200 text-navy-800 border border-sand-300'
+                      }`}
+                    >
+                      {s.code.slice(0, 3)}
+                    </span>
+                  )}
+                  <div className="min-w-0">
+                    <span className="block truncate font-medium">{s.name}</span>
+                    <span
+                      className={`text-[10px] font-mono block ${
+                        isSelected ? 'text-blue-600 font-bold' : 'text-slate font-medium'
+                      }`}
+                    >
+                      {s.code}
+                    </span>
+                  </div>
+                </div>
+
+                {s.productCount !== undefined && (
+                  <span
+                    className={`text-[11px] font-mono px-1.5 py-0.5 rounded-full shrink-0 ml-1 ${
+                      isSelected
+                        ? 'bg-blue-600 text-white'
+                        : 'bg-sand-200 text-slate'
+                    }`}
+                  >
+                    {s.productCount}
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </div>
+      </nav>
+
+      {/* ======================================================== */}
+      {/* TABLET & MOBILE RAIL (<1024px): Horizontally scrollable  */}
+      {/* ======================================================== */}
+      <nav
+        aria-label="Schools mobile selection"
+        className="lg:hidden w-full overflow-x-auto pb-2 scrollbar-none flex items-center gap-2"
+      >
+        {/* All Schools Pill */}
+        <button
+          type="button"
+          onClick={() => onSelectSchool('all')}
+          aria-pressed={isAllSelected}
+          className={`shrink-0 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold min-h-[44px] transition-all btn-tactile ${
+            isAllSelected
+              ? 'bg-navy-800 text-cream-50 shadow-sm border border-navy-700'
+              : 'bg-cream-50 text-navy-800 border border-sand-300 hover:bg-sand-200'
+          }`}
+        >
+          <GraduationCap className="w-3.5 h-3.5" />
+          <span>All Schools</span>
+          {totalAllSchoolsCount > 0 && (
+            <span
+              className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
+                isAllSelected ? 'bg-cream-50/20 text-cream-50' : 'bg-sand-200 text-slate'
+              }`}
+            >
+              {totalAllSchoolsCount}
+            </span>
+          )}
+        </button>
+
+        {/* School Pills */}
+        {schools.map((s) => {
+          const isSelected =
+            selectedSchoolSlug.toLowerCase() === s.slug.toLowerCase() ||
+            selectedSchoolSlug.toLowerCase() === s.code.toLowerCase();
+
+          return (
+            <button
+              key={s._id || s.slug}
+              type="button"
+              onClick={() => onSelectSchool(s.slug)}
+              aria-pressed={isSelected}
+              className={`shrink-0 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold min-h-[44px] transition-all btn-tactile ${
+                isSelected
+                  ? 'bg-navy-800 text-cream-50 shadow-sm border border-navy-700'
+                  : 'bg-cream-50 text-navy-800 border border-sand-300 hover:bg-sand-200'
+              }`}
+            >
+              <span>{s.code || s.name}</span>
+              {s.productCount !== undefined && (
+                <span
+                  className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
+                    isSelected ? 'bg-cream-50/20 text-cream-50' : 'bg-sand-200 text-slate'
+                  }`}
+                >
+                  {s.productCount}
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </nav>
+    </>
+  );
+};

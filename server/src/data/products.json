@@ -1,0 +1,177 @@
+[
+  {
+    "name": "Dps Winter Tie",
+    "price": 100,
+    "schoolCode": "DPS",
+    "schoolName": "Delhi Public School Bhopal",
+    "category": "Winter-ware",
+    "imageUrl": "https://res.cloudinary.com/dvaynkflu/image/upload/v1791370845/indraprasth/products/ngfiqedvngrgzvuc12td.png",
+    "publicId": "indraprasth/products/ngfiqedvngrgzvuc12td",
+    "description": "Official Delhi Public School Bhopal winter tie made with durable, high-quality woven fabric and fine finishing.",
+    "gender": "unisex",
+    "season": "winter",
+    "typeGroup": "accessories",
+    "itemType": "Tie",
+    "sizes": [
+      { "label": "Standard", "stock": 50 }
+    ],
+    "isFeatured": true
+  },
+  {
+    "name": "Dps Winter Socks",
+    "price": 90,
+    "schoolCode": "DPS",
+    "schoolName": "Delhi Public School Bhopal",
+    "category": "Winter-ware",
+    "imageUrl": "https://res.cloudinary.com/dvaynkflu/image/upload/v1791370637/indraprasth/products/zrq27ztm2hqbjgthuxpo.jpg",
+    "publicId": "indraprasth/products/zrq27ztm2hqbjgthuxpo",
+    "description": "Warm, sweat-absorbent official DPS winter socks with reinforced heel and elastic cuff.",
+    "gender": "unisex",
+    "season": "winter",
+    "typeGroup": "accessories",
+    "itemType": "Socks",
+    "sizes": [
+      { "label": "Small (Age 4-7)", "stock": 35 },
+      { "label": "Medium (Age 8-12)", "stock": 40 },
+      { "label": "Large (Age 13+)", "stock": 30 }
+    ],
+    "isFeatured": false
+  },
+  {
+    "name": "Dps Winter Divider",
+    "price": 760,
+    "schoolCode": "DPS",
+    "schoolName": "Delhi Public School Bhopal",
+    "category": "Winter-ware",
+    "imageUrl": "https://res.cloudinary.com/dvaynkflu/image/upload/v1791370417/indraprasth/products/bkj9xtu61hsf4jrm1oyi.jpg",
+    "publicId": "indraprasth/products/bkj9xtu61hsf4jrm1oyi",
+    "description": "Pleated official winter divider skirt for girls, premium wool-blend fabric for thermal comfort and freedom of movement.",
+    "gender": "girls",
+    "season": "winter",
+    "typeGroup": "bottoms",
+    "itemType": "Divider",
+    "sizes": [
+      { "label": "26", "stock": 15 },
+      { "label": "28", "stock": 20 },
+      { "label": "30", "stock": 25 },
+      { "label": "32", "stock": 18 },
+      { "label": "34", "stock": 10 }
+    ],
+    "isFeatured": true
+  },
+  {
+    "name": "Dps Winter Pant",
+    "price": 600,
+    "schoolCode": "DPS",
+    "schoolName": "Delhi Public School Bhopal",
+    "category": "Winter-ware",
+    "imageUrl": "https://res.cloudinary.com/dvaynkflu/image/upload/v1791369881/indraprasth/products/qd10kjcmtfu1v2vhlxzk.jpg",
+    "publicId": "indraprasth/products/qd10kjcmtfu1v2vhlxzk",
+    "description": "Official DPS regulation winter trousers with wrinkle-resistant finish and adjustable waist elasticity.",
+    "gender": "boys",
+    "season": "winter",
+    "typeGroup": "bottoms",
+    "itemType": "Pant",
+    "sizes": [
+      { "label": "24", "stock": 15 },
+      { "label": "26", "stock": 20 },
+      { "label": "28", "stock": 25 },
+      { "label": "30", "stock": 22 },
+      { "label": "32", "stock": 18 },
+      { "label": "34", "stock": 12 },
+      { "label": "36", "stock": 8 }
+    ],
+    "isFeatured": false
+  },
+  {
+    "name": "Dps Winter Full Shirt",
+    "price": 690,
+    "schoolCode": "DPS",
+    "schoolName": "Delhi Public School Bhopal",
+    "category": "Winter-ware",
+    "imageUrl": "https://res.cloudinary.com/dvaynkflu/image/upload/v1792342081/indraprasth/products/kmvum0fv0ruijkwgbhug.png",
+    "publicId": "indraprasth/products/kmvum0fv0ruijkwgbhug",
+    "description": "Official DPS full-sleeve winter shirt crafted with easy-iron cotton-rich blend for crisp daily school wear.",
+    "gender": "unisex",
+    "season": "winter",
+    "typeGroup": "tops",
+    "itemType": "Shirt",
+    "sizes": [
+      { "label": "26", "stock": 15 },
+      { "label": "28", "stock": 20 },
+      { "label": "30", "stock": 30 },
+      { "label": "32", "stock": 25 },
+      { "label": "34", "stock": 20 },
+      { "label": "36", "stock": 15 }
+    ],
+    "isFeatured": true
+  },
+  {
+    "name": "Dps Kolar Upper",
+    "price": 945,
+    "schoolCode": "DPS KOLAR",
+    "schoolName": "Delhi Public School Kolar Road",
+    "category": "Winter-ware",
+    "imageUrl": "https://res.cloudinary.com/dvaynkflu/image/upload/v1791288458/indraprasth/products/q7nybi9zslivjwujnetr.png",
+    "publicId": "indraprasth/products/q7nybi9zslivjwujnetr",
+    "description": "Official DPS Kolar zippered track upper / winter jacket with contrast piping and embroidered school monogram.",
+    "gender": "unisex",
+    "season": "winter",
+    "typeGroup": "outerwear",
+    "itemType": "Upper",
+    "sizes": [
+      { "label": "28", "stock": 12 },
+      { "label": "30", "stock": 18 },
+      { "label": "32", "stock": 22 },
+      { "label": "34", "stock": 15 },
+      { "label": "36", "stock": 10 }
+    ],
+    "isFeatured": true
+  },
+  {
+    "name": "Dps Kolar Blazzer",
+    "price": 1650,
+    "schoolCode": "DPS KOLAR",
+    "schoolName": "Delhi Public School Kolar Road",
+    "category": "Winter-ware",
+    "imageUrl": "https://res.cloudinary.com/dvaynkflu/image/upload/v1791284736/indraprasth/products/lhr4qpes6dxelbgo77vo.jpg",
+    "publicId": "indraprasth/products/lhr4qpes6dxelbgo77vo",
+    "description": "Premium tailored blazer for DPS Kolar Road with official brass buttons and crest embroidery.",
+    "gender": "unisex",
+    "season": "winter",
+    "typeGroup": "outerwear",
+    "itemType": "Blazer",
+    "sizes": [
+      { "label": "28", "stock": 8 },
+      { "label": "30", "stock": 12 },
+      { "label": "32", "stock": 15 },
+      { "label": "34", "stock": 14 },
+      { "label": "36", "stock": 10 },
+      { "label": "38", "stock": 6 }
+    ],
+    "isFeatured": true
+  },
+  {
+    "name": "Dps Bhopal Blazzer",
+    "price": 1650,
+    "schoolCode": "DPS",
+    "schoolName": "Delhi Public School Bhopal",
+    "category": "Winter-ware",
+    "imageUrl": "https://res.cloudinary.com/dvaynkflu/image/upload/v1791284239/indraprasth/products/y3sgf8q8kydtlarcydnb.jpg",
+    "publicId": "indraprasth/products/y3sgf8q8kydtlarcydnb",
+    "description": "Signature high-grade wool-feel blazer for Delhi Public School Bhopal. Superior shape retention and comfort lining.",
+    "gender": "unisex",
+    "season": "winter",
+    "typeGroup": "outerwear",
+    "itemType": "Blazer",
+    "sizes": [
+      { "label": "28", "stock": 10 },
+      { "label": "30", "stock": 15 },
+      { "label": "32", "stock": 18 },
+      { "label": "34", "stock": 16 },
+      { "label": "36", "stock": 12 },
+      { "label": "38", "stock": 8 }
+    ],
+    "isFeatured": true
+  }
+]

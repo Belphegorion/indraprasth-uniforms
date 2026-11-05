@@ -1,0 +1,11 @@
+ID,Severity,Category,Title,AffectedRoute,Status,Evidence
+F-001,P0-Critical,Runtime Bug,Unwrapped Helmet title interpolation crashes Cart page when items are present,/cart,Fixed,audit/screenshots/05_cart_error_bug.png
+F-002,P1-High,Security,CSV Formula Injection (CWE-1236) in Admin order export,/api/v1/admin/orders/export.csv,Open,server/src/controllers/orderController.ts:153
+F-003,P1-High,Security,CORS origin validation bypassed in non-production environments,/api/v1/*,Open,server/src/app.ts:38
+F-004,P1-High,Security,Content-Security-Policy header disabled in Helmet,/api/v1/*,Open,server/src/app.ts:19
+F-005,P2-Medium,Accessibility,Color contrast ratio below 4.5:1 on footer admin link (1.64:1) and WhatsApp pill (1.98:1),Global Storefront,Open,audit/lighthouse/desktop_home.json
+F-006,P2-Medium,Accessibility,WCAG 2.5.3 Label in Name mismatch on product card Add to Bag buttons,/, /shop,Open,audit/lighthouse/desktop_home.json
+F-007,P2-Medium,Responsive,Navbar Cart icon overflows viewport by 10px at tablet breakpoint (768px),Global Header,Open,client/src/components/layout/Header.tsx
+F-008,P2-Medium,Accessibility,Skipped heading levels (h1 directly to h3 in Hero Plinth),/,Open,audit/lighthouse/desktop_home.json
+F-009,P3-Low,SEO,Missing robots noindex tag on Cart and Checkout pages,/cart, /checkout,Open,client/src/pages/public/Cart.tsx
+F-010,P3-Low,Dependencies,High/Critical npm audit advisories in tinypool and zod,Package Dependencies,Open,audit/logs/npm_audit.json

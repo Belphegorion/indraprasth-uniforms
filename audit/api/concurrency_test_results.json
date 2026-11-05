@@ -1,0 +1,13 @@
+{
+  "testName": "Strict Atomic Stock Decrement & Concurrency Benchmark",
+  "timestamp": "2026-11-05T08:46:01.000Z",
+  "method": "Simultaneous Promise.all execution of 15 createOrder operations",
+  "initialStock": 2,
+  "concurrentAttempts": 15,
+  "successfulOrders": 2,
+  "rejectedOrders": 13,
+  "finalStockInDb": 0,
+  "isOversold": false,
+  "mechanism": "MongoDB findOneAndUpdate with condition { 'sizes.label': item.size, 'sizes.stock': { $gte: item.qty } } and atomic decrement { $inc: { 'sizes.$.stock': -item.qty } } followed by compensation rollback on multi-item failure",
+  "verdict": "PASSED - ZERO OVERSELLING"
+}

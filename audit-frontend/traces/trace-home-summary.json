@@ -1,0 +1,42 @@
+{
+  "url": "http://localhost:4173/",
+  "metrics": {
+    "lcpMs": 500,
+    "ttfbMs": 5,
+    "renderDelayMs": 496,
+    "cls": 0.05,
+    "fcpEstimatedSavingsMs": 308,
+    "lcpEstimatedSavingsMs": 308
+  },
+  "insights": {
+    "RenderBlocking": [
+      {
+        "url": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=JetBrains+Mono:wght@400;500;600&display=swap",
+        "durationMs": 146,
+        "type": "text/css"
+      },
+      {
+        "url": "http://localhost:4173/assets/index-CUUty22L.css",
+        "durationMs": 21,
+        "type": "text/css"
+      }
+    ],
+    "ImageDelivery": {
+      "totalPotentialSavingsBytes": 93696,
+      "unoptimizedImages": [
+        {
+          "url": "https://res.cloudinary.com/dvaynkflu/image/upload/f_auto,q_auto,w_800/v1791284239/indraprasth/products/y3sgf8q8kydtlarcydnb.jpg",
+          "naturalSize": "800x1200",
+          "displaySize": "267x400",
+          "potentialSavingsKB": 64
+        },
+        {
+          "url": "http://localhost:4173/logo.png",
+          "naturalSize": "400x200",
+          "displaySize": "140x70",
+          "potentialSavingsKB": 27.5
+        }
+      ]
+    }
+  }
+}

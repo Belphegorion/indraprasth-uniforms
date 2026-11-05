@@ -1,0 +1,27 @@
+{
+  "test": "Initial Load Production Build Network Telemetry",
+  "url": "http://localhost:4173/",
+  "totalRequests": 23,
+  "staticAssets": {
+    "js": 4,
+    "css": 1,
+    "fonts": 8,
+    "images": 3
+  },
+  "apiCalls": [
+    "GET /api/v1/settings/public (304)",
+    "GET /api/v1/schools (304)",
+    "GET /api/v1/schools?withCounts=true (304)",
+    "GET /api/v1/products/browse?inStock=false&sort=relevance&page=1&limit=12 (200)",
+    "GET /api/v1/products/featured (304)"
+  ],
+  "caching": {
+    "eTagSupport": true,
+    "304NotModifiedObserved": true
+  },
+  "waterfallAnalysis": "Parallel asynchronous fetching via TanStack Query without blocking cascades. Assets leverage HTTP 304 conditional validation.",
+  "payloadSizeEstimate": {
+    "transferred": "164.3 kB",
+    "uncompressed": "~520 kB"
+  }
+}

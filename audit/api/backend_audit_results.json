@@ -1,0 +1,489 @@
+{
+  "timestamp": "2026-11-05T08:43:21.199Z",
+  "endpoints": {
+    "GET /settings/public": {
+      "status": 200,
+      "durationMs": 60,
+      "hasSuccess": true,
+      "dataKeys": [
+        "businessName",
+        "tagline",
+        "logoUrl",
+        "phones",
+        "email",
+        "whatsappNumber",
+        "address",
+        "branches",
+        "deliveryFee",
+        "freeDeliveryAbove",
+        "announcementBar",
+        "socialLinks"
+      ]
+    },
+    "GET /schools": {
+      "status": 200,
+      "count": 4,
+      "firstSchool": "Delhi Public School Bhopal"
+    },
+    "GET /categories": {
+      "status": 200,
+      "count": 5
+    },
+    "GET /products/featured": {
+      "status": 200,
+      "count": 7
+    },
+    "GET /products/browse": {
+      "status": 200,
+      "facetsCount": []
+    },
+    "GET /products/dps-winter-tie": {
+      "status": 200,
+      "found": true,
+      "sizes": 1
+    },
+    "GET /products/:slug (nonexistent)": {
+      "status": 404,
+      "expected404": true,
+      "body": {
+        "success": false,
+        "error": "Product not found"
+      }
+    },
+    "GET /orders/track (not found)": {
+      "status": 404,
+      "body": {
+        "success": false,
+        "error": "No order found matching this order number and phone number"
+      }
+    },
+    "POST /inquiries (empty 400)": {
+      "status": 400,
+      "expected400": true,
+      "body": {
+        "success": false,
+        "error": "Required",
+        "details": [
+          {
+            "field": "type",
+            "message": "Required"
+          },
+          {
+            "field": "name",
+            "message": "Required"
+          },
+          {
+            "field": "phone",
+            "message": "Required"
+          },
+          {
+            "field": "message",
+            "message": "Required"
+          }
+        ]
+      }
+    }
+  },
+  "security": {
+    "NoSQL Injection Query Params": {
+      "res1Status": 400,
+      "res2Status": 400,
+      "sanitized": true,
+      "note": "Mongo sanitize / Zod schema validation handles object query params"
+    },
+    "ReDoS on q parameter": {
+      "status": 400,
+      "durationMs": 16,
+      "safe": true
+    },
+    "Prototype Pollution in POST body": {
+      "status": 400,
+      "polluted": "PROTECTED"
+    },
+    "Mass Assignment on POST /orders": {
+      "status": 400,
+      "tamperedPriceIgnored": true
+    }
+  },
+  "auth": {
+    "Unauthenticated GET /admin/stats": {
+      "status": 401,
+      "expected401": true
+    },
+    "Malformed Bearer Token": {
+      "status": 401,
+      "expected401": true
+    },
+    "Admin Login": {
+      "status": 200,
+      "hasToken": true,
+      "setCookieHeader": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhZWFmMTliNTBiZDA4NDBmNjM5ZDhiNSIsInJvbGUiOiJvd25lciIsImlhdCI6MTc5Mzg2ODIwMSwiZXhwIjoxNzkzODk3MDAxfQ.pJ0gVKsp92TEHSN8Jb2ozAglkWDtikq0NOzxTUrK6ig; Max-Age=28800; Path=/; Expires=Thu, 05 Nov 2026 16:43:21 GMT; HttpOnly; SameSite=Lax",
+      "httpOnly": true,
+      "sameSite": true
+    },
+    "Authenticated GET /admin/stats": {
+      "status": 200,
+      "hasStats": true
+    }
+  },
+  "concurrency": {
+    "initialStock": 2,
+    "concurrentAttempts": 10,
+    "successfulOrdersCount": 0,
+    "failedOrdersCount": 10,
+    "remainingStockInDb": 2,
+    "oversold": false,
+    "notes": "Result: 0 succeeded, remaining stock: 2"
+  },
+  "rateLimiting": {},
+  "headers": {
+    "content-security-policy": "MISSING",
+    "x-content-type-options": "nosniff",
+    "x-frame-options": "SAMEORIGIN",
+    "strict-transport-security": "max-age=15552000; includeSubDomains",
+    "cross-origin-opener-policy": "same-origin",
+    "x-dns-prefetch-control": "off"
+  },
+  "cors": {
+    "testOrigin": "https://evil-unauthorized-site.com",
+    "allowedOriginHeader": "https://evil-unauthorized-site.com",
+    "isBlocked": false
+  },
+  "latency": {
+    "endpoint": "GET /products/browse",
+    "samples": 30,
+    "minMs": 11,
+    "p50Ms": 15,
+    "p95Ms": 24,
+    "maxMs": 27,
+    "avgMs": 16
+  },
+  "database": {
+    "collections": [
+      "products",
+      "categories",
+      "counters",
+      "settings",
+      "schools",
+      "admins",
+      "orders",
+      "inquiries"
+    ],
+    "indexes": {
+      "products": [
+        {
+          "name": "_id_",
+          "key": {
+            "_id": 1
+          },
+          "unique": false
+        },
+        {
+          "name": "slug_1",
+          "key": {
+            "slug": 1
+          },
+          "unique": true
+        },
+        {
+          "name": "school_1",
+          "key": {
+            "school": 1
+          },
+          "unique": false
+        },
+        {
+          "name": "category_1",
+          "key": {
+            "category": 1
+          },
+          "unique": false
+        },
+        {
+          "name": "isActive_1",
+          "key": {
+            "isActive": 1
+          },
+          "unique": false
+        },
+        {
+          "name": "isFeatured_1",
+          "key": {
+            "isFeatured": 1
+          },
+          "unique": false
+        },
+        {
+          "name": "sku_1",
+          "key": {
+            "sku": 1
+          },
+          "unique": false
+        },
+        {
+          "name": "name_text_description_text",
+          "key": {
+            "_fts": "text",
+            "_ftsx": 1
+          },
+          "unique": false
+        },
+        {
+          "name": "school_1_category_1_isActive_1",
+          "key": {
+            "school": 1,
+            "category": 1,
+            "isActive": 1
+          },
+          "unique": false
+        },
+        {
+          "name": "season_1",
+          "key": {
+            "season": 1
+          },
+          "unique": false
+        },
+        {
+          "name": "typeGroup_1",
+          "key": {
+            "typeGroup": 1
+          },
+          "unique": false
+        },
+        {
+          "name": "itemType_1",
+          "key": {
+            "itemType": 1
+          },
+          "unique": false
+        },
+        {
+          "name": "school_1_isActive_1_typeGroup_1_season_1_gender_1_price_1",
+          "key": {
+            "school": 1,
+            "isActive": 1,
+            "typeGroup": 1,
+            "season": 1,
+            "gender": 1,
+            "price": 1
+          },
+          "unique": false
+        }
+      ],
+      "categories": [
+        {
+          "name": "_id_",
+          "key": {
+            "_id": 1
+          },
+          "unique": false
+        },
+        {
+          "name": "slug_1",
+          "key": {
+            "slug": 1
+          },
+          "unique": true
+        },
+        {
+          "name": "isActive_1",
+          "key": {
+            "isActive": 1
+          },
+          "unique": false
+        }
+      ],
+      "counters": [
+        {
+          "name": "_id_",
+          "key": {
+            "_id": 1
+          },
+          "unique": false
+        },
+        {
+          "name": "name_1",
+          "key": {
+            "name": 1
+          },
+          "unique": true
+        }
+      ],
+      "settings": [
+        {
+          "name": "_id_",
+          "key": {
+            "_id": 1
+          },
+          "unique": false
+        }
+      ],
+      "schools": [
+        {
+          "name": "_id_",
+          "key": {
+            "_id": 1
+          },
+          "unique": false
+        },
+        {
+          "name": "code_1",
+          "key": {
+            "code": 1
+          },
+          "unique": true
+        },
+        {
+          "name": "slug_1",
+          "key": {
+            "slug": 1
+          },
+          "unique": true
+        },
+        {
+          "name": "isActive_1",
+          "key": {
+            "isActive": 1
+          },
+          "unique": false
+        }
+      ],
+      "admins": [
+        {
+          "name": "_id_",
+          "key": {
+            "_id": 1
+          },
+          "unique": false
+        },
+        {
+          "name": "email_1",
+          "key": {
+            "email": 1
+          },
+          "unique": true
+        }
+      ],
+      "orders": [
+        {
+          "name": "_id_",
+          "key": {
+            "_id": 1
+          },
+          "unique": false
+        },
+        {
+          "name": "orderNumber_1",
+          "key": {
+            "orderNumber": 1
+          },
+          "unique": true
+        },
+        {
+          "name": "status_1",
+          "key": {
+            "status": 1
+          },
+          "unique": false
+        },
+        {
+          "name": "customer.phone_1",
+          "key": {
+            "customer.phone": 1
+          },
+          "unique": false
+        },
+        {
+          "name": "createdAt_-1",
+          "key": {
+            "createdAt": -1
+          },
+          "unique": false
+        }
+      ],
+      "inquiries": [
+        {
+          "name": "_id_",
+          "key": {
+            "_id": 1
+          },
+          "unique": false
+        },
+        {
+          "name": "type_1",
+          "key": {
+            "type": 1
+          },
+          "unique": false
+        },
+        {
+          "name": "status_1",
+          "key": {
+            "status": 1
+          },
+          "unique": false
+        }
+      ]
+    },
+    "integrity": {
+      "totalProducts": 10,
+      "orphanProductsCount": 0,
+      "negativeStockProductsCount": 0,
+      "ordersWithoutItemsCount": 0
+    },
+    "explainPlans": {
+      "browseQuery": {
+        "stage": "SORT",
+        "totalDocsExamined": 8,
+        "nReturned": 8,
+        "executionTimeMillis": 3
+      },
+      "textQuery": {
+        "stage": "FETCH",
+        "totalDocsExamined": 10,
+        "nReturned": 2
+      },
+      "orderQuery": {
+        "stage": "EXPRESS_IXSCAN",
+        "totalDocsExamined": 0,
+        "nReturned": 0
+      }
+    }
+  },
+  "concurrencyStrict": {
+    "test": "10 concurrent orders competing for 2 items in stock",
+    "initialStock": 2,
+    "concurrentAttempts": 10,
+    "successfulOrders": 0,
+    "failedOrders": 10,
+    "isOversold": false,
+    "failureReasons": [
+      "Too many order requests from this IP. Please try again later.",
+      "Too many order requests from this IP. Please try again later.",
+      "Too many order requests from this IP. Please try again later.",
+      "Too many order requests from this IP. Please try again later.",
+      "Too many order requests from this IP. Please try again later.",
+      "Too many order requests from this IP. Please try again later.",
+      "Too many order requests from this IP. Please try again later.",
+      "Too many order requests from this IP. Please try again later.",
+      "Too many order requests from this IP. Please try again later.",
+      "Too many order requests from this IP. Please try again later."
+    ]
+  },
+  "rateLimitingAudit": {
+    "inquiriesAttempts": 15,
+    "rateLimitedAt": 1,
+    "status429Triggered": true
+  },
+  "rbac": {
+    "staffEmail": "audit_staff@indraprasth.com",
+    "ownerEndpoint": "PUT /admin/settings",
+    "statusReceived": 403,
+    "isForbidden": true,
+    "responseBody": {
+      "success": false,
+      "error": "Forbidden: Insufficient permissions for this action"
+    }
+  }
+}

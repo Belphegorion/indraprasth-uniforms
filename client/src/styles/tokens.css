@@ -1,0 +1,49 @@
+:root {
+  /* Brand Structure: Navy Hierarchy */
+  --color-navy-900: #0A1F3A; /* Footer base, admin sidebar, deepest backgrounds */
+  --color-navy-800: #0E2747; /* Headings, header text, primary buttons, dark plinths */
+  --color-navy-700: #14407A; /* Primary button hover, active states */
+
+  /* Brand Primary: Royal Blue (Logo Wordmark) */
+  --color-blue-600: #1860A8; /* Logo blue: links, focus ring, selected school, info highlights */
+  --color-blue-100: #DCE8F5; /* Selected/hover backgrounds, info alerts, active chips */
+
+  /* Brand Accent: Crimson (Logo Crown) */
+  --color-crimson-800: #7F1428; /* Pressed state of crimson */
+  --color-crimson-700: #A51B33; /* Crimson hover, destructive */
+  --color-crimson-600: #C8233F; /* Logo red accent: sale/new badges, cart count, hero CTA */
+  --color-crimson-400: #E5566D; /* Red text/icons on dark navy backgrounds */
+  --color-crimson-100: #F8DDE2; /* Error/alert backgrounds, soft badge fill */
+
+  /* Surfaces: Warm Beige & Cream (~60% of viewport) */
+  --color-cream-50: #FBF8F2;  /* Cards, inputs, modals (the "paper" layer) */
+  --color-cream-100: #F7F2E8; /* Default page background canvas */
+  --color-sand-200: #EDE3D2;  /* Alternate section bands, table stripes, skeletons */
+  --color-sand-300: #DCCDB4;  /* Borders, dividers, input outlines */
+  --color-taupe-500: #8C7B63; /* Placeholder text, secondary icons, MRP strikethrough */
+
+  /* Accents: Antique Brass */
+  --color-brass: #A8863C;      /* Decorative only: hairlines, ornaments, star flourishes */
+  --color-brass-text: #7A5F22; /* Brass text (≥4.5:1 contrast on cream/white) */
+
+  /* Typography: Ink & Slate */
+  --color-ink: #1B2430;        /* Primary body text (14.0:1 on cream-100) */
+  --color-slate: #5B6676;      /* Secondary text (5.2:1 on cream-100) */
+  --color-white: #FFFFFF;      /* Text on navy/crimson, pure white logo plate */
+
+  /* Semantic State Tokens */
+  --color-success: #2F7D5B;
+  --color-success-bg: #DDF0E6;
+  --color-warning: #B7791F;
+  --color-warning-bg: #FBEFD5;
+  --color-danger: #A51B33;
+  --color-danger-bg: #F8DDE2;
+  --color-info: #1860A8;
+  --color-info-bg: #DCE8F5;
+
+  /* Elevation Shadows */
+  --shadow-subtle: 0 1px 2px rgba(14, 39, 71, 0.06);
+  --shadow-plinth: 0 1px 2px rgba(14, 39, 71, 0.06), 0 8px 24px rgba(14, 39, 71, 0.06);
+  --shadow-plinth-hover: 0 4px 8px rgba(14, 39, 71, 0.08), 0 16px 32px rgba(14, 39, 71, 0.10);
+  --shadow-drawer: -8px 0 32px 0 rgba(10, 31, 58, 0.22);
+}
