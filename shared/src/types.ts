@@ -44,7 +44,18 @@ export interface IProductImage {
 
 export interface IProductSize {
   label: string;
+  originalLabel?: string;
+  price?: number;
   stock: number;
+  gradeRange?: string;
+  unit?: string;
+}
+
+export interface IProductVariant {
+  colorName: string;
+  colorHex?: string;
+  images: IProductImage[];
+  sizes: IProductSize[];
 }
 
 export type ProductGender = 'boys' | 'girls' | 'unisex';
@@ -69,6 +80,7 @@ export interface IProduct {
   id?: string;
   _id?: string;
   name: string;
+  originalName?: string;
   slug: string;
   description: string;
   price: number;
@@ -77,6 +89,7 @@ export interface IProduct {
   category: ICategory | string;
   images: IProductImage[];
   sizes: IProductSize[];
+  variants?: IProductVariant[];
   gender: ProductGender;
   season?: ProductSeason;
   typeGroup?: ProductTypeGroup;
@@ -84,6 +97,11 @@ export interface IProduct {
   isActive: boolean;
   isFeatured: boolean;
   sku?: string;
+  importSource?: {
+    file: string;
+    productNo: number;
+    importedAt: string | Date;
+  };
   createdAt?: string | Date;
   updatedAt?: string | Date;
 }
@@ -105,6 +123,7 @@ export interface IOrderItem {
   nameSnapshot: string;
   priceSnapshot: number;
   size: string;
+  color?: string;
   qty: number;
   image: string;
 }

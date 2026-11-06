@@ -117,7 +117,7 @@ export const CartDrawer: React.FC = () => {
             ) : (
               items.map((item) => (
                 <div
-                  key={`${item.productId}-${item.size}`}
+                  key={`${item.productId}-${item.size}-${item.color || ''}`}
                   className="bg-cream-50 p-3.5 rounded-[10px] border border-sand-300 shadow-subtle flex gap-3.5 relative hover:border-blue-600 transition-colors"
                 >
                   {/* Item Image */}
@@ -147,6 +147,9 @@ export const CartDrawer: React.FC = () => {
                       </h4>
                       <p className="text-xs text-slate">
                         Size: <strong className="text-navy-800 font-mono">{item.size}</strong>
+                        {item.color && (
+                          <> • Colour: <strong className="text-navy-800 font-sans capitalize">{item.color}</strong></>
+                        )}
                       </p>
                     </div>
 
@@ -154,7 +157,7 @@ export const CartDrawer: React.FC = () => {
                       {/* Qty controller */}
                       <div className="flex items-center border border-sand-300 rounded-[6px] bg-cream-100">
                         <button
-                          onClick={() => updateQty(item.productId, item.size, item.qty - 1)}
+                          onClick={() => updateQty(item.productId, item.size, item.qty - 1, item.color)}
                           className="p-1 hover:bg-cream-50 text-slate transition-colors btn-tactile"
                           aria-label="Decrease quantity"
                         >
@@ -164,7 +167,7 @@ export const CartDrawer: React.FC = () => {
                           {item.qty}
                         </span>
                         <button
-                          onClick={() => updateQty(item.productId, item.size, item.qty + 1)}
+                          onClick={() => updateQty(item.productId, item.size, item.qty + 1, item.color)}
                           className="p-1 hover:bg-cream-50 text-slate transition-colors btn-tactile"
                           aria-label="Increase quantity"
                         >
@@ -183,7 +186,7 @@ export const CartDrawer: React.FC = () => {
 
                   {/* Remove button */}
                   <button
-                    onClick={() => removeItem(item.productId, item.size)}
+                    onClick={() => removeItem(item.productId, item.size, item.color)}
                     className="absolute top-2 right-2 text-slate hover:text-crimson-700 p-1 rounded transition-colors focus-visible:ring-1 focus-visible:ring-crimson-600"
                     aria-label={`Remove ${item.name}`}
                   >

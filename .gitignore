@@ -39,3 +39,7 @@ Thumbs.db
 .idea/
 *.sublime-project
 *.sublime-workspace
+
+# Python caches
+__pycache__/
+*.pyc

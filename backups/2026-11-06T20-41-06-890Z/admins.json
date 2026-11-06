@@ -1,0 +1,13 @@
+[
+  {
+    "_id": "6aec82453617f51d427f379a",
+    "name": "Store Owner",
+    "email": "admin@indraprasth.com",
+    "passwordHash": "$2a$12$rl8Xvig1DdUmZSxMx/iZgufjpT0waxMlFyHMRu9bWVc8etYkrefCe",
+    "role": "owner",
+    "isActive": true,
+    "createdAt": "2026-11-05T13:19:01.980Z",
+    "updatedAt": "2026-11-05T13:19:01.980Z",
+    "__v": 0
+  }
+]

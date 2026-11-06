@@ -38,11 +38,23 @@ export const productImageSchema = z.object({
 
 export const productSizeSchema = z.object({
   label: z.string().min(1, 'Size label is required'),
+  originalLabel: z.string().optional(),
+  price: z.number().min(0).optional(),
   stock: z.number().int().min(0, 'Stock cannot be negative'),
+  gradeRange: z.string().optional(),
+  unit: z.string().optional(),
+});
+
+export const productVariantSchema = z.object({
+  colorName: z.string().min(1, 'Color name is required'),
+  colorHex: z.string().optional(),
+  images: z.array(productImageSchema).default([]),
+  sizes: z.array(productSizeSchema).default([]),
 });
 
 export const productCreateSchema = z.object({
   name: z.string().min(2, 'Product name is required'),
+  originalName: z.string().optional(),
   slug: z.string().min(2, 'Slug is required').toLowerCase(),
   description: z.string().min(5, 'Description is required'),
   price: z.number().positive('Price must be greater than 0'),
@@ -50,7 +62,8 @@ export const productCreateSchema = z.object({
   school: z.string().min(1, 'School ID is required'),
   category: z.string().min(1, 'Category ID is required'),
   images: z.array(productImageSchema).min(1, 'At least one image is required'),
-  sizes: z.array(productSizeSchema).min(1, 'At least one size is required'),
+  sizes: z.array(productSizeSchema).default([]),
+  variants: z.array(productVariantSchema).default([]),
   gender: z.enum(['boys', 'girls', 'unisex']).default('unisex'),
   season: z.enum(['winter', 'summer', 'all']).default('all'),
   typeGroup: z.enum(['tops', 'bottoms', 'footwear', 'outerwear', 'accessories']).default('tops'),
@@ -58,6 +71,11 @@ export const productCreateSchema = z.object({
   isActive: z.boolean().default(true),
   isFeatured: z.boolean().default(false),
   sku: z.string().optional(),
+  importSource: z.object({
+    file: z.string(),
+    productNo: z.number(),
+    importedAt: z.union([z.string(), z.date()]),
+  }).optional(),
 });
 
 export const productUpdateSchema = productCreateSchema.partial();
@@ -145,6 +163,7 @@ export const customerInputSchema = z.object({
 export const orderItemInputSchema = z.object({
   productId: z.string().min(1, 'Product ID is required'),
   size: z.string().min(1, 'Size is required'),
+  color: z.string().optional(),
   qty: z.number().int().min(1, 'Quantity must be at least 1').max(20, 'Max 20 per item'),
 });
 

@@ -19,6 +19,7 @@ export interface CreateOrderParams {
   items: Array<{
     productId: string;
     size: string;
+    color?: string;
     qty: number;
   }>;
   paymentMethod: PaymentMethod;
@@ -41,6 +42,7 @@ export const createOrder = async (params: CreateOrderParams): Promise<IOrderDocu
     nameSnapshot: string;
     priceSnapshot: number;
     size: string;
+    color?: string;
     qty: number;
     image: string;
   }> = [];
@@ -53,65 +55,137 @@ export const createOrder = async (params: CreateOrderParams): Promise<IOrderDocu
       throw new Error(`Product not found or inactive: ${item.productId}`);
     }
 
-    const sizeObj = p.sizes.find((s) => s.label === item.size);
+    let sizeObj: any = null;
+    let variantObj: any = null;
+
+    if (p.variants && p.variants.length > 0) {
+      variantObj = item.color
+        ? p.variants.find((v: any) => v.colorName.toLowerCase() === item.color!.toLowerCase())
+        : p.variants[0];
+      if (!variantObj) {
+        variantObj = p.variants[0];
+      }
+      sizeObj = variantObj.sizes?.find((s: any) => s.label === item.size);
+    } else {
+      sizeObj = p.sizes.find((s: any) => s.label === item.size);
+    }
+
     if (!sizeObj) {
       throw new Error(`Size "${item.size}" does not exist for product "${p.name}"`);
     }
 
     if (sizeObj.stock < item.qty) {
       throw new Error(
-        `Insufficient stock for "${p.name}" (Size: ${item.size}). Available: ${sizeObj.stock}, requested: ${item.qty}`
+        `Insufficient stock for "${p.name}" (Size: ${item.size}${variantObj ? ', Colour: ' + variantObj.colorName : ''}). Available: ${sizeObj.stock}, requested: ${item.qty}`
       );
     }
 
-    const price = p.price;
+    const price = typeof sizeObj.price === 'number' && sizeObj.price > 0 ? sizeObj.price : p.price;
     subtotal += price * item.qty;
+
+    const itemImage = variantObj?.images?.[0]?.url || p.images[0]?.url || '';
 
     snapshots.push({
       product: p._id.toString(),
-      nameSnapshot: p.name,
+      nameSnapshot: variantObj ? `${p.name} (${variantObj.colorName})` : p.name,
       priceSnapshot: price,
       size: item.size,
+      color: variantObj?.colorName || item.color,
       qty: item.qty,
-      image: p.images[0]?.url || '',
+      image: itemImage,
     });
   }
 
   // 3. Atomically decrement stock with compensation/rollback if any step fails
-  const decremented: Array<{ productId: string; size: string; qty: number }> = [];
+  const decremented: Array<{ productId: string; size: string; variantColor?: string; qty: number }> = [];
 
   const rollbackStock = async () => {
     for (const rollback of decremented) {
-      await Product.updateOne(
-        { _id: rollback.productId, 'sizes.label': rollback.size },
-        { $inc: { 'sizes.$.stock': rollback.qty } }
-      );
+      if (rollback.variantColor) {
+        await Product.updateOne(
+          { _id: rollback.productId },
+          { $inc: { 'variants.$[v].sizes.$[s].stock': rollback.qty } },
+          {
+            arrayFilters: [
+              { 'v.colorName': rollback.variantColor },
+              { 's.label': rollback.size },
+            ],
+          }
+        );
+      } else {
+        await Product.updateOne(
+          { _id: rollback.productId, 'sizes.label': rollback.size },
+          { $inc: { 'sizes.$.stock': rollback.qty } }
+        );
+      }
     }
   };
 
   try {
     for (const item of items) {
-      const updated = await Product.findOneAndUpdate(
-        {
-          _id: item.productId,
-          'sizes.label': item.size,
-          'sizes.stock': { $gte: item.qty },
-        },
-        {
-          $inc: { 'sizes.$.stock': -item.qty },
-        },
-        { new: true }
-      );
+      const p = productMap.get(item.productId);
+      if (!p) {
+        throw new Error(`Product not found: ${item.productId}`);
+      }
+      const isVariant = !!(p.variants && p.variants.length > 0);
+      let variantColor: string | undefined;
 
-      if (!updated) {
-        await rollbackStock();
-        const p = productMap.get(item.productId);
-        throw new Error(
-          `Could not reserve stock for "${p?.name || item.productId}" size ${item.size}. It may have just sold out.`
+      let updated;
+      if (isVariant && p.variants) {
+        const vObj = item.color
+          ? p.variants.find((v: any) => v.colorName.toLowerCase() === item.color!.toLowerCase())
+          : p.variants[0];
+        variantColor = vObj?.colorName || p.variants[0]?.colorName;
+
+        updated = await Product.findOneAndUpdate(
+          {
+            _id: item.productId,
+            variants: {
+              $elemMatch: {
+                colorName: variantColor,
+                sizes: {
+                  $elemMatch: {
+                    label: item.size,
+                    stock: { $gte: item.qty },
+                  },
+                },
+              },
+            },
+          },
+          {
+            $inc: { 'variants.$[v].sizes.$[s].stock': -item.qty },
+          },
+          {
+            arrayFilters: [
+              { 'v.colorName': variantColor },
+              { 's.label': item.size },
+            ],
+            new: true,
+          }
+        );
+      } else {
+        updated = await Product.findOneAndUpdate(
+          {
+            _id: item.productId,
+            'sizes.label': item.size,
+            'sizes.stock': { $gte: item.qty },
+          },
+          {
+            $inc: { 'sizes.$.stock': -item.qty },
+          },
+          { new: true }
         );
       }
 
-      decremented.push(item);
+      if (!updated) {
+        await rollbackStock();
+        const prod = productMap.get(item.productId);
+        throw new Error(
+          `Could not reserve stock for "${prod?.name || item.productId}" size ${item.size}. It may have just sold out.`
+        );
+      }
+
+      decremented.push({ ...item, variantColor });
     }
 
     // 4. Calculate delivery fee from settings

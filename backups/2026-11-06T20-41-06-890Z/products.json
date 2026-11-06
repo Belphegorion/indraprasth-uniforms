@@ -1,0 +1,382 @@
+[
+  {
+    "_id": "6aec8244a0f4ed9cf96241a2",
+    "slug": "dps-winter-tie",
+    "__v": 0,
+    "category": "6aec8244a0f4ed9cf962419d",
+    "createdAt": "2026-11-05T13:19:00.937Z",
+    "description": "Official Delhi Public School Bhopal winter tie made with durable, high-quality woven fabric and fine finishing.",
+    "gender": "unisex",
+    "images": [
+      {
+        "url": "https://res.cloudinary.com/dvaynkflu/image/upload/v1791370845/indraprasth/products/ngfiqedvngrgzvuc12td.png",
+        "publicId": "indraprasth/products/ngfiqedvngrgzvuc12td"
+      }
+    ],
+    "isActive": true,
+    "isFeatured": true,
+    "itemType": "Tie",
+    "mrp": 115,
+    "name": "Dps Winter Tie",
+    "price": 100,
+    "school": "6aec8243a0f4ed9cf9624199",
+    "season": "winter",
+    "sizes": [
+      {
+        "label": "Standard",
+        "stock": 50
+      }
+    ],
+    "sku": "IU-DPS-DPS-WINTER",
+    "typeGroup": "accessories",
+    "updatedAt": "2026-11-05T13:19:00.937Z"
+  },
+  {
+    "_id": "6aec8244a0f4ed9cf96241a3",
+    "slug": "dps-winter-socks",
+    "__v": 0,
+    "category": "6aec8244a0f4ed9cf962419d",
+    "createdAt": "2026-11-05T13:19:01.036Z",
+    "description": "Warm, sweat-absorbent official DPS winter socks with reinforced heel and elastic cuff.",
+    "gender": "unisex",
+    "images": [
+      {
+        "url": "https://res.cloudinary.com/dvaynkflu/image/upload/v1791370637/indraprasth/products/zrq27ztm2hqbjgthuxpo.jpg",
+        "publicId": "indraprasth/products/zrq27ztm2hqbjgthuxpo"
+      }
+    ],
+    "isActive": true,
+    "isFeatured": false,
+    "itemType": "Socks",
+    "mrp": 103,
+    "name": "Dps Winter Socks",
+    "price": 90,
+    "school": "6aec8243a0f4ed9cf9624199",
+    "season": "winter",
+    "sizes": [
+      {
+        "label": "Small (Age 4-7)",
+        "stock": 35
+      },
+      {
+        "label": "Medium (Age 8-12)",
+        "stock": 40
+      },
+      {
+        "label": "Large (Age 13+)",
+        "stock": 30
+      }
+    ],
+    "sku": "IU-DPS-DPS-WINTER",
+    "typeGroup": "accessories",
+    "updatedAt": "2026-11-05T13:19:01.036Z"
+  },
+  {
+    "_id": "6aec8244a0f4ed9cf96241a4",
+    "slug": "dps-winter-divider",
+    "__v": 0,
+    "category": "6aec8244a0f4ed9cf962419d",
+    "createdAt": "2026-11-05T13:19:01.114Z",
+    "description": "Pleated official winter divider skirt for girls, premium wool-blend fabric for thermal comfort and freedom of movement.",
+    "gender": "girls",
+    "images": [
+      {
+        "url": "https://res.cloudinary.com/dvaynkflu/image/upload/v1791370417/indraprasth/products/bkj9xtu61hsf4jrm1oyi.jpg",
+        "publicId": "indraprasth/products/bkj9xtu61hsf4jrm1oyi"
+      }
+    ],
+    "isActive": true,
+    "isFeatured": true,
+    "itemType": "Divider",
+    "mrp": 874,
+    "name": "Dps Winter Divider",
+    "price": 760,
+    "school": "6aec8243a0f4ed9cf9624199",
+    "season": "winter",
+    "sizes": [
+      {
+        "label": "26",
+        "stock": 15
+      },
+      {
+        "label": "28",
+        "stock": 20
+      },
+      {
+        "label": "30",
+        "stock": 25
+      },
+      {
+        "label": "32",
+        "stock": 18
+      },
+      {
+        "label": "34",
+        "stock": 10
+      }
+    ],
+    "sku": "IU-DPS-DPS-WINTER",
+    "typeGroup": "bottoms",
+    "updatedAt": "2026-11-05T13:19:01.114Z"
+  },
+  {
+    "_id": "6aec8244a0f4ed9cf96241a5",
+    "slug": "dps-winter-pant",
+    "__v": 0,
+    "category": "6aec8244a0f4ed9cf962419d",
+    "createdAt": "2026-11-05T13:19:01.174Z",
+    "description": "Official DPS regulation winter trousers with wrinkle-resistant finish and adjustable waist elasticity.",
+    "gender": "boys",
+    "images": [
+      {
+        "url": "https://res.cloudinary.com/dvaynkflu/image/upload/v1791369881/indraprasth/products/qd10kjcmtfu1v2vhlxzk.jpg",
+        "publicId": "indraprasth/products/qd10kjcmtfu1v2vhlxzk"
+      }
+    ],
+    "isActive": true,
+    "isFeatured": false,
+    "itemType": "Pant",
+    "mrp": 690,
+    "name": "Dps Winter Pant",
+    "price": 600,
+    "school": "6aec8243a0f4ed9cf9624199",
+    "season": "winter",
+    "sizes": [
+      {
+        "label": "24",
+        "stock": 15
+      },
+      {
+        "label": "26",
+        "stock": 20
+      },
+      {
+        "label": "28",
+        "stock": 25
+      },
+      {
+        "label": "30",
+        "stock": 22
+      },
+      {
+        "label": "32",
+        "stock": 18
+      },
+      {
+        "label": "34",
+        "stock": 12
+      },
+      {
+        "label": "36",
+        "stock": 8
+      }
+    ],
+    "sku": "IU-DPS-DPS-WINTER",
+    "typeGroup": "bottoms",
+    "updatedAt": "2026-11-05T13:19:01.174Z"
+  },
+  {
+    "_id": "6aec8244a0f4ed9cf96241a6",
+    "slug": "dps-winter-full-shirt",
+    "__v": 0,
+    "category": "6aec8244a0f4ed9cf962419d",
+    "createdAt": "2026-11-05T13:19:01.255Z",
+    "description": "Official DPS full-sleeve winter shirt crafted with easy-iron cotton-rich blend for crisp daily school wear.",
+    "gender": "unisex",
+    "images": [
+      {
+        "url": "https://res.cloudinary.com/dvaynkflu/image/upload/v1792342081/indraprasth/products/kmvum0fv0ruijkwgbhug.png",
+        "publicId": "indraprasth/products/kmvum0fv0ruijkwgbhug"
+      }
+    ],
+    "isActive": true,
+    "isFeatured": true,
+    "itemType": "Shirt",
+    "mrp": 793,
+    "name": "Dps Winter Full Shirt",
+    "price": 690,
+    "school": "6aec8243a0f4ed9cf9624199",
+    "season": "winter",
+    "sizes": [
+      {
+        "label": "26",
+        "stock": 15
+      },
+      {
+        "label": "28",
+        "stock": 20
+      },
+      {
+        "label": "30",
+        "stock": 30
+      },
+      {
+        "label": "32",
+        "stock": 25
+      },
+      {
+        "label": "34",
+        "stock": 20
+      },
+      {
+        "label": "36",
+        "stock": 15
+      }
+    ],
+    "sku": "IU-DPS-DPS-WINTER",
+    "typeGroup": "tops",
+    "updatedAt": "2026-11-05T13:19:01.255Z"
+  },
+  {
+    "_id": "6aec8245a0f4ed9cf96241a7",
+    "slug": "dps-kolar-upper",
+    "__v": 0,
+    "category": "6aec8244a0f4ed9cf962419d",
+    "createdAt": "2026-11-05T13:19:01.334Z",
+    "description": "Official DPS Kolar zippered track upper / winter jacket with contrast piping and embroidered school monogram.",
+    "gender": "unisex",
+    "images": [
+      {
+        "url": "https://res.cloudinary.com/dvaynkflu/image/upload/v1791288458/indraprasth/products/q7nybi9zslivjwujnetr.png",
+        "publicId": "indraprasth/products/q7nybi9zslivjwujnetr"
+      }
+    ],
+    "isActive": true,
+    "isFeatured": true,
+    "itemType": "Upper",
+    "mrp": 1087,
+    "name": "Dps Kolar Upper",
+    "price": 945,
+    "school": "6aec8244a0f4ed9cf962419a",
+    "season": "winter",
+    "sizes": [
+      {
+        "label": "28",
+        "stock": 12
+      },
+      {
+        "label": "30",
+        "stock": 18
+      },
+      {
+        "label": "32",
+        "stock": 22
+      },
+      {
+        "label": "34",
+        "stock": 15
+      },
+      {
+        "label": "36",
+        "stock": 10
+      }
+    ],
+    "sku": "IU-DPSKOLAR-DPS-KOLAR-",
+    "typeGroup": "outerwear",
+    "updatedAt": "2026-11-05T13:19:01.334Z"
+  },
+  {
+    "_id": "6aec8245a0f4ed9cf96241a8",
+    "slug": "dps-kolar-blazer",
+    "__v": 0,
+    "category": "6aec8244a0f4ed9cf962419d",
+    "createdAt": "2026-11-05T13:19:01.415Z",
+    "description": "Premium tailored blazer for DPS Kolar Road with official brass buttons and crest embroidery.",
+    "gender": "unisex",
+    "images": [
+      {
+        "url": "https://res.cloudinary.com/dvaynkflu/image/upload/v1791284736/indraprasth/products/lhr4qpes6dxelbgo77vo.jpg",
+        "publicId": "indraprasth/products/lhr4qpes6dxelbgo77vo"
+      }
+    ],
+    "isActive": true,
+    "isFeatured": true,
+    "itemType": "Blazer",
+    "mrp": 1897,
+    "name": "Dps Kolar Blazer",
+    "price": 1650,
+    "school": "6aec8244a0f4ed9cf962419a",
+    "season": "winter",
+    "sizes": [
+      {
+        "label": "28",
+        "stock": 8
+      },
+      {
+        "label": "30",
+        "stock": 12
+      },
+      {
+        "label": "32",
+        "stock": 15
+      },
+      {
+        "label": "34",
+        "stock": 14
+      },
+      {
+        "label": "36",
+        "stock": 10
+      },
+      {
+        "label": "38",
+        "stock": 6
+      }
+    ],
+    "sku": "IU-DPSKOLAR-DPS-KOLAR-",
+    "typeGroup": "outerwear",
+    "updatedAt": "2026-11-05T13:19:01.415Z"
+  },
+  {
+    "_id": "6aec8245a0f4ed9cf96241a9",
+    "slug": "dps-bhopal-blazer",
+    "__v": 0,
+    "category": "6aec8244a0f4ed9cf962419d",
+    "createdAt": "2026-11-05T13:19:01.494Z",
+    "description": "Signature high-grade wool-feel blazer for Delhi Public School Bhopal. Superior shape retention and comfort lining.",
+    "gender": "unisex",
+    "images": [
+      {
+        "url": "https://res.cloudinary.com/dvaynkflu/image/upload/v1791284239/indraprasth/products/y3sgf8q8kydtlarcydnb.jpg",
+        "publicId": "indraprasth/products/y3sgf8q8kydtlarcydnb"
+      }
+    ],
+    "isActive": true,
+    "isFeatured": true,
+    "itemType": "Blazer",
+    "mrp": 1897,
+    "name": "Dps Bhopal Blazer",
+    "price": 1650,
+    "school": "6aec8243a0f4ed9cf9624199",
+    "season": "winter",
+    "sizes": [
+      {
+        "label": "28",
+        "stock": 10
+      },
+      {
+        "label": "30",
+        "stock": 15
+      },
+      {
+        "label": "32",
+        "stock": 18
+      },
+      {
+        "label": "34",
+        "stock": 16
+      },
+      {
+        "label": "36",
+        "stock": 12
+      },
+      {
+        "label": "38",
+        "stock": 8
+      }
+    ],
+    "sku": "IU-DPS-DPS-BHOPAL",
+    "typeGroup": "outerwear",
+    "updatedAt": "2026-11-05T13:19:01.494Z"
+  }
+]

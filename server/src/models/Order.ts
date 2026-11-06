@@ -47,6 +47,7 @@ const orderItemSchema = new Schema<IOrderItem>(
     nameSnapshot: { type: String, required: true },
     priceSnapshot: { type: Number, required: true, min: 0 },
     size: { type: String, required: true },
+    color: { type: String },
     qty: { type: Number, required: true, min: 1 },
     image: { type: String, required: true },
   },

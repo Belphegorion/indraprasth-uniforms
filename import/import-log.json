@@ -1,0 +1,692 @@
+{
+  "startedAt": "2026-11-06T20:51:09.567Z",
+  "schoolsUpserted": [
+    {
+      "name": "The Sanskaar Valley School",
+      "code": "TSVS",
+      "id": "6aee3be9378655b25492863d"
+    },
+    {
+      "name": "St Joseph Higher Secondary School",
+      "code": "JSS",
+      "id": "6aee3be9378655b25492863e"
+    },
+    {
+      "name": "Delhi Public School Bhopal",
+      "code": "DPS",
+      "id": "6aec8243a0f4ed9cf9624199"
+    },
+    {
+      "name": "Delhi Public School Kolar Road",
+      "code": "DPS KOLAR",
+      "id": "6aec8244a0f4ed9cf962419a"
+    },
+    {
+      "name": "IES Public School",
+      "code": "IES",
+      "id": "6aee3be9378655b25492863f"
+    },
+    {
+      "name": "Sagar Public School",
+      "code": "SPS",
+      "id": "6aec8244a0f4ed9cf962419c"
+    },
+    {
+      "name": "Billabong High International School",
+      "code": "BHIS",
+      "id": "6aee3be9378655b254928640"
+    }
+  ],
+  "categoriesUpserted": [
+    {
+      "name": "Winter-ware",
+      "slug": "winter-ware",
+      "id": "6aec8244a0f4ed9cf962419d"
+    },
+    {
+      "name": "T-Shirt",
+      "slug": "t-shirt",
+      "id": "6aee3bea378655b254928641"
+    },
+    {
+      "name": "House Uniform",
+      "slug": "house-uniform",
+      "id": "6aee3bea378655b254928642"
+    },
+    {
+      "name": "Knicker",
+      "slug": "knicker",
+      "id": "6aee3bea378655b254928643"
+    },
+    {
+      "name": "Trouser",
+      "slug": "trouser",
+      "id": "6aee3bea378655b254928644"
+    },
+    {
+      "name": "Socks",
+      "slug": "socks",
+      "id": "6aee3bea378655b254928645"
+    },
+    {
+      "name": "Shirt",
+      "slug": "shirt",
+      "id": "6aee3bea378655b254928646"
+    },
+    {
+      "name": "Belt",
+      "slug": "belt",
+      "id": "6aee3bea378655b254928647"
+    },
+    {
+      "name": "Skirt",
+      "slug": "skirt",
+      "id": "6aee3bea378655b254928648"
+    },
+    {
+      "name": "Divider",
+      "slug": "divider",
+      "id": "6aee3bea378655b254928649"
+    },
+    {
+      "name": "Other",
+      "slug": "other",
+      "id": "6aee3bea378655b25492864a"
+    },
+    {
+      "name": "Tie",
+      "slug": "tie",
+      "id": "6aee3bea378655b25492864b"
+    },
+    {
+      "name": "Bag",
+      "slug": "bag",
+      "id": "6aee3bea378655b25492864c"
+    },
+    {
+      "name": "Shoes",
+      "slug": "shoes",
+      "id": "6aee3bea378655b25492864d"
+    },
+    {
+      "name": "Pinafore Frock",
+      "slug": "pinafore-frock",
+      "id": "6aee3bea378655b25492864e"
+    },
+    {
+      "name": "Jacket",
+      "slug": "jacket",
+      "id": "6aee3bea378655b25492864f"
+    },
+    {
+      "name": "Salwar Suit",
+      "slug": "salwar-suit",
+      "id": "6aee3bea378655b254928650"
+    },
+    {
+      "name": "Accessories",
+      "slug": "accessories",
+      "id": "6aec8244a0f4ed9cf962419f"
+    },
+    {
+      "name": "Tunic",
+      "slug": "tunic",
+      "id": "6aee3bea378655b254928651"
+    },
+    {
+      "name": "Cycling Tights",
+      "slug": "cycling-tights",
+      "id": "6aee3beb378655b254928652"
+    },
+    {
+      "name": "Track Suit",
+      "slug": "track-suit",
+      "id": "6aee3beb378655b254928653"
+    }
+  ],
+  "productsCreated": [],
+  "productsUpdated": [
+    {
+      "productNo": 1,
+      "slug": "dps-winter-tie",
+      "id": "6aec8244a0f4ed9cf96241a2"
+    },
+    {
+      "productNo": 2,
+      "slug": "dps-winter-socks",
+      "id": "6aec8244a0f4ed9cf96241a3"
+    },
+    {
+      "productNo": 3,
+      "slug": "dps-winter-divider",
+      "id": "6aec8244a0f4ed9cf96241a4"
+    },
+    {
+      "productNo": 4,
+      "slug": "dps-winter-pant",
+      "id": "6aec8244a0f4ed9cf96241a5"
+    },
+    {
+      "productNo": 5,
+      "slug": "dps-winter-full-shirt",
+      "id": "6aec8244a0f4ed9cf96241a6"
+    },
+    {
+      "productNo": 6,
+      "slug": "dps-kolar-upper",
+      "id": "6aec8245a0f4ed9cf96241a7"
+    },
+    {
+      "productNo": 7,
+      "slug": "dps-kolar-blazer",
+      "id": "6aec8245a0f4ed9cf96241a8"
+    },
+    {
+      "productNo": 8,
+      "slug": "dps-bhopal-blazer",
+      "id": "6aec8245a0f4ed9cf96241a9"
+    },
+    {
+      "productNo": 9,
+      "slug": "half-sweater-dps-kolar-bhopal",
+      "id": "6aee3bec20d34e5e0f982054"
+    },
+    {
+      "productNo": 10,
+      "slug": "dps-winter-upper",
+      "id": "6aee3bed20d34e5e0f982058"
+    },
+    {
+      "productNo": 11,
+      "slug": "dps-winter-lower",
+      "id": "6aee3bed20d34e5e0f98205c"
+    },
+    {
+      "productNo": 12,
+      "slug": "dps-winter-t-shirt",
+      "id": "6aee3bee20d34e5e0f982060"
+    },
+    {
+      "productNo": 13,
+      "slug": "billabong-upper",
+      "id": "6aee3bee20d34e5e0f982064"
+    },
+    {
+      "productNo": 14,
+      "slug": "billabong-lower-for-kids-kangaroo",
+      "id": "6aee3bef20d34e5e0f982068"
+    },
+    {
+      "productNo": 15,
+      "slug": "sanskaar-winter-sweater",
+      "id": "6aee3bef20d34e5e0f98206c"
+    },
+    {
+      "productNo": 16,
+      "slug": "sanskaar-winter-t-shirt",
+      "id": "6aee3bef20d34e5e0f982070"
+    },
+    {
+      "productNo": 17,
+      "slug": "sanskaar-winter-lower",
+      "id": "6aee3bf020d34e5e0f982074"
+    },
+    {
+      "productNo": 18,
+      "slug": "sanskaar-blazer",
+      "id": "6aee3bf020d34e5e0f982078"
+    },
+    {
+      "productNo": 19,
+      "slug": "st-josephs-house-tie",
+      "id": "6aee3bf020d34e5e0f98207c"
+    },
+    {
+      "productNo": 20,
+      "slug": "st-josephs-house-upper-6th-to-12th",
+      "id": "6aee3bf120d34e5e0f982080"
+    },
+    {
+      "productNo": 21,
+      "slug": "st-josephs-lower-6th-to-12th",
+      "id": "6aee3bf120d34e5e0f982084"
+    },
+    {
+      "productNo": 22,
+      "slug": "st-josephs-kg-lower",
+      "id": "6aee3bf120d34e5e0f982088"
+    },
+    {
+      "productNo": 23,
+      "slug": "st-josephs-kg-sports-t-shirt",
+      "id": "6aee3bf120d34e5e0f98208c"
+    },
+    {
+      "productNo": 24,
+      "slug": "st-josephs-house-jacket",
+      "id": "6aee3bf220d34e5e0f982090"
+    },
+    {
+      "productNo": 25,
+      "slug": "st-josephs-jacket-regular-for-girls",
+      "id": "6aee3bf220d34e5e0f982094"
+    },
+    {
+      "productNo": 26,
+      "slug": "st-josephs-regular-salwar-suit",
+      "id": "6aee3bf320d34e5e0f982098"
+    },
+    {
+      "productNo": 27,
+      "slug": "st-josephs-house-salwar-suit",
+      "id": "6aee3bf320d34e5e0f98209c"
+    },
+    {
+      "productNo": 28,
+      "slug": "st-josephs-socks",
+      "id": "6aee3bf320d34e5e0f9820a0"
+    },
+    {
+      "productNo": 29,
+      "slug": "st-josephs-belt",
+      "id": "6aee3bf320d34e5e0f9820a4"
+    },
+    {
+      "productNo": 30,
+      "slug": "st-josephs-house-stripe",
+      "id": "6aee3bf420d34e5e0f9820a8"
+    },
+    {
+      "productNo": 31,
+      "slug": "st-josephs-house-upper-1st-to-5th",
+      "id": "6aee3bf420d34e5e0f9820ac"
+    },
+    {
+      "productNo": 32,
+      "slug": "st-josephs-house-lower-1st-to-5th",
+      "id": "6aee3bf420d34e5e0f9820b0"
+    },
+    {
+      "productNo": 33,
+      "slug": "st-josephs-house-t-shirt",
+      "id": "6aee3bf520d34e5e0f9820b4"
+    },
+    {
+      "productNo": 34,
+      "slug": "st-josephs-white-shirt",
+      "id": "6aee3bf520d34e5e0f9820b8"
+    },
+    {
+      "productNo": 35,
+      "slug": "st-josephs-pant-6th-to-12th",
+      "id": "6aee3bf520d34e5e0f9820bc"
+    },
+    {
+      "productNo": 36,
+      "slug": "st-josephs-white-shirt-1st-to-5th",
+      "id": "6aee3bf520d34e5e0f9820c0"
+    },
+    {
+      "productNo": 37,
+      "slug": "st-josephs-tunic",
+      "id": "6aee3bf620d34e5e0f9820c4"
+    },
+    {
+      "productNo": 38,
+      "slug": "st-josephs-1st-class-knicker",
+      "id": "6aee3bf720d34e5e0f9820c8"
+    },
+    {
+      "productNo": 39,
+      "slug": "st-josephs-q-kg-1-kg-2-skirt",
+      "id": "6aee3bfa20d34e5e0f9820cc"
+    },
+    {
+      "productNo": 40,
+      "slug": "st-josephs-q-kg-1-kg-2-knicker",
+      "id": "6aee3bfb20d34e5e0f9820d0"
+    },
+    {
+      "productNo": 41,
+      "slug": "st-josephs-kg-2-t-shirt",
+      "id": "6aee3bfb20d34e5e0f9820d4"
+    },
+    {
+      "productNo": 42,
+      "slug": "st-josephs-kg-1st-t-shirt",
+      "id": "6aee3bfb20d34e5e0f9820d8"
+    },
+    {
+      "productNo": 43,
+      "slug": "ies-belt",
+      "id": "6aee3bfb20d34e5e0f9820dc"
+    },
+    {
+      "productNo": 44,
+      "slug": "ies-tie",
+      "id": "6aee3bfc20d34e5e0f9820e0"
+    },
+    {
+      "productNo": 45,
+      "slug": "ies-house-lower",
+      "id": "6aee3bfc20d34e5e0f9820e4"
+    },
+    {
+      "productNo": 46,
+      "slug": "ies-house-t-shirt",
+      "id": "6aee3bfd20d34e5e0f9820e8"
+    },
+    {
+      "productNo": 47,
+      "slug": "ies-formal-white-shirt-6-to-12th",
+      "id": "6aee3bfd20d34e5e0f9820ec"
+    },
+    {
+      "productNo": 48,
+      "slug": "ies-regular-pant-5th-to-12th",
+      "id": "6aee3bfe20d34e5e0f9820f0"
+    },
+    {
+      "productNo": 49,
+      "slug": "ies-regular-t-shirt-blue-1st-to-12th",
+      "id": "6aee3bfe20d34e5e0f9820f4"
+    },
+    {
+      "productNo": 50,
+      "slug": "ies-girls-capri-for-kg",
+      "id": "6aee3bfe20d34e5e0f9820f8"
+    },
+    {
+      "productNo": 51,
+      "slug": "ies-kg-knicker",
+      "id": "6aee3bfe20d34e5e0f9820fc"
+    },
+    {
+      "productNo": 52,
+      "slug": "ies-kg-green-t-shirt",
+      "id": "6aee3bff20d34e5e0f982100"
+    },
+    {
+      "productNo": 53,
+      "slug": "the-sanskaar-valley-school-tights-for-girls",
+      "id": "6aee3bff20d34e5e0f982104"
+    },
+    {
+      "productNo": 54,
+      "slug": "the-sanskaar-valley-school-tie",
+      "id": "6aee3bff20d34e5e0f982108"
+    },
+    {
+      "productNo": 55,
+      "slug": "the-sanskaar-valley-school-belt",
+      "id": "6aee3bff20d34e5e0f98210c"
+    },
+    {
+      "productNo": 56,
+      "slug": "the-sanskaar-valley-school-sopaanshikhar-socks-white-stripes",
+      "id": "6aee3bff20d34e5e0f982110"
+    },
+    {
+      "productNo": 57,
+      "slug": "the-sanskaar-valley-school-prangan-socks-yellow-stripes",
+      "id": "6aee3c0020d34e5e0f982114"
+    },
+    {
+      "productNo": 58,
+      "slug": "the-sanskaar-valley-school-aadhar-socks-red-stripes",
+      "id": "6aee3c0020d34e5e0f982118"
+    },
+    {
+      "productNo": 59,
+      "slug": "sanskaar-valley-school-school-bag",
+      "id": "6aee3c0020d34e5e0f98211c"
+    },
+    {
+      "productNo": 60,
+      "slug": "the-sanskaar-valley-school-prangan-half-pants",
+      "id": "6aee3c0020d34e5e0f982120"
+    },
+    {
+      "productNo": 61,
+      "slug": "the-sanskaar-valley-school-aadhar-half-pants",
+      "id": "6aee3c0120d34e5e0f982124"
+    },
+    {
+      "productNo": 62,
+      "slug": "sanskaar-valley-school-house-t-shirt",
+      "id": "6aee3c0220d34e5e0f982128"
+    },
+    {
+      "productNo": 63,
+      "slug": "the-sanskaar-valley-school-sopaan-t-shirt-white",
+      "id": "6aee3c0420d34e5e0f98212c"
+    },
+    {
+      "productNo": 64,
+      "slug": "the-sanskaar-valley-school-sopaan-pants",
+      "id": "6aee3c0420d34e5e0f982130"
+    },
+    {
+      "productNo": 65,
+      "slug": "the-sanskaar-valley-school-sopaan-divider-skirt",
+      "id": "6aee3c0420d34e5e0f982134"
+    },
+    {
+      "productNo": 66,
+      "slug": "the-sanskaar-valley-school-shikhar-t-shirt-white",
+      "id": "6aee3c0420d34e5e0f982138"
+    },
+    {
+      "productNo": 67,
+      "slug": "the-sanskaar-valley-school-shikhar-pants",
+      "id": "6aee3c0520d34e5e0f98213c"
+    },
+    {
+      "productNo": 68,
+      "slug": "the-sanskaar-valley-school-shikhar-divider-skirt",
+      "id": "6aee3c0520d34e5e0f982140"
+    },
+    {
+      "productNo": 69,
+      "slug": "the-sanskaar-valley-school-prangan-t-shirt-yellow",
+      "id": "6aee3c0520d34e5e0f982144"
+    },
+    {
+      "productNo": 70,
+      "slug": "the-sanskaar-valley-school-prangan-skirt",
+      "id": "6aee3c0520d34e5e0f982148"
+    },
+    {
+      "productNo": 71,
+      "slug": "the-sanskaar-valley-school-aadhar-t-shirt-red",
+      "id": "6aee3c0620d34e5e0f98214c"
+    },
+    {
+      "productNo": 72,
+      "slug": "the-sanskaar-valley-school-aadhar-skirt",
+      "id": "6aee3c0620d34e5e0f982150"
+    },
+    {
+      "productNo": 73,
+      "slug": "dps-neelbad-black-school-shoes",
+      "id": "6aee3c0620d34e5e0f982154"
+    },
+    {
+      "productNo": 74,
+      "slug": "dps-kolar-white-school-shorts-boys",
+      "id": "6aee3c0620d34e5e0f982158"
+    },
+    {
+      "productNo": 75,
+      "slug": "dps-kolar-white-school-tunic-girls",
+      "id": "6aee3c0620d34e5e0f98215c"
+    },
+    {
+      "productNo": 76,
+      "slug": "dps-kolar-house-lower",
+      "id": "6aee3c0720d34e5e0f982160"
+    },
+    {
+      "productNo": 77,
+      "slug": "dps-kolar-house-t-shirt",
+      "id": "6aee3c0820d34e5e0f982164"
+    },
+    {
+      "productNo": 78,
+      "slug": "dps-kolar-green-school-bag",
+      "id": "6aee3c0820d34e5e0f982168"
+    },
+    {
+      "productNo": 79,
+      "slug": "dps-kolar-campus-shoes",
+      "id": "6aee3c0820d34e5e0f98216c"
+    },
+    {
+      "productNo": 80,
+      "slug": "dps-kolar-white-school-socks-pair",
+      "id": "6aee3c0920d34e5e0f982170"
+    },
+    {
+      "productNo": 81,
+      "slug": "dps-kolar-green-school-belt",
+      "id": "6aee3c0920d34e5e0f982174"
+    },
+    {
+      "productNo": 82,
+      "slug": "dps-kolar-white-school-divider-skirt-girls",
+      "id": "6aee3c0920d34e5e0f982178"
+    },
+    {
+      "productNo": 83,
+      "slug": "dps-kolar-white-school-pant-boys",
+      "id": "6aee3c0a20d34e5e0f98217c"
+    },
+    {
+      "productNo": 84,
+      "slug": "dps-kolar-white-school-shirt-boys-girls",
+      "id": "6aee3c0a20d34e5e0f982180"
+    },
+    {
+      "productNo": 85,
+      "slug": "billabong-high-school-socks-boys-girls",
+      "id": "6aee3c0b20d34e5e0f982184"
+    },
+    {
+      "productNo": 86,
+      "slug": "dps-neelbad-white-school-shorts-boys",
+      "id": "6aee3c797c0410374b09ef97"
+    },
+    {
+      "productNo": 87,
+      "slug": "dps-neelbad-house-t-shirt",
+      "id": "6aee3c0d20d34e5e0f98218c"
+    },
+    {
+      "productNo": 88,
+      "slug": "the-sanskaar-valley-school-formal-shirt-boys-girls",
+      "id": "6aee3c0e20d34e5e0f982190"
+    },
+    {
+      "productNo": 89,
+      "slug": "dps-neelbad-white-school-pinafore-frock-girls",
+      "id": "6aee3c0e20d34e5e0f982194"
+    },
+    {
+      "productNo": 90,
+      "slug": "sagar-public-school-saket-nagar-yellow-house-t-shirt",
+      "id": "6aee3c0f20d34e5e0f982198"
+    },
+    {
+      "productNo": 91,
+      "slug": "sagar-public-school-saket-nagar-skirt",
+      "id": "6aee3c1020d34e5e0f98219c"
+    },
+    {
+      "productNo": 92,
+      "slug": "sagar-public-school-saket-nagar-sea-green-house-t-shirt",
+      "id": "6aee3c1220d34e5e0f9821a0"
+    },
+    {
+      "productNo": 93,
+      "slug": "sagar-public-school-saket-nagar-red-house-t-shirt",
+      "id": "6aee3c1520d34e5e0f9821a4"
+    },
+    {
+      "productNo": 94,
+      "slug": "sagar-public-school-saket-nagar-half-pant-bottom",
+      "id": "6aee3c1720d34e5e0f9821a8"
+    },
+    {
+      "productNo": 95,
+      "slug": "sagar-public-school-saket-nagar-grey-full-pant-boys-girls",
+      "id": "6aee3c1820d34e5e0f9821ac"
+    },
+    {
+      "productNo": 96,
+      "slug": "sagar-public-school-saket-nagar-blue-house-t-shirt",
+      "id": "6aee3c1820d34e5e0f9821b0"
+    },
+    {
+      "productNo": 97,
+      "slug": "sagar-public-school-saket-nagar-daily-t-shirt",
+      "id": "6aee3c1920d34e5e0f9821b4"
+    },
+    {
+      "productNo": 98,
+      "slug": "sagar-public-school-saket-nagar-yoga-track-suit",
+      "id": "6aee3c1a20d34e5e0f9821b8"
+    },
+    {
+      "productNo": 99,
+      "slug": "billabong-high-school-cargo-pant-boys-girls",
+      "id": "6aee3c1b20d34e5e0f9821bc"
+    },
+    {
+      "productNo": 100,
+      "slug": "dps-neelbad-house-lower",
+      "id": "6aee3c1b20d34e5e0f9821c0"
+    },
+    {
+      "productNo": 101,
+      "slug": "dps-neelbad-white-school-shorts-boys-alt",
+      "id": "6aee3c0c20d34e5e0f982188"
+    },
+    {
+      "productNo": 102,
+      "slug": "dps-neelbad-white-school-divider-skirt-girls",
+      "id": "6aee3c1d20d34e5e0f9821c7"
+    },
+    {
+      "productNo": 103,
+      "slug": "dps-neelbad-white-school-pant-boys",
+      "id": "6aee3c1e20d34e5e0f9821cb"
+    },
+    {
+      "productNo": 104,
+      "slug": "dps-neelbad-green-school-belt",
+      "id": "6aee3c1e20d34e5e0f9821cf"
+    },
+    {
+      "productNo": 105,
+      "slug": "dps-neelbad-half-white-school-shirt-boys-girls",
+      "id": "6aee3c1f20d34e5e0f9821d3"
+    },
+    {
+      "productNo": 106,
+      "slug": "billabong-high-school-shorts-boys-girls",
+      "id": "6aee3c1f20d34e5e0f9821d7"
+    },
+    {
+      "productNo": 107,
+      "slug": "billabong-high-school-purple-house-t-shirt-boys-girls",
+      "id": "6aee3c2020d34e5e0f9821db"
+    },
+    {
+      "productNo": 108,
+      "slug": "billabong-yellow-t-shirt-boys-and-girls",
+      "id": "6aee3c2120d34e5e0f9821df"
+    }
+  ],
+  "errors": [],
+  "completedAt": "2026-11-06T20:51:55.495Z"
+}

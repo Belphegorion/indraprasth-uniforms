@@ -7,6 +7,7 @@ export interface CartItem {
   price: number;
   mrp?: number;
   size: string;
+  color?: string;
   qty: number;
   image: string;
   schoolCode?: string;
@@ -18,8 +19,8 @@ interface CartStore {
   items: CartItem[];
   isDrawerOpen: boolean;
   addItem: (item: Omit<CartItem, 'qty'> & { qty?: number }) => void;
-  removeItem: (productId: string, size: string) => void;
-  updateQty: (productId: string, size: string, qty: number) => void;
+  removeItem: (productId: string, size: string, color?: string) => void;
+  updateQty: (productId: string, size: string, qty: number, color?: string) => void;
   clearCart: () => void;
   openDrawer: () => void;
   closeDrawer: () => void;
@@ -27,6 +28,9 @@ interface CartStore {
   getTotalItems: () => number;
   getSubtotal: () => number;
 }
+
+const isSameItem = (i: CartItem, productId: string, size: string, color?: string) =>
+  i.productId === productId && i.size === size && (i.color || '') === (color || '');
 
 export const useCartStore = create<CartStore>()(
   persist(
@@ -38,7 +42,7 @@ export const useCartStore = create<CartStore>()(
         const qtyToAdd = item.qty || 1;
         set((state) => {
           const existingIndex = state.items.findIndex(
-            (i) => i.productId === item.productId && i.size === item.size
+            (i) => isSameItem(i, item.productId, item.size, item.color)
           );
 
           if (existingIndex > -1) {
@@ -54,22 +58,22 @@ export const useCartStore = create<CartStore>()(
         });
       },
 
-      removeItem: (productId, size) => {
+      removeItem: (productId, size, color) => {
         set((state) => ({
           items: state.items.filter(
-            (i) => !(i.productId === productId && i.size === size)
+            (i) => !isSameItem(i, productId, size, color)
           ),
         }));
       },
 
-      updateQty: (productId, size, qty) => {
+      updateQty: (productId, size, qty, color) => {
         if (qty <= 0) {
-          get().removeItem(productId, size);
+          get().removeItem(productId, size, color);
           return;
         }
         set((state) => ({
           items: state.items.map((i) =>
-            i.productId === productId && i.size === size ? { ...i, qty } : i
+            isSameItem(i, productId, size, color) ? { ...i, qty } : i
           ),
         }));
       },

@@ -100,6 +100,9 @@ export const Cart: React.FC = () => {
                     </h3>
                     <p className="text-xs text-slate mt-0.5">
                       Tailored Size: <strong className="text-navy-800 font-mono font-semibold">{item.size}</strong>
+                      {item.color && (
+                        <> • Colour: <strong className="text-navy-800 font-sans capitalize font-semibold">{item.color}</strong></>
+                      )}
                     </p>
                     <span className="text-xs font-serif font-bold text-navy-800 block mt-1">
                       ₹{item.price.toLocaleString('en-IN')} each
@@ -111,7 +114,7 @@ export const Cart: React.FC = () => {
                   {/* Quantity control */}
                   <div className="flex items-center border border-sand-300 rounded-[6px] bg-cream-100">
                     <button
-                      onClick={() => updateQty(item.productId, item.size, item.qty - 1)}
+                      onClick={() => updateQty(item.productId, item.size, item.qty - 1, item.color)}
                       className="p-1.5 hover:bg-cream-50 text-slate transition-colors btn-tactile"
                       aria-label="Decrease quantity"
                     >
@@ -121,7 +124,7 @@ export const Cart: React.FC = () => {
                       {item.qty}
                     </span>
                     <button
-                      onClick={() => updateQty(item.productId, item.size, item.qty + 1)}
+                      onClick={() => updateQty(item.productId, item.size, item.qty + 1, item.color)}
                       className="p-1.5 hover:bg-cream-50 text-slate transition-colors btn-tactile"
                       aria-label="Increase quantity"
                     >
@@ -136,7 +139,7 @@ export const Cart: React.FC = () => {
 
                   {/* Remove */}
                   <button
-                    onClick={() => removeItem(item.productId, item.size)}
+                    onClick={() => removeItem(item.productId, item.size, item.color)}
                     className="text-slate hover:text-crimson-700 p-1.5 rounded transition-colors focus-visible:ring-1 focus-visible:ring-crimson-600"
                     aria-label={`Remove ${item.name}`}
                   >

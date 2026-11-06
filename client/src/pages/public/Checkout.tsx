@@ -98,6 +98,7 @@ export const Checkout: React.FC = () => {
       items: items.map((i) => ({
         productId: i.productId,
         size: i.size,
+        color: i.color,
         qty: i.qty,
       })),
       paymentMethod,
@@ -462,13 +463,13 @@ export const Checkout: React.FC = () => {
 
               <div className="divide-y divide-sand-300 max-h-72 overflow-y-auto pr-1 space-y-2">
                 {items.map((i) => (
-                  <div key={`${i.productId}-${i.size}`} className="pt-2 flex items-center justify-between text-xs">
+                  <div key={`${i.productId}-${i.size}-${i.color || ''}`} className="pt-2 flex items-center justify-between text-xs">
                     <div className="flex items-center gap-2.5">
                       <img src={i.image} alt="" className="w-10 h-12 object-cover rounded-md bg-sand-200 border border-sand-300" />
                       <div>
                         <p className="font-serif font-bold text-navy-800 line-clamp-1">{i.name}</p>
                         <p className="text-slate font-mono">
-                          Size {i.size} × {i.qty}
+                          Size {i.size}{i.color ? ` • ${i.color}` : ''} × {i.qty}
                         </p>
                       </div>
                     </div>

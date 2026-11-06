@@ -17,17 +17,31 @@ export const BrowseProductCard: React.FC<BrowseProductCardProps> = ({ product })
 
   const school = product.school as ISchool;
   const category = product.category as ICategory;
+  const hasVariants = Boolean(product.variants && product.variants.length > 0);
   const primaryImage =
     product.images[0]?.url ||
+    product.variants?.[0]?.images?.[0]?.url ||
     'https://res.cloudinary.com/dvaynkflu/image/upload/v1791370845/indraprasth/products/ngfiqedvngrgzvuc12td.png';
 
-  const totalStock = product.sizes.reduce((acc, s) => acc + (s.stock || 0), 0);
+  const totalStock = hasVariants
+    ? product.variants!.reduce((acc, v) => acc + (v.sizes?.reduce((sAcc, s) => sAcc + (s.stock || 0), 0) || 0), 0)
+    : (product.sizes?.reduce((acc, s) => acc + (s.stock || 0), 0) || 0);
+
   const isOutOfStock = totalStock <= 0;
   const isLowStock = !isOutOfStock && totalStock <= 5;
 
+  const allPrices = hasVariants
+    ? product.variants!.flatMap((v) => v.sizes?.map((s) => s.price).filter((p): p is number => typeof p === 'number' && p > 0) || [])
+    : (product.sizes?.map((s) => s.price).filter((p): p is number => typeof p === 'number' && p > 0) || []);
+
+  const minPrice = allPrices.length > 0 ? Math.min(...allPrices) : product.price;
+  const maxPrice = allPrices.length > 0 ? Math.max(...allPrices) : product.price;
+  const hasVariablePrice = minPrice !== maxPrice || hasVariants || (product.sizes && product.sizes.length > 1 && allPrices.length > 1);
+  const displayPrice = minPrice || product.price;
+
   const discountPercent =
-    product.mrp && product.mrp > product.price
-      ? Math.round(((product.mrp - product.price) / product.mrp) * 100)
+    product.mrp && product.mrp > displayPrice
+      ? Math.round(((product.mrp - displayPrice) / product.mrp) * 100)
       : null;
 
   // Close popover when clicking outside or pressing Escape
@@ -54,10 +68,13 @@ export const BrowseProductCard: React.FC<BrowseProductCardProps> = ({ product })
   const handleAddToCart = (sizeToAdd: string) => {
     if (isOutOfStock) return;
 
+    const sizeObj = product.sizes.find((s) => s.label === sizeToAdd);
+    const itemPrice = sizeObj?.price || displayPrice;
+
     addItem({
       productId: (product._id || product.id) as string,
       name: product.name,
-      price: product.price,
+      price: itemPrice,
       mrp: product.mrp,
       size: sizeToAdd,
       qty: 1,
@@ -85,6 +102,11 @@ export const BrowseProductCard: React.FC<BrowseProductCardProps> = ({ product })
     e.stopPropagation();
 
     if (isOutOfStock) return;
+
+    if (hasVariants) {
+      window.location.href = `/product/${product.slug}`;
+      return;
+    }
 
     if (product.sizes.length > 1) {
       setShowSizePicker((prev) => !prev);
@@ -172,9 +194,9 @@ export const BrowseProductCard: React.FC<BrowseProductCardProps> = ({ product })
           <div>
             <div className="flex items-baseline gap-1.5">
               <span className="text-base sm:text-lg font-serif font-bold text-navy-800 tracking-tight">
-                ₹{product.price.toLocaleString('en-IN')}
+                {hasVariablePrice ? 'From ' : ''}₹{displayPrice.toLocaleString('en-IN')}
               </span>
-              {product.mrp && product.mrp > product.price && (
+              {product.mrp && product.mrp > displayPrice && (
                 <span className="text-xs text-taupe-500 line-through font-sans">
                   ₹{product.mrp.toLocaleString('en-IN')}
                 </span>
@@ -193,12 +215,12 @@ export const BrowseProductCard: React.FC<BrowseProductCardProps> = ({ product })
                 ? 'bg-sand-200 text-slate/50 border border-sand-300 cursor-not-allowed'
                 : 'bg-navy-800 hover:bg-navy-700 active:bg-navy-900 text-cream-50 border border-navy-700 shadow-sm'
             }`}
-            aria-label={`Add ${product.name} to bag`}
-            aria-haspopup={product.sizes.length > 1 ? 'true' : undefined}
+            aria-label={hasVariants ? `View options for ${product.name}` : `Add ${product.name} to bag`}
+            aria-haspopup={!hasVariants && product.sizes.length > 1 ? 'true' : undefined}
             aria-expanded={showSizePicker}
           >
             <ShoppingBag className="w-3.5 h-3.5 text-cream-50" />
-            <span>Add <span className="hidden sm:inline">to Bag</span></span>
+            <span>{hasVariants ? 'Options' : 'Add'}<span className="hidden sm:inline">{hasVariants ? '' : ' to Bag'}</span></span>
           </button>
 
           {/* Quick Size Picker Popover */}

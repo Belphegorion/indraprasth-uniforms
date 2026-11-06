@@ -26,6 +26,7 @@ export const ProductDetail: React.FC = () => {
   const { data: settings } = usePublicSettings();
   const { addItem } = useCartStore();
 
+  const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState<string>('');
   const [quantity, setQuantity] = useState(1);
@@ -40,13 +41,26 @@ export const ProductDetail: React.FC = () => {
     setZoomPos({ x, y });
   };
 
-  // Set default size once product is loaded
+  const hasVariants = Boolean(product?.variants && product.variants.length > 0);
+  const activeVariant = hasVariants ? product?.variants?.[selectedVariantIndex] || product?.variants?.[0] : null;
+
+  const availableSizes = activeVariant ? (activeVariant.sizes || []) : (product?.sizes || []);
+  const availableImages = (activeVariant?.images && activeVariant.images.length > 0)
+    ? activeVariant.images
+    : (product?.images || []);
+
+  // Update selected size when product or variant changes
   React.useEffect(() => {
-    if (product && product.sizes?.length > 0 && !selectedSize) {
-      const firstInStock = product.sizes.find((s) => s.stock > 0);
-      setSelectedSize(firstInStock ? firstInStock.label : product.sizes[0].label);
+    if (availableSizes.length > 0) {
+      const exists = availableSizes.some((s) => s.label === selectedSize);
+      if (!exists) {
+        const firstInStock = availableSizes.find((s) => s.stock > 0);
+        setSelectedSize(firstInStock ? firstInStock.label : availableSizes[0].label);
+      }
+    } else {
+      setSelectedSize('');
     }
-  }, [product, selectedSize]);
+  }, [availableSizes, selectedVariantIndex, product]);
 
   if (isLoading) {
     return (
@@ -83,15 +97,22 @@ export const ProductDetail: React.FC = () => {
 
   const school = product.school as ISchool;
   const category = product.category as ICategory;
-  const activeImage = product.images[selectedImageIndex]?.url || product.images[0]?.url;
+  const activeImage = availableImages[selectedImageIndex]?.url || availableImages[0]?.url || product.images[0]?.url;
 
-  const currentSizeObj = product.sizes.find((s) => s.label === selectedSize);
+  const currentSizeObj = availableSizes.find((s) => s.label === selectedSize);
   const currentStock = currentSizeObj ? currentSizeObj.stock : 0;
   const isOutOfStock = currentStock <= 0;
 
+  const currentPrice =
+    currentSizeObj && typeof currentSizeObj.price === 'number' && currentSizeObj.price > 0
+      ? currentSizeObj.price
+      : availableSizes[0]?.price && availableSizes[0].price > 0
+      ? availableSizes[0].price
+      : product.price;
+
   const discountPercent =
-    product.mrp && product.mrp > product.price
-      ? Math.round(((product.mrp - product.price) / product.mrp) * 100)
+    product.mrp && product.mrp > currentPrice
+      ? Math.round(((product.mrp - currentPrice) / product.mrp) * 100)
       : null;
 
   const handleAddToCart = () => {
@@ -99,18 +120,19 @@ export const ProductDetail: React.FC = () => {
 
     addItem({
       productId: (product._id || product.id) as string,
-      name: product.name,
-      price: product.price,
+      name: activeVariant ? `${product.name} (${activeVariant.colorName})` : product.name,
+      price: currentPrice,
       mrp: product.mrp,
       size: selectedSize,
+      color: activeVariant?.colorName,
       qty: quantity,
-      image: product.images[0]?.url || '',
+      image: activeImage,
       schoolCode: school?.code,
       schoolName: school?.name,
       category: category?.name,
     });
 
-    toast.success(`Added ${quantity}x ${product.name} (${selectedSize}) to bag!`, {
+    toast.success(`Added ${quantity}x ${product.name}${activeVariant ? ' (' + activeVariant.colorName + ')' : ''} (${selectedSize}) to bag!`, {
       icon: '🛍️',
       style: {
         background: '#0E2747',
@@ -123,7 +145,7 @@ export const ProductDetail: React.FC = () => {
 
   const handleBuyOnWhatsApp = () => {
     const phone = settings?.whatsappNumber || '919826025211';
-    const msg = `Hello Indraprasth Uniforms, I want to reserve / order:\n\n*Product:* ${product.name}\n*School:* ${school?.name || 'N/A'}\n*Size:* ${selectedSize}\n*Quantity:* ${quantity}\n*Price:* ₹${product.price}\n*Link:* ${window.location.href}\n\nPlease let me know store availability and trial options.`;
+    const msg = `Hello Indraprasth Uniforms, I want to reserve / order:\n\n*Product:* ${product.name}${activeVariant ? ' (' + activeVariant.colorName + ')' : ''}\n*School:* ${school?.name || 'N/A'}\n*Size:* ${selectedSize}${activeVariant ? '\n*Colour:* ' + activeVariant.colorName : ''}\n*Quantity:* ${quantity}\n*Price:* ₹${currentPrice}\n*Link:* ${window.location.href}\n\nPlease let me know store availability and trial options.`;
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
@@ -189,9 +211,9 @@ export const ProductDetail: React.FC = () => {
           </div>
 
           {/* Thumbnails if multiple images */}
-          {product.images.length > 1 && (
+          {availableImages.length > 1 && (
             <div className="flex gap-3 overflow-x-auto pb-2">
-              {product.images.map((img, idx) => (
+              {availableImages.map((img, idx) => (
                 <button
                   key={idx}
                   onClick={() => setSelectedImageIndex(idx)}
@@ -246,15 +268,72 @@ export const ProductDetail: React.FC = () => {
           {/* Price Block */}
           <div className="p-5 rounded-[10px] bg-cream-50 border border-sand-300 shadow-plinth flex items-baseline gap-3">
             <span className="text-3xl sm:text-4xl font-serif font-bold text-navy-800 tracking-tight">
-              ₹{product.price.toLocaleString('en-IN')}
+              ₹{currentPrice.toLocaleString('en-IN')}
             </span>
-            {product.mrp && product.mrp > product.price && (
+            {product.mrp && product.mrp > currentPrice && (
               <span className="text-base text-taupe-500 line-through font-sans">
                 MRP ₹{product.mrp.toLocaleString('en-IN')}
               </span>
             )}
             <span className="text-xs text-slate ml-auto font-serif italic">Inclusive of all taxes</span>
           </div>
+
+          {/* Colour Variant Selector */}
+          {hasVariants && product.variants && (
+            <div className="space-y-2.5">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-serif uppercase tracking-widest text-brass-text font-bold">
+                  Select Colour / House:
+                </label>
+                <span className="text-xs font-mono font-bold text-navy-800 uppercase px-2 py-0.5 rounded bg-sand-200 border border-sand-300">
+                  {activeVariant?.colorName}
+                </span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {product.variants.map((v, vIdx) => {
+                  const isSelected = selectedVariantIndex === vIdx;
+                  const colorLower = v.colorName.toLowerCase();
+                  const bgCircle =
+                    colorLower === 'red' ? '#DC2626' :
+                    colorLower === 'purple' ? '#7C3AED' :
+                    colorLower === 'blue' ? '#2563EB' :
+                    colorLower === 'green' ? '#16A34A' :
+                    colorLower === 'yellow' ? '#EAB308' :
+                    colorLower === 'grey' || colorLower === 'gray' ? '#6B7280' :
+                    colorLower === 'white' ? '#F9FAFB' :
+                    colorLower === 'brown' ? '#92400E' :
+                    colorLower === 'pink' ? '#EC4899' :
+                    '#14407A';
+
+                  return (
+                    <button
+                      key={v.colorName + vIdx}
+                      type="button"
+                      onClick={() => {
+                        setSelectedVariantIndex(vIdx);
+                        setSelectedImageIndex(0);
+                      }}
+                      className={`px-3 py-2 rounded-[8px] text-xs font-sans font-medium border transition-all flex items-center gap-2 btn-tactile min-h-[44px] ${
+                        isSelected
+                          ? 'border-navy-800 bg-navy-800 text-cream-50 font-bold shadow-xs'
+                          : 'border-sand-300 bg-cream-50 text-navy-800 hover:border-blue-600 hover:bg-cream-100'
+                      }`}
+                      aria-label={`Select colour variant ${v.colorName}`}
+                    >
+                      <span
+                        className="w-3.5 h-3.5 rounded-full border border-sand-400 shrink-0 shadow-xs"
+                        style={{ backgroundColor: bgCircle }}
+                      />
+                      <span className="capitalize">{v.colorName}</span>
+                      <span className={`text-[10px] font-mono ${isSelected ? 'text-cream-200' : 'text-slate'}`}>
+                        ({v.sizes?.length || 0})
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
 
           {/* Size Selector */}
           <div className="space-y-3">
@@ -273,13 +352,13 @@ export const ProductDetail: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
-              {product.sizes.map((s) => (
+              {availableSizes.map((s) => (
                 <button
                   key={s.label}
                   type="button"
                   disabled={s.stock <= 0}
                   onClick={() => setSelectedSize(s.label)}
-                  className={`py-2.5 px-3 rounded-[8px] text-xs sm:text-sm font-mono border transition-all flex flex-col items-center justify-center btn-tactile min-h-[44px] ${
+                  className={`py-2 px-2.5 rounded-[8px] text-xs font-mono border transition-all flex flex-col items-center justify-center btn-tactile min-h-[44px] ${
                     selectedSize === s.label
                       ? 'border-navy-800 bg-navy-800 text-cream-50 font-bold shadow-xs'
                       : s.stock <= 0
@@ -288,7 +367,12 @@ export const ProductDetail: React.FC = () => {
                   }`}
                 >
                   <span className="font-bold">{s.label}</span>
-                  <span className="text-[10px] font-sans font-normal text-slate mt-0.5">
+                  {typeof s.price === 'number' && s.price > 0 && (
+                    <span className={`text-[10px] font-serif ${selectedSize === s.label ? 'text-amber-200 font-semibold' : 'text-slate'}`}>
+                      ₹{s.price}
+                    </span>
+                  )}
+                  <span className={`text-[9px] font-sans font-normal ${selectedSize === s.label ? 'text-cream-200' : 'text-slate/80'}`}>
                     {s.stock > 0 ? (s.stock <= 5 ? `Low (${s.stock})` : 'In stock') : 'Sold out'}
                   </span>
                 </button>
@@ -339,7 +423,7 @@ export const ProductDetail: React.FC = () => {
                 </button>
               </div>
               <span className="text-xs text-slate font-sans">
-                Subtotal: <strong className="text-navy-800 font-sans">₹{(product.price * quantity).toLocaleString('en-IN')}</strong>
+                Subtotal: <strong className="text-navy-800 font-sans">₹{(currentPrice * quantity).toLocaleString('en-IN')}</strong>
               </span>
             </div>
           </div>

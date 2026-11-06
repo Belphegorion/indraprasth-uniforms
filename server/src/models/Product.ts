@@ -1,8 +1,9 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
-import { ProductGender, ProductSeason, ProductTypeGroup, IProductImage, IProductSize } from '@indraprasth/shared';
+import { ProductGender, ProductSeason, ProductTypeGroup, IProductImage, IProductSize, IProductVariant } from '@indraprasth/shared';
 
 export interface IProductDocument extends Document {
   name: string;
+  originalName?: string;
   slug: string;
   description: string;
   price: number;
@@ -11,6 +12,7 @@ export interface IProductDocument extends Document {
   category: mongoose.Types.ObjectId;
   images: IProductImage[];
   sizes: IProductSize[];
+  variants?: IProductVariant[];
   gender: ProductGender;
   season: ProductSeason;
   typeGroup: ProductTypeGroup;
@@ -18,6 +20,11 @@ export interface IProductDocument extends Document {
   isActive: boolean;
   isFeatured: boolean;
   sku?: string;
+  importSource?: {
+    file: string;
+    productNo: number;
+    importedAt: Date;
+  };
   createdAt: Date;
   updatedAt: Date;
 }
@@ -33,7 +40,21 @@ const productImageSchema = new Schema<IProductImage>(
 const productSizeSchema = new Schema<IProductSize>(
   {
     label: { type: String, required: true },
+    originalLabel: { type: String },
+    price: { type: Number, min: 0 },
     stock: { type: Number, required: true, min: 0, default: 0 },
+    gradeRange: { type: String },
+    unit: { type: String },
+  },
+  { _id: false }
+);
+
+const productVariantSchema = new Schema<IProductVariant>(
+  {
+    colorName: { type: String, required: true },
+    colorHex: { type: String },
+    images: { type: [productImageSchema], default: [] },
+    sizes: { type: [productSizeSchema], default: [] },
   },
   { _id: false }
 );
@@ -41,6 +62,7 @@ const productSizeSchema = new Schema<IProductSize>(
 const productSchema = new Schema<IProductDocument>(
   {
     name: { type: String, required: true, trim: true },
+    originalName: { type: String, trim: true },
     slug: {
       type: String,
       required: true,
@@ -71,8 +93,11 @@ const productSchema = new Schema<IProductDocument>(
     },
     sizes: {
       type: [productSizeSchema],
-      required: true,
-      validate: [(v: IProductSize[]) => v.length > 0, 'At least one size is required'],
+      default: [],
+    },
+    variants: {
+      type: [productVariantSchema],
+      default: [],
     },
     gender: {
       type: String,
@@ -102,6 +127,11 @@ const productSchema = new Schema<IProductDocument>(
     isActive: { type: Boolean, default: true, index: true },
     isFeatured: { type: Boolean, default: false, index: true },
     sku: { type: String, trim: true, sparse: true, index: true },
+    importSource: {
+      file: { type: String },
+      productNo: { type: Number },
+      importedAt: { type: Date },
+    },
   },
   {
     timestamps: true,
