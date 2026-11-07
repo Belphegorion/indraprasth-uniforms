@@ -3,12 +3,17 @@ import { env } from '../config/env';
 import path from 'path';
 import fs from 'fs';
 
+import os from 'os';
+
 export interface CloudinaryUploadResult {
   url: string;
   publicId: string;
 }
 
-export const UPLOADS_DIR = path.resolve(__dirname, '../../../uploads');
+export const UPLOADS_DIR = process.env.VERCEL
+  ? path.join(os.tmpdir(), 'indraprasth_uploads')
+  : path.resolve(__dirname, '../../../uploads');
+
 
 export const uploadImageStream = async (
   fileBuffer: Buffer,
@@ -59,27 +64,30 @@ export const uploadVideoStream = async (
     const sanitizedBase = path.basename(filename, ext).replace(/[^a-zA-Z0-9_-]/g, '_');
     const safeFilename = `${sanitizedBase}_${Date.now()}${ext}`;
 
-    if (!fs.existsSync(UPLOADS_DIR)) {
-      fs.mkdirSync(UPLOADS_DIR, { recursive: true });
-    }
-    const targetPath = path.join(UPLOADS_DIR, safeFilename);
-    fs.writeFileSync(targetPath, fileBuffer);
-
-    // Also mirror to client/public/uploads if it exists for local Vite dev convenience
-    const clientUploads = path.resolve(__dirname, '../../../client/public/uploads');
     try {
-      if (!fs.existsSync(clientUploads)) {
-        fs.mkdirSync(clientUploads, { recursive: true });
+      if (!fs.existsSync(UPLOADS_DIR)) {
+        fs.mkdirSync(UPLOADS_DIR, { recursive: true });
       }
-      fs.writeFileSync(path.join(clientUploads, safeFilename), fileBuffer);
-    } catch {
-      // Non-fatal
+      const targetPath = path.join(UPLOADS_DIR, safeFilename);
+      fs.writeFileSync(targetPath, fileBuffer);
+
+      // Also mirror to client/public/uploads if it exists for local Vite dev convenience
+      if (!process.env.VERCEL) {
+        const clientUploads = path.resolve(__dirname, '../../../client/public/uploads');
+        if (!fs.existsSync(clientUploads)) {
+          fs.mkdirSync(clientUploads, { recursive: true });
+        }
+        fs.writeFileSync(path.join(clientUploads, safeFilename), fileBuffer);
+      }
+    } catch (writeErr) {
+      console.warn('⚠️ Could not persist local upload file to disk:', writeErr);
     }
 
     return {
       url: `/uploads/${safeFilename}`,
       publicId: `local_${safeFilename}`,
     };
+
   }
 
   return new Promise((resolve, reject) => {

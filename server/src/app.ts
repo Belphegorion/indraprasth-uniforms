@@ -48,12 +48,21 @@ app.use(
   })
 );
 
-// Ensure MongoDB is connected for serverless invocations
-app.use(async (_req, _res, next) => {
+// Health check endpoint (both /health and /api/health) - immediately responsive without DB dependency
+app.get(['/health', '/api/health'], (_req, res) => {
+  res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
+// Ensure MongoDB is connected for API invocations
+app.use(async (req, _res, next) => {
+  if (req.path === '/health' || req.path === '/api/health' || req.path.startsWith('/uploads')) {
+    return next();
+  }
   try {
     await connectDB();
     next();
   } catch (err) {
+    console.error('MongoDB connection error in request lifecycle:', err);
     next(err);
   }
 });
@@ -76,17 +85,18 @@ if (env.NODE_ENV !== 'test') {
   );
 }
 
-// Health check endpoint (both /health and /api/health)
-app.get(['/health', '/api/health'], (_req, res) => {
-  res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
-});
-
-// Static uploads directory (for local file uploads and offline development)
-const uploadsDir = path.resolve(__dirname, '../../uploads');
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir, { recursive: true });
+// Static uploads directory (for local file uploads and offline development only)
+if (!process.env.VERCEL) {
+  try {
+    const uploadsDir = path.resolve(__dirname, '../../uploads');
+    if (!fs.existsSync(uploadsDir)) {
+      fs.mkdirSync(uploadsDir, { recursive: true });
+    }
+    app.use('/uploads', express.static(uploadsDir));
+  } catch (err) {
+    console.warn('⚠️ Could not initialize local uploads directory:', err);
+  }
 }
-app.use('/uploads', express.static(uploadsDir));
 
 // API Routes
 app.use('/api/v1', publicRoutes);
@@ -97,3 +107,8 @@ app.use(notFound);
 app.use(errorHandler);
 
 export default app;
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = app;
+  module.exports.default = app;
+}
+

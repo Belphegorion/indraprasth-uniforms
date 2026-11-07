@@ -33,3 +33,8 @@ if (!process.env.VERCEL) {
 }
 
 export default app;
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = app;
+  module.exports.default = app;
+}
+
