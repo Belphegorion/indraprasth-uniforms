@@ -51,11 +51,18 @@ export const errorHandler = (
       .join(', ');
   }
 
+  // Zod Validation Error
+  if (err.name === 'ZodError') {
+    statusCode = 400;
+    const issues = err.issues || err.errors || [];
+    message = issues[0]?.message || 'Validation failed';
+  }
+
   // Multer & File Upload Errors
   if (err.name === 'MulterError' || err.message?.includes('Invalid file type') || err.message?.includes('Only CSV')) {
     statusCode = 400;
     if (err.code === 'LIMIT_FILE_SIZE') {
-      message = 'File size exceeds maximum allowed limit (5 MB for images, 10 MB for CSV)';
+      message = 'File size exceeds maximum allowed limit (50 MB for videos, 5 MB for images, 10 MB for CSV)';
     } else {
       message = err.message || 'File upload error';
     }

@@ -186,6 +186,7 @@ export const seedDatabase = async () => {
     businessName: 'Indraprasth Uniforms',
     tagline: 'The Uniform Icons since 1975',
     logoUrl: 'https://res.cloudinary.com/dvaynkflu/image/upload/v1791284239/indraprasth/products/y3sgf8q8kydtlarcydnb.jpg',
+    heroVideoUrl: '/new-video-hero.mp4',
     phones: ['+91 98260 25211', '+91 755 2770244'],
     email: 'info@indraprasthuniforms.com',
     whatsappNumber: '919826025211',
@@ -236,8 +237,17 @@ export const seedDatabase = async () => {
     gstin: '23AAAAA0000A1Z5',
   };
 
-  await Setting.findOneAndUpdate({}, { $set: settingsData }, { upsert: true, new: true });
-  console.log('⚙️ Default settings and branches synced');
+  const existingSettings = await Setting.findOne();
+  if (!existingSettings) {
+    await Setting.create(settingsData);
+    console.log('⚙️ Default settings and branches created');
+  } else {
+    if (!existingSettings.heroVideoUrl) {
+      existingSettings.heroVideoUrl = '/new-video-hero.mp4';
+      await existingSettings.save();
+    }
+    console.log('⚙️ Default settings and branches synced');
+  }
 
   // 5. Seed Owner Admin
   await createOrUpdateAdmin();

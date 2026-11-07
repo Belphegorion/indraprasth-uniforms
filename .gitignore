@@ -11,6 +11,8 @@ coverage/
 dist/
 build/
 *.tsbuildinfo
+uploads/
+client/public/uploads/
 
 # Environment variables & Local configuration
 .env

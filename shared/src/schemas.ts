@@ -242,6 +242,7 @@ export const settingUpdateSchema = z.object({
   businessName: z.string().min(2, 'Business name is required'),
   tagline: z.string().min(2, 'Tagline is required'),
   logoUrl: z.string().optional(),
+  heroVideoUrl: z.string().optional(),
   phones: z.array(z.string()).min(1, 'At least one phone number is required'),
   email: z.string().email('Valid email required'),
   whatsappNumber: z.string().min(10, 'Valid WhatsApp number required'),

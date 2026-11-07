@@ -17,11 +17,17 @@ import {
   MapPin,
   ExternalLink,
   ShieldAlert,
+  Video,
+  Film,
+  RotateCcw,
+  Eye,
+  Sparkles,
 } from 'lucide-react';
 import {
   useAdminSettings,
   useUpdateSettings,
   useUploadImage,
+  useUploadVideo,
 } from '../../api';
 import { api } from '../../api/client';
 import { useAuthStore } from '../../store/auth';
@@ -35,9 +41,12 @@ export const Settings: React.FC = () => {
   const { data: settings, isLoading, refetch } = useAdminSettings();
   const updateSettingsMutation = useUpdateSettings();
   const uploadImageMutation = useUploadImage();
+  const uploadVideoMutation = useUploadVideo();
 
-  const [activeTab, setActiveTab] = useState<'business' | 'branches' | 'delivery' | 'security'>('business');
+  const [activeTab, setActiveTab] = useState<'business' | 'hero' | 'branches' | 'delivery' | 'security'>('business');
   const [isUploading, setIsUploading] = useState(false);
+  const [isVideoUploading, setIsVideoUploading] = useState(false);
+  const [videoUploadProgress, setVideoUploadProgress] = useState('');
 
   // Password change state
   const [currentPassword, setCurrentPassword] = useState('');
@@ -59,6 +68,7 @@ export const Settings: React.FC = () => {
       businessName: '',
       tagline: '',
       logoUrl: '',
+      heroVideoUrl: '/new-video-hero.mp4',
       phones: ['+91 98260 25211'],
       email: '',
       whatsappNumber: '',
@@ -91,6 +101,7 @@ export const Settings: React.FC = () => {
   });
 
   const logoUrlValue = watch('logoUrl');
+  const heroVideoUrlValue = watch('heroVideoUrl');
 
   useEffect(() => {
     if (settings) {
@@ -98,6 +109,7 @@ export const Settings: React.FC = () => {
         businessName: settings.businessName,
         tagline: settings.tagline,
         logoUrl: settings.logoUrl || '',
+        heroVideoUrl: settings.heroVideoUrl || '/new-video-hero.mp4',
         phones: settings.phones || ['+91 98260 25211'],
         email: settings.email,
         whatsappNumber: settings.whatsappNumber,
@@ -134,6 +146,30 @@ export const Settings: React.FC = () => {
       toast.error('Failed to upload logo');
     } finally {
       setIsUploading(false);
+    }
+  };
+
+  const handleVideoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 50 * 1024 * 1024) {
+      toast.error('Video file size exceeds 50MB limit');
+      return;
+    }
+
+    setIsVideoUploading(true);
+    setVideoUploadProgress(`Uploading ${file.name} (${(file.size / (1024 * 1024)).toFixed(1)} MB)...`);
+    try {
+      const res = await uploadVideoMutation.mutateAsync(file);
+      setValue('heroVideoUrl', res.url, { shouldValidate: true, shouldDirty: true });
+      toast.success('Hero background video uploaded! Click "Save Settings" or "Save & Apply Hero Video" to publish.');
+    } catch (err: any) {
+      toast.error(err.response?.data?.error || 'Failed to upload video');
+    } finally {
+      setIsVideoUploading(false);
+      setVideoUploadProgress('');
+      e.target.value = '';
     }
   };
 
@@ -230,6 +266,18 @@ export const Settings: React.FC = () => {
         >
           <Building2 className="w-4 h-4" />
           <span>Business Profile</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab('hero')}
+          className={`flex items-center gap-2 px-4 py-3 font-bold text-xs sm:text-sm whitespace-nowrap border-b-2 transition-all ${
+            activeTab === 'hero'
+              ? 'border-blue-600 text-blue-600'
+              : 'border-transparent text-taupe-500 hover:text-navy-800'
+          }`}
+        >
+          <Video className="w-4 h-4" />
+          <span>Hero Video Backdrop</span>
         </button>
 
         <button
@@ -374,23 +422,245 @@ export const Settings: React.FC = () => {
                   <div>
                     <label
                       htmlFor="settings-logo-upload"
-                      className="cursor-pointer inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-sand-200 hover:bg-sand-300 text-navy-800 text-xs font-bold transition-colors"
+                      className="cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-xl bg-sand-200 hover:bg-sand-300 text-navy-800 text-xs font-bold transition-colors focus-within:ring-2 focus-within:ring-blue-600 focus-within:ring-offset-2"
                     >
-                      <Upload className="w-4 h-4 text-taupe-500" />
+                      <Upload className="w-4 h-4 text-taupe-500" aria-hidden="true" />
                       <span>{isUploading ? 'Uploading to Cloudinary...' : 'Change Store Logo'}</span>
+                      <input
+                        id="settings-logo-upload"
+                        type="file"
+                        accept="image/*"
+                        className="sr-only"
+                        onChange={handleLogoUpload}
+                        disabled={isUploading}
+                      />
                     </label>
-                    <input
-                      id="settings-logo-upload"
-                      type="file"
-                      accept="image/*"
-                      className="hidden"
-                      onChange={handleLogoUpload}
-                      disabled={isUploading}
-                    />
                     <p className="text-[10px] text-taupe-500 mt-1">
                       PNG or SVG format with transparent background recommended.
                     </p>
                   </div>
+                </div>
+              </div>
+
+              {/* Hero Video Quick Summary & Link to Tab */}
+              <div className="pt-4 border-t border-sand-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-sand-100/60 p-4 rounded-2xl border border-sand-300">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center shrink-0">
+                    <Video className="w-5 h-5" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h3 className="text-xs font-bold text-navy-800">Storefront Hero Video Backdrop</h3>
+                    <p className="text-[11px] text-taupe-500 font-mono truncate max-w-xs sm:max-w-md">
+                      Current: {heroVideoUrlValue || '/new-video-hero.mp4'}
+                    </p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('hero')}
+                  className="inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-xl bg-navy-800 hover:bg-navy-700 text-white text-xs font-bold transition-colors shadow-sm shrink-0 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:outline-none"
+                >
+                  <Film className="w-4 h-4" aria-hidden="true" />
+                  <span>Configure Video & Preview</span>
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* TAB: Hero Video Management */}
+          {activeTab === 'hero' && (
+            <div className="bg-cream-50 p-6 sm:p-8 rounded-3xl border border-sand-300 shadow-sm space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-sand-200 pb-4">
+                <div>
+                  <h2 className="text-xs font-bold uppercase tracking-wider text-taupe-500">
+                    Storefront Hero Video Backdrop
+                  </h2>
+                  <p className="text-xs text-taupe-500 mt-0.5">
+                    Controls the ambient background video playing across the homepage hero banner.
+                  </p>
+                </div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setValue('heroVideoUrl', '/new-video-hero.mp4', {
+                        shouldDirty: true,
+                        shouldValidate: true,
+                      })
+                    }
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2 min-h-[44px] rounded-xl bg-sand-200 hover:bg-sand-300 text-navy-800 text-xs font-bold transition-colors focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:outline-none"
+                    title="Restore the new-video-hero.mp4 default"
+                    aria-label="Reset hero video to default /new-video-hero.mp4"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5 text-taupe-500" aria-hidden="true" />
+                    <span>Reset to Default</span>
+                  </button>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting || !isOwner}
+                    className="inline-flex items-center gap-2 px-4 py-2 min-h-[44px] rounded-xl bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-bold text-xs shadow-sm transition-colors focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:outline-none"
+                    aria-label="Save and apply hero video"
+                  >
+                    <Save className="w-4 h-4" aria-hidden="true" />
+                    <span>{isSubmitting ? 'Saving...' : 'Save & Apply Video'}</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Unsaved changes notice banner */}
+              {isDirty && (
+                <div className="p-3.5 bg-amber-50 border border-amber-200 rounded-2xl flex items-center justify-between gap-3 text-amber-900 text-xs">
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-amber-600 shrink-0" aria-hidden="true" />
+                    <span>
+                      You have unsaved video changes. Click <strong>Save & Apply Video</strong> to publish them to the live storefront.
+                    </span>
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting || !isOwner}
+                    className="px-3 py-1.5 min-h-[36px] bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-bold text-xs shrink-0"
+                  >
+                    Save Now
+                  </button>
+                </div>
+              )}
+
+              {/* Live Video Preview Box */}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <label htmlFor="hero-video-url-input" className="text-xs font-bold text-navy-800 flex items-center gap-2">
+                    <Eye className="w-4 h-4 text-blue-600" aria-hidden="true" />
+                    <span>Live Hero Video Preview</span>
+                  </label>
+                  <span className="text-[11px] font-mono text-taupe-500 truncate max-w-xs sm:max-w-md">
+                    {heroVideoUrlValue || '/new-video-hero.mp4'}
+                  </span>
+                </div>
+
+                <div className="relative rounded-2xl overflow-hidden bg-navy-950 border border-sand-300 shadow-inner aspect-[16/9] max-h-80 sm:max-h-96 w-full flex items-center justify-center group dark">
+                  <video
+                    key={heroVideoUrlValue || '/new-video-hero.mp4'}
+                    src={heroVideoUrlValue || '/new-video-hero.mp4'}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    controls
+                    title="Live hero video backdrop preview"
+                    aria-label="Live hero video backdrop preview"
+                    className="w-full h-full object-cover"
+                  />
+                  {/* Scrim preview overlay note */}
+                  <div className="absolute top-3 left-3 bg-navy-900/80 backdrop-blur-sm border border-sand-300/20 text-cream-100 text-[10px] font-mono px-2.5 py-1 rounded-full pointer-events-none">
+                    Ambient Preview Mode • Muted Autoplay
+                  </div>
+                </div>
+              </div>
+
+              {/* Video URL Input & Upload Controls */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                <div className="space-y-1">
+                  <label htmlFor="hero-video-url-input" className="text-xs font-bold text-navy-800">
+                    Hero Video URL or Static Path *
+                  </label>
+                  <input
+                    id="hero-video-url-input"
+                    type="text"
+                    {...register('heroVideoUrl')}
+                    placeholder="/new-video-hero.mp4 or https://res.cloudinary.com/..."
+                    className="w-full text-xs px-3 py-2.5 min-h-[44px] rounded-xl border border-sand-300 focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white text-navy-800 font-mono"
+                  />
+                  {errors.heroVideoUrl && (
+                    <p className="text-[11px] text-crimson-600">
+                      {errors.heroVideoUrl.message as string}
+                    </p>
+                  )}
+                  <p className="text-[11px] text-taupe-500">
+                    Enter a relative path (e.g.{' '}
+                    <code className="bg-sand-200 px-1 py-0.5 rounded text-navy-800 font-mono">
+                      /new-video-hero.mp4
+                    </code>
+                    ) or an external Cloudinary / CDN URL.
+                  </p>
+                </div>
+
+                {/* File Upload Box */}
+                <div className="space-y-1">
+                  <span className="text-xs font-bold text-navy-800 block">
+                    Upload Video File (MP4 / WebM up to 50MB)
+                  </span>
+                  <div className="flex items-center gap-3">
+                    <label
+                      htmlFor="hero-video-file-upload"
+                      className={`cursor-pointer inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[44px] rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-colors shadow-sm focus-within:ring-2 focus-within:ring-blue-600 focus-within:ring-offset-2 ${
+                        isVideoUploading ? 'opacity-60 cursor-not-allowed' : ''
+                      }`}
+                    >
+                      <Upload className="w-4 h-4" aria-hidden="true" />
+                      <span>{isVideoUploading ? 'Uploading Video...' : 'Choose & Upload Video'}</span>
+                      <input
+                        id="hero-video-file-upload"
+                        type="file"
+                        accept="video/mp4,video/webm,video/ogg,video/quicktime"
+                        className="sr-only"
+                        onChange={handleVideoUpload}
+                        disabled={isVideoUploading}
+                      />
+                    </label>
+                  </div>
+                  {videoUploadProgress && (
+                    <p className="text-[11px] text-blue-600 font-medium animate-pulse mt-1">
+                      {videoUploadProgress}
+                    </p>
+                  )}
+                  <p className="text-[11px] text-taupe-500">
+                    High-definition H.264/MP4 or WebM video recommended. Aspect ratio 16:9 or wider.
+                  </p>
+                </div>
+              </div>
+
+              {/* Preset Quick Selectors */}
+              <div className="pt-3 border-t border-sand-200">
+                <span className="text-[11px] font-bold text-navy-800 uppercase tracking-wider block mb-2">
+                  Available Local Presets:
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setValue('heroVideoUrl', '/new-video-hero.mp4', {
+                        shouldDirty: true,
+                        shouldValidate: true,
+                      })
+                    }
+                    aria-pressed={heroVideoUrlValue === '/new-video-hero.mp4' || !heroVideoUrlValue}
+                    className={`px-4 py-2.5 min-h-[44px] rounded-xl text-xs font-mono font-medium transition-colors border focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:outline-none ${
+                      heroVideoUrlValue === '/new-video-hero.mp4' || !heroVideoUrlValue
+                        ? 'bg-blue-50 border-blue-400 text-blue-700 font-bold'
+                        : 'bg-white border-sand-300 text-slate hover:bg-sand-100'
+                    }`}
+                  >
+                    ✨ /new-video-hero.mp4 (Current Default)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setValue('heroVideoUrl', '/new-bg-hero-background-video.mp4', {
+                        shouldDirty: true,
+                        shouldValidate: true,
+                      })
+                    }
+                    aria-pressed={heroVideoUrlValue === '/new-bg-hero-background-video.mp4'}
+                    className={`px-4 py-2.5 min-h-[44px] rounded-xl text-xs font-mono font-medium transition-colors border focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:outline-none ${
+                      heroVideoUrlValue === '/new-bg-hero-background-video.mp4'
+                        ? 'bg-blue-50 border-blue-400 text-blue-700 font-bold'
+                        : 'bg-white border-sand-300 text-slate hover:bg-sand-100'
+                    }`}
+                  >
+                    🏛️ /new-bg-hero-background-video.mp4 (Archival)
+                  </button>
                 </div>
               </div>
             </div>

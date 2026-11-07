@@ -6,6 +6,8 @@ import compression from 'compression';
 import mongoSanitize from 'express-mongo-sanitize';
 import pinoHttp from 'pino-http';
 import pino from 'pino';
+import path from 'path';
+import fs from 'fs';
 import { env } from './config/env';
 import publicRoutes from './routes/publicRoutes';
 import adminRoutes from './routes/adminRoutes';
@@ -78,6 +80,13 @@ if (env.NODE_ENV !== 'test') {
 app.get(['/health', '/api/health'], (_req, res) => {
   res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
 });
+
+// Static uploads directory (for local file uploads and offline development)
+const uploadsDir = path.resolve(__dirname, '../../uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+app.use('/uploads', express.static(uploadsDir));
 
 // API Routes
 app.use('/api/v1', publicRoutes);

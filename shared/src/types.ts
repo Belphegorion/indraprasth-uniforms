@@ -211,6 +211,7 @@ export interface ISetting {
   businessName: string;
   tagline: string;
   logoUrl?: string;
+  heroVideoUrl?: string;
   phones: string[];
   email: string;
   whatsappNumber: string;

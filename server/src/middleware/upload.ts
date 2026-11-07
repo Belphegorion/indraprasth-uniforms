@@ -38,3 +38,47 @@ export const uploadCsvFile = multer({
     }
   },
 }).single('file');
+
+const videoFileFilter = (
+  _req: Request,
+  file: Express.Multer.File,
+  cb: FileFilterCallback
+): void => {
+  const allowedMimeTypes = ['video/mp4', 'video/webm', 'video/ogg', 'video/quicktime'];
+  const hasValidExt = /\.(mp4|webm|ogg|mov)$/i.test(file.originalname);
+  const hasValidMime =
+    allowedMimeTypes.includes(file.mimetype) ||
+    file.mimetype.startsWith('video/') ||
+    file.mimetype === 'application/octet-stream';
+
+  // Do not allow executable or scripts
+  const isDangerousMime = /executable|dos-download|x-sh|javascript|html/i.test(file.mimetype);
+
+  if (hasValidExt && hasValidMime && !isDangerousMime) {
+    cb(null, true);
+  } else {
+    cb(new Error('Invalid file type. Only MP4, WebM, OGG, and MOV videos are allowed.'));
+  }
+};
+
+const videoMulter = multer({
+  storage,
+  limits: {
+    fileSize: 50 * 1024 * 1024, // 50 MB max
+  },
+  fileFilter: videoFileFilter,
+});
+
+export const uploadSingleVideo = (req: Request, res: any, next: any): void => {
+  videoMulter.fields([
+    { name: 'video', maxCount: 1 },
+    { name: 'file', maxCount: 1 },
+  ])(req, res, (err: any) => {
+    if (err) return next(err);
+    if (req.files) {
+      const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+      req.file = files['video']?.[0] || files['file']?.[0];
+    }
+    next();
+  });
+};

@@ -5,6 +5,7 @@ export interface ISettingDocument extends Document {
   businessName: string;
   tagline: string;
   logoUrl?: string;
+  heroVideoUrl?: string;
   phones: string[];
   email: string;
   whatsappNumber: string;
@@ -35,6 +36,7 @@ const settingSchema = new Schema<ISettingDocument>(
     businessName: { type: String, default: 'Indraprasth Uniforms' },
     tagline: { type: String, default: 'The Uniform Icons since 1975' },
     logoUrl: { type: String },
+    heroVideoUrl: { type: String, default: '/new-video-hero.mp4' },
     phones: {
       type: [String],
       default: ['+91 98260 25211', '+91 755 2770244'],
@@ -106,6 +108,16 @@ const settingSchema = new Schema<ISettingDocument>(
     },
   }
 );
+
+settingSchema.pre('save', function (next) {
+  if (this.heroVideoUrl !== undefined) {
+    const trimmed = typeof this.heroVideoUrl === 'string' ? this.heroVideoUrl.trim() : '';
+    this.heroVideoUrl = trimmed || '/new-video-hero.mp4';
+  } else {
+    this.heroVideoUrl = '/new-video-hero.mp4';
+  }
+  next();
+});
 
 export interface ISettingModel extends Model<ISettingDocument> {
   getSettings(): Promise<ISettingDocument>;

@@ -6,10 +6,10 @@ export const validateBody = (schema: ZodSchema) => {
     try {
       req.body = schema.parse(req.body);
       next();
-    } catch (error) {
-      if (error instanceof ZodError) {
-        const issues = error.errors.map((e) => ({
-          field: e.path.join('.'),
+    } catch (error: any) {
+      if (error instanceof ZodError || error?.name === 'ZodError') {
+        const issues = (error.errors || error.issues || []).map((e: any) => ({
+          field: Array.isArray(e.path) ? e.path.join('.') : String(e.path),
           message: e.message,
         }));
         res.status(400).json({
@@ -29,10 +29,10 @@ export const validateQuery = (schema: ZodSchema) => {
     try {
       req.query = schema.parse(req.query) as any;
       next();
-    } catch (error) {
-      if (error instanceof ZodError) {
-        const issues = error.errors.map((e) => ({
-          field: e.path.join('.'),
+    } catch (error: any) {
+      if (error instanceof ZodError || error?.name === 'ZodError') {
+        const issues = (error.errors || error.issues || []).map((e: any) => ({
+          field: Array.isArray(e.path) ? e.path.join('.') : String(e.path),
           message: e.message,
         }));
         res.status(400).json({

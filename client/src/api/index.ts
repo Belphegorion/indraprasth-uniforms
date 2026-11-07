@@ -372,6 +372,19 @@ export const useUploadImage = () => {
   });
 };
 
+export const useUploadVideo = () => {
+  return useMutation({
+    mutationFn: async (file: File) => {
+      const formData = new FormData();
+      formData.append('video', file);
+      const res = await api.post('/admin/uploads/video', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      return res.data.data as { url: string; publicId: string };
+    },
+  });
+};
+
 export const useImportProductsCsv = () => {
   const queryClient = useQueryClient();
   return useMutation({

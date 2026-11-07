@@ -12,17 +12,41 @@ import {
   Phone,
   Clock,
   ExternalLink,
-  Scissors,
+  Play,
+  Pause,
 } from 'lucide-react';
 import { useSchools, useFeaturedProducts, usePublicSettings } from '../../api';
 import { ProductCard } from '../../components/product/ProductCard';
 import { Skeleton } from '../../components/ui/Skeleton';
 import { SchoolShopSection } from '../../components/home/SchoolShopSection';
 
+const getVideoMimeType = (url: string): string => {
+  const clean = url.split('?')[0].split('#')[0].toLowerCase();
+  if (clean.endsWith('.webm')) return 'video/webm';
+  if (clean.endsWith('.ogg')) return 'video/ogg';
+  if (clean.endsWith('.mov')) return 'video/quicktime';
+  return 'video/mp4';
+};
+
 export const Home: React.FC = () => {
   const { data: schools, isLoading: schoolsLoading } = useSchools();
   const { data: featuredProducts, isLoading: productsLoading } = useFeaturedProducts();
   const { data: settings } = usePublicSettings();
+  const heroVideo = settings?.heroVideoUrl?.trim() || '/new-video-hero.mp4';
+
+  const videoRef = React.useRef<HTMLVideoElement | null>(null);
+  const [isPlaying, setIsPlaying] = React.useState(true);
+
+  const toggleVideoPlayback = () => {
+    if (!videoRef.current) return;
+    if (videoRef.current.paused) {
+      videoRef.current.play();
+      setIsPlaying(true);
+    } else {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    }
+  };
 
   // LocalBusiness schema for rich snippet SEO
   const jsonLd = {
@@ -54,110 +78,114 @@ export const Home: React.FC = () => {
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
 
-      {/* Hero Section — Archival Atelier Elegance */}
-      <section className="relative overflow-hidden bg-cream-100 py-12 sm:py-20 border-b border-sand-300">
+      {/* Hero Section — Archival Atelier Elegance with Ambient Video Backdrop */}
+      <section className="relative overflow-hidden bg-cream-100 py-16 sm:py-24 lg:py-28 border-b border-sand-300">
+        {/* Background Video Layer */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none select-none group dark" aria-hidden="true">
+          <video
+            ref={videoRef}
+            key={heroVideo}
+            src={heroVideo}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            poster="/hero-video-poster.jpg"
+            aria-label="Craftsmanship and tailoring background video"
+            className="w-full h-full object-cover object-right lg:object-[80%_center] motion-reduce:hidden"
+          >
+            <source
+              src={heroVideo}
+              type={getVideoMimeType(heroVideo)}
+            />
+          </video>
+          {/* Fallback image for users with prefers-reduced-motion */}
+          <img
+            src="/hero-video-poster.jpg"
+            alt=""
+            className="w-full h-full object-cover object-right lg:object-[80%_center] hidden motion-reduce:block"
+          />
+          {/* Atelier Gradient Scrim for Legibility & Contrast */}
+          <div
+            className="absolute inset-0 bg-gradient-to-b from-cream-100/95 via-cream-100/90 to-cream-100/60 lg:bg-gradient-to-r lg:from-cream-100 lg:via-cream-100/95 lg:via-60% lg:to-transparent"
+            aria-hidden="true"
+          />
+          <div className="absolute inset-0 bg-navy-950/[0.02]" aria-hidden="true" />
+        </div>
+
+        {/* Ambient Video Play/Pause Toggle (WCAG 2.2.2 Pause, Stop, Hide) */}
+        <div className="absolute bottom-4 right-4 z-20">
+          <button
+            type="button"
+            onClick={toggleVideoPlayback}
+            aria-label={isPlaying ? 'Pause background hero video' : 'Play background hero video'}
+            title={isPlaying ? 'Pause background video' : 'Play background video'}
+            className="inline-flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-cream-50/90 hover:bg-cream-50 text-navy-800 border border-sand-300 shadow-md backdrop-blur-sm transition-colors focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:outline-none"
+          >
+            {isPlaying ? (
+              <Pause className="w-4 h-4 text-navy-800" aria-hidden="true" />
+            ) : (
+              <Play className="w-4 h-4 text-navy-800 ml-0.5" aria-hidden="true" />
+            )}
+          </button>
+        </div>
+
+        {/* Hero Content (Foreground) */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Column Text */}
-            <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cream-50 border border-sand-300 text-brass-text text-xs font-serif font-semibold uppercase tracking-wider shadow-subtle">
-                <Sparkles className="w-3.5 h-3.5 text-brass" />
-                <span>The Uniform Icons Since 1975</span>
-              </div>
-
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-bold text-navy-800 tracking-tight leading-[1.08]">
-                Crafted for Character &{' '}
-                <span className="font-serif italic font-normal text-brass-text">
-                  Academic Distinction
-                </span>
-              </h1>
-
-              <p className="text-base sm:text-lg text-slate font-sans max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                Trusted by Bhopal's premier schools, colleges, medical faculties, and corporations for half a century.
-                Official regulation dye-lots, certified shrink-resistant woollens, and master tailoring designed to outlast the academic year.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start pt-2">
-                <a
-                  href="#shop-by-school"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.getElementById('shop-by-school')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-[8px] bg-crimson-600 hover:bg-crimson-700 active:bg-crimson-800 text-white font-medium text-sm sm:text-base shadow-sm shadow-crimson-600/20 btn-tactile focus-visible:ring-2 focus-visible:ring-crimson-600"
-                >
-                  <span>Select Your School</span>
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-
-                <Link
-                  to="/bulk-inquiry"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-[8px] bg-transparent hover:bg-navy-800 hover:text-cream-50 text-navy-800 border-[1.5px] border-navy-800 font-medium text-sm sm:text-base btn-tactile focus-visible:ring-2 focus-visible:ring-blue-600"
-                >
-                  <Building className="w-4 h-4 text-brass" />
-                  <span>Institutional & Bulk Orders</span>
-                </Link>
-              </div>
-
-              {/* Trust Indicators */}
-              <div className="grid grid-cols-3 gap-6 pt-8 border-t border-sand-300 max-w-lg mx-auto lg:mx-0 text-left">
-                <div>
-                  <span className="block text-2xl sm:text-3xl font-serif font-bold text-navy-800">50+</span>
-                  <span className="text-xs text-slate font-serif italic">Years of Heritage</span>
-                </div>
-                <div>
-                  <span className="block text-2xl sm:text-3xl font-serif font-bold text-navy-800">4</span>
-                  <span className="text-xs text-slate font-serif italic">Bhopal Retail Branches</span>
-                </div>
-                <div>
-                  <span className="block text-2xl sm:text-3xl font-serif font-bold text-navy-800">100%</span>
-                  <span className="text-xs text-slate font-serif italic">Regulation Conformity</span>
-                </div>
-              </div>
+          <div className="max-w-2xl space-y-6 text-center lg:text-left p-6 sm:p-8 lg:p-0 rounded-2xl lg:rounded-none bg-cream-50/90 lg:bg-transparent backdrop-blur-md lg:backdrop-blur-none border border-sand-300/80 lg:border-none shadow-xl lg:shadow-none">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cream-50/90 backdrop-blur-sm border border-sand-300 text-brass-text text-xs font-serif font-semibold uppercase tracking-wider shadow-subtle">
+              <Sparkles className="w-3.5 h-3.5 text-brass" />
+              <span>The Uniform Icons Since 1975</span>
             </div>
 
-            {/* Right Column Visual Plinth */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative mx-auto max-w-md lg:max-w-none">
-                <div className="relative rounded-[10px] overflow-hidden shadow-2xl border border-navy-700 bg-navy-900 text-cream-50">
-                  <div className="relative bg-cream-50 p-4 sm:p-6 flex items-center justify-center border-b border-sand-300">
-                    <img
-                      src="https://res.cloudinary.com/dvaynkflu/image/upload/f_auto,q_auto,w_800/v1791284239/indraprasth/products/y3sgf8q8kydtlarcydnb.jpg"
-                      alt="Delhi Public School Bhopal Blazer by Indraprasth"
-                      className="w-full h-64 sm:h-80 object-contain drop-shadow-md hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute top-4 left-4">
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-[4px] text-xs font-serif font-semibold bg-navy-800 text-cream-50 border border-navy-700 shadow-md">
-                        DPS Official Issue
-                      </span>
-                    </div>
-                  </div>
-                  <div className="p-5 sm:p-6 bg-navy-900 text-cream-50">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[11px] uppercase font-serif tracking-widest text-brass font-bold">
-                        Bespoke Masterpiece
-                      </span>
-                      <span className="font-mono text-sm font-semibold text-crimson-400">₹1,650</span>
-                    </div>
-                    <div className="text-xl font-serif font-bold text-cream-50 mt-1">
-                      Delhi Public School Official Blazer
-                    </div>
-                    <p className="text-xs text-sand-300 mt-1.5 font-sans leading-relaxed">
-                      Double-interlocked lapels, crest-embossed brass buttons, certified thermal poly-wool weave.
-                    </p>
-                  </div>
-                </div>
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-bold text-navy-800 tracking-tight leading-[1.08]">
+              Crafted for Character &{' '}
+              <span className="font-serif italic font-normal text-brass-text">
+                Academic Distinction
+              </span>
+            </h1>
 
-                {/* Floating Heritage Craft Pill */}
-                <div className="absolute -bottom-6 -left-6 bg-cream-50 p-4 rounded-[10px] shadow-xl border border-sand-300 flex items-center gap-3.5 hidden sm:flex">
-                  <div className="w-11 h-11 rounded-[8px] bg-blue-100 text-navy-800 flex items-center justify-center font-bold border border-blue-600/30">
-                    <Scissors className="w-5 h-5 text-blue-600" />
-                  </div>
-                  <div>
-                    <div className="text-sm font-serif font-bold text-navy-800">Master Cut & Finish</div>
-                    <p className="text-xs text-slate font-serif italic">Free branch alteration support</p>
-                  </div>
-                </div>
+            <p className="text-base sm:text-lg text-slate font-sans max-w-xl mx-auto lg:mx-0 leading-relaxed">
+              Trusted by Bhopal's premier schools, colleges, medical faculties, and corporations for half a century.
+              Official regulation dye-lots, certified shrink-resistant woollens, and master tailoring designed to outlast the academic year.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start pt-2">
+              <a
+                href="#shop-by-school"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('shop-by-school')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-[8px] bg-crimson-600 hover:bg-crimson-700 active:bg-crimson-800 text-white font-medium text-sm sm:text-base shadow-sm shadow-crimson-600/20 btn-tactile focus-visible:ring-2 focus-visible:ring-crimson-600"
+              >
+                <span>Select Your School</span>
+                <ArrowRight className="w-4 h-4" />
+              </a>
+
+              <Link
+                to="/bulk-inquiry"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-[8px] bg-cream-50/80 backdrop-blur-sm hover:bg-navy-800 hover:text-cream-50 text-navy-800 border-[1.5px] border-navy-800 font-medium text-sm sm:text-base btn-tactile focus-visible:ring-2 focus-visible:ring-blue-600 shadow-sm"
+              >
+                <Building className="w-4 h-4 text-brass" />
+                <span>Institutional & Bulk Orders</span>
+              </Link>
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="grid grid-cols-3 gap-6 pt-8 border-t border-sand-300 max-w-lg mx-auto lg:mx-0 text-left">
+              <div>
+                <span className="block text-2xl sm:text-3xl font-serif font-bold text-navy-800">50+</span>
+                <span className="text-xs text-slate font-serif italic">Years of Heritage</span>
+              </div>
+              <div>
+                <span className="block text-2xl sm:text-3xl font-serif font-bold text-navy-800">4</span>
+                <span className="text-xs text-slate font-serif italic">Bhopal Retail Branches</span>
+              </div>
+              <div>
+                <span className="block text-2xl sm:text-3xl font-serif font-bold text-navy-800">100%</span>
+                <span className="text-xs text-slate font-serif italic">Regulation Conformity</span>
               </div>
             </div>
           </div>

@@ -9,6 +9,7 @@ export const getPublicSettings = async (_req: Request, res: Response): Promise<v
       businessName: settings.businessName,
       tagline: settings.tagline,
       logoUrl: settings.logoUrl,
+      heroVideoUrl: (settings.heroVideoUrl && settings.heroVideoUrl.trim()) || '/new-video-hero.mp4',
       phones: settings.phones,
       email: settings.email,
       whatsappNumber: settings.whatsappNumber,

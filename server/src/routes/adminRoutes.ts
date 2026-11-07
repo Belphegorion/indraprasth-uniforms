@@ -42,12 +42,14 @@ import {
 import {
   uploadProductImage,
   deleteProductImage,
+  uploadHeroVideo,
+  deleteHeroVideo,
 } from '../controllers/uploadController';
 import { getAdminStats } from '../services/statsService';
 import { authenticate, requireRole } from '../middleware/auth';
 import { validateBody } from '../middleware/validate';
 import { loginLimiter } from '../middleware/rateLimit';
-import { uploadSingleImage, uploadCsvFile } from '../middleware/upload';
+import { uploadSingleImage, uploadCsvFile, uploadSingleVideo } from '../middleware/upload';
 import {
   adminLoginSchema,
   adminChangePasswordSchema,
@@ -119,6 +121,8 @@ router.patch('/inquiries/:id', validateBody(inquiryStatusUpdateSchema), patchInq
 router.post('/uploads/image', uploadSingleImage, uploadProductImage);
 router.delete('/uploads/:publicId(*)', deleteProductImage);
 router.delete('/uploads', deleteProductImage);
+router.post('/uploads/video', uploadSingleVideo, uploadHeroVideo);
+router.delete('/uploads/video/:publicId(*)', deleteHeroVideo);
 
 // Settings (Owner only for updates)
 router.get('/settings', getAdminSettings);

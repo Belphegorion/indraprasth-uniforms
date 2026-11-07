@@ -336,7 +336,7 @@ describe('5. Database Seeding & Data Integrity', () => {
   });
 });
 
-describe('6. Image Upload & File Validation', () => {
+describe('6. Image & Video Upload & File Validation', () => {
   it('should accept valid image upload and return url & publicId', async () => {
     const fakeImageBuffer = Buffer.from('fake image content for testing');
     const res = await request(app)
@@ -360,6 +360,63 @@ describe('6. Image Upload & File Validation', () => {
     expect(res.status).toBe(400);
     expect(res.body.success).toBe(false);
     expect(res.body.error).toContain('Invalid file type');
+  });
+
+  it('should accept valid hero video upload and return url & publicId', async () => {
+    const fakeVideoBuffer = Buffer.from('fake mp4 video content for testing');
+    const res = await request(app)
+      .post('/api/v1/admin/uploads/video')
+      .set('Cookie', adminCookie)
+      .attach('video', fakeVideoBuffer, { filename: 'new-hero.mp4', contentType: 'video/mp4' });
+
+    expect(res.status).toBe(200);
+    expect(res.body.success).toBe(true);
+    expect(res.body.data.url).toBeDefined();
+    expect(res.body.data.publicId).toBeDefined();
+  });
+
+  it('should reject invalid video file types with 400 bad request', async () => {
+    const fakeTextBuffer = Buffer.from('plain text file');
+    const res = await request(app)
+      .post('/api/v1/admin/uploads/video')
+      .set('Cookie', adminCookie)
+      .attach('video', fakeTextBuffer, { filename: 'malicious.exe', contentType: 'application/x-msdownload' });
+
+    expect(res.status).toBe(400);
+    expect(res.body.success).toBe(false);
+    expect(res.body.error).toContain('Invalid file type');
+  });
+
+  it('should reject spoofed extension with dangerous MIME type', async () => {
+    const fakeBuffer = Buffer.from('fake payload');
+    const res = await request(app)
+      .post('/api/v1/admin/uploads/video')
+      .set('Cookie', adminCookie)
+      .attach('video', fakeBuffer, { filename: 'evil.mp4', contentType: 'application/x-msdownload' });
+
+    expect(res.status).toBe(400);
+    expect(res.body.success).toBe(false);
+    expect(res.body.error).toContain('Invalid file type');
+  });
+
+  it('should allow deleting uploaded video safely', async () => {
+    // First upload a test video
+    const fakeVideoBuffer = Buffer.from('temporary video');
+    const uploadRes = await request(app)
+      .post('/api/v1/admin/uploads/video')
+      .set('Cookie', adminCookie)
+      .attach('video', fakeVideoBuffer, { filename: 'to-delete.mp4', contentType: 'video/mp4' });
+
+    expect(uploadRes.status).toBe(200);
+    const publicId = uploadRes.body.data.publicId;
+
+    // Delete it
+    const deleteRes = await request(app)
+      .delete(`/api/v1/admin/uploads/video/${encodeURIComponent(publicId)}`)
+      .set('Cookie', adminCookie);
+
+    expect(deleteRes.status).toBe(200);
+    expect(deleteRes.body.success).toBe(true);
   });
 });
 
@@ -414,5 +471,90 @@ describe('8. Order Tracking', () => {
     expect(trackRes.body.success).toBe(true);
     expect(trackRes.body.data.orderNumber).toBe(orderNum);
     expect(trackRes.body.data.status).toBe('pending');
+  });
+});
+
+describe('9. Hero Video & Store Settings', () => {
+  it('should return default heroVideoUrl in public settings', async () => {
+    const res = await request(app).get('/api/v1/settings/public');
+    expect(res.status).toBe(200);
+    expect(res.body.success).toBe(true);
+    expect(res.body.data.heroVideoUrl).toBe('/new-video-hero.mp4');
+  });
+
+  it('should allow owner admin to update heroVideoUrl in store settings', async () => {
+    const updateRes = await request(app)
+      .put('/api/v1/admin/settings')
+      .set('Cookie', adminCookie)
+      .send({
+        businessName: 'Indraprasth Uniforms',
+        tagline: 'The Uniform Icons since 1975',
+        heroVideoUrl: 'https://res.cloudinary.com/dvaynkflu/video/upload/custom-hero-test.mp4',
+        phones: ['+91 98260 25211'],
+        email: 'info@indraprasthuniforms.com',
+        whatsappNumber: '919826025211',
+        address: 'Plot 23, New MLA Colony, Jawahar Chowk, Bhopal 462003',
+        branches: [
+          {
+            name: 'Jawahar Chowk (HQ)',
+            address: 'Plot 23, New MLA Colony, Bhopal 462003',
+            phone: '+91 98260 25211',
+            hours: 'Mon-Sat: 10:30 AM - 8:30 PM',
+          },
+        ],
+        deliveryFee: 60,
+        freeDeliveryAbove: 1500,
+        announcementBar: {
+          text: 'Welcome to Indraprasth Uniforms',
+          enabled: true,
+        },
+      });
+
+    expect(updateRes.status).toBe(200);
+    expect(updateRes.body.success).toBe(true);
+    expect(updateRes.body.data.heroVideoUrl).toBe(
+      'https://res.cloudinary.com/dvaynkflu/video/upload/custom-hero-test.mp4'
+    );
+
+    // Verify public settings now reflect the updated heroVideoUrl
+    const publicRes = await request(app).get('/api/v1/settings/public');
+    expect(publicRes.status).toBe(200);
+    expect(publicRes.body.data.heroVideoUrl).toBe(
+      'https://res.cloudinary.com/dvaynkflu/video/upload/custom-hero-test.mp4'
+    );
+  });
+
+  it('should normalize empty or whitespace heroVideoUrl back to default /new-video-hero.mp4', async () => {
+    const updateRes = await request(app)
+      .put('/api/v1/admin/settings')
+      .set('Cookie', adminCookie)
+      .send({
+        businessName: 'Indraprasth Uniforms',
+        tagline: 'The Uniform Icons since 1975',
+        heroVideoUrl: '   ',
+        phones: ['+91 98260 25211'],
+        email: 'info@indraprasthuniforms.com',
+        whatsappNumber: '919826025211',
+        address: 'Plot 23, New MLA Colony, Jawahar Chowk, Bhopal 462003',
+        branches: [
+          {
+            name: 'Jawahar Chowk (HQ)',
+            address: 'Plot 23, New MLA Colony, Bhopal 462003',
+            phone: '+91 98260 25211',
+            hours: 'Mon-Sat: 10:30 AM - 8:30 PM',
+          },
+        ],
+        deliveryFee: 60,
+        freeDeliveryAbove: 1500,
+        announcementBar: { text: '', enabled: false },
+      });
+
+    expect(updateRes.status).toBe(200);
+    expect(updateRes.body.success).toBe(true);
+    expect(updateRes.body.data.heroVideoUrl).toBe('/new-video-hero.mp4');
+
+    const publicRes = await request(app).get('/api/v1/settings/public');
+    expect(publicRes.status).toBe(200);
+    expect(publicRes.body.data.heroVideoUrl).toBe('/new-video-hero.mp4');
   });
 });
