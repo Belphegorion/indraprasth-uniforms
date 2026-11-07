@@ -103,6 +103,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
         />
 
+        {/* Discount Badge */}
+        {discountPercent && (
+          <span className="absolute top-2.5 right-2.5 bg-crimson-600 text-white text-[10px] font-bold uppercase px-1.5 py-0.5 rounded shadow-sm z-10 pointer-events-none">
+            {discountPercent}% OFF
+          </span>
+        )}
 
         {/* Stock status indicator */}
         {isOutOfStock ? (

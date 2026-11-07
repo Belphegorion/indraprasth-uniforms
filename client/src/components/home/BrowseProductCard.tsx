@@ -130,6 +130,13 @@ export const BrowseProductCard: React.FC<BrowseProductCardProps> = ({ product })
           className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
         />
 
+        {/* Discount Badge */}
+        {discountPercent && (
+          <span className="absolute top-2.5 right-2.5 bg-crimson-600 text-white text-[10px] font-bold uppercase px-1.5 py-0.5 rounded shadow-sm z-10 pointer-events-none">
+            {discountPercent}% OFF
+          </span>
+        )}
+
         {/* Stock Status Badge */}
         {isOutOfStock ? (
           <div className="absolute inset-0 bg-navy-900/70 backdrop-blur-[2px] flex items-center justify-center p-3">
