@@ -35,16 +35,58 @@ export const Home: React.FC = () => {
   const heroVideo = settings?.heroVideoUrl?.trim() || '/new-video-hero.mp4';
 
   const videoRef = React.useRef<HTMLVideoElement | null>(null);
+  const userPausedRef = React.useRef(false);
   const [isPlaying, setIsPlaying] = React.useState(true);
+
+  // Auto-pause when off-screen or tab is hidden to save CPU, battery, and bandwidth (HIGH-03)
+  React.useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        video.pause();
+      } else if (!userPausedRef.current && isPlaying) {
+        video.play().catch(() => {});
+      }
+    };
+
+    let observer: IntersectionObserver | null = null;
+    if ('IntersectionObserver' in window) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0];
+          if (!entry.isIntersecting) {
+            video.pause();
+          } else if (!userPausedRef.current && isPlaying) {
+            video.play().catch(() => {});
+          }
+        },
+        { threshold: 0.1 }
+      );
+      observer.observe(video);
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      if (observer && video) {
+        observer.unobserve(video);
+      }
+    };
+  }, [isPlaying, heroVideo]);
 
   const toggleVideoPlayback = () => {
     if (!videoRef.current) return;
     if (videoRef.current.paused) {
-      videoRef.current.play();
+      videoRef.current.play().catch(() => {});
       setIsPlaying(true);
+      userPausedRef.current = false;
     } else {
       videoRef.current.pause();
       setIsPlaying(false);
+      userPausedRef.current = true;
     }
   };
 
@@ -55,7 +97,7 @@ export const Home: React.FC = () => {
     name: 'Indraprasth Uniforms',
     image: 'https://res.cloudinary.com/dvaynkflu/image/upload/v1791284239/indraprasth/products/y3sgf8q8kydtlarcydnb.jpg',
     telephone: settings?.phones?.[0] || '+91 98260 25211',
-    url: 'https://indraprasth-uniforms.netlify.app',
+    url: 'https://indraprasth-uniforms.vercel.app',
     address: {
       '@type': 'PostalAddress',
       streetAddress: 'Plot 23, New MLA Colony, near Unique College, Jawahar Chowk',
@@ -90,7 +132,7 @@ export const Home: React.FC = () => {
             loop
             muted
             playsInline
-            preload="auto"
+            preload="metadata"
             poster="/hero-video-poster.jpg"
             aria-label="Craftsmanship and tailoring background video"
             className="w-full h-full object-cover object-right lg:object-[80%_center] motion-reduce:hidden"

@@ -23,6 +23,17 @@ const slugify = (text: string) => {
     .replace(/--+/g, '-');
 };
 
+interface CacheEntry {
+  data: unknown;
+  timestamp: number;
+}
+const browseCache = new Map<string, CacheEntry>();
+const BROWSE_CACHE_TTL_MS = 60 * 1000; // 60 seconds
+
+export const invalidateBrowseCache = () => {
+  browseCache.clear();
+};
+
 export const browsePublicProducts = async (req: Request, res: Response): Promise<void> => {
   const {
     school,
@@ -38,11 +49,19 @@ export const browsePublicProducts = async (req: Request, res: Response): Promise
     sort = 'relevance',
     page = 1,
     limit = 12,
-  } = req.query as any;
+  } = req.query as Record<string, unknown>;
 
   // Short HTTP caching for non-search requests
   if (!q) {
     res.setHeader('Cache-Control', 'public, max-age=60');
+  }
+
+  // In-memory cache check for browse endpoint (MED-05)
+  const cacheKey = JSON.stringify(req.query);
+  const cached = browseCache.get(cacheKey);
+  if (cached && Date.now() - cached.timestamp < BROWSE_CACHE_TTL_MS) {
+    res.status(200).json(cached.data);
+    return;
   }
 
   // Resolve school if provided
@@ -76,7 +95,7 @@ export const browsePublicProducts = async (req: Request, res: Response): Promise
   }
 
   // Normalize multi-valued filter arrays
-  const toArray = (val: any): string[] => {
+  const toArray = (val: unknown): string[] => {
     if (!val) return [];
     if (Array.isArray(val)) return val.map((v) => String(v).trim()).filter(Boolean);
     if (typeof val === 'string') return val.split(',').map((v) => v.trim()).filter(Boolean);
@@ -94,8 +113,8 @@ export const browsePublicProducts = async (req: Request, res: Response): Promise
   const inStockBool = inStock === true || inStock === 'true' || inStock === '1';
 
   // Helper to build match criteria, optionally excluding own filter key so users can see sibling facet counts
-  const buildMatch = (excludeKey?: 'gender' | 'season' | 'typeGroup' | 'itemType' | 'size' | 'price'): any => {
-    const match: any = { isActive: true };
+  const buildMatch = (excludeKey?: 'gender' | 'season' | 'typeGroup' | 'itemType' | 'size' | 'price'): Record<string, unknown> => {
+    const match: Record<string, any> = { isActive: true };
 
     if (schoolId) {
       match.school = schoolId;
@@ -143,7 +162,7 @@ export const browsePublicProducts = async (req: Request, res: Response): Promise
   };
 
   // Sorting
-  let sortStage: any = { isFeatured: -1, createdAt: -1, _id: 1 };
+  let sortStage: Record<string, 1 | -1> = { isFeatured: -1, createdAt: -1, _id: 1 };
   if (sort === 'price_asc') sortStage = { price: 1, _id: 1 };
   else if (sort === 'price_desc') sortStage = { price: -1, _id: 1 };
   else if (sort === 'newest') sortStage = { createdAt: -1, _id: 1 };
@@ -246,7 +265,7 @@ export const browsePublicProducts = async (req: Request, res: Response): Promise
   const total = output.totalCount[0]?.count || 0;
   const priceData = output.priceRange[0] || { min: 0, max: 2000 };
 
-  res.status(200).json({
+  const responseData = {
     success: true,
     data: {
       items,
@@ -268,7 +287,10 @@ export const browsePublicProducts = async (req: Request, res: Response): Promise
         },
       },
     },
-  });
+  };
+
+  browseCache.set(cacheKey, { data: responseData, timestamp: Date.now() });
+  res.status(200).json(responseData);
 };
 
 export const getPublicProducts = async (req: Request, res: Response): Promise<void> => {
@@ -287,7 +309,7 @@ export const getPublicProducts = async (req: Request, res: Response): Promise<vo
   const filter: any = { isActive: true };
 
   if (q && typeof q === 'string' && q.trim().length > 0) {
-    const searchRegex = new RegExp(q.trim(), 'i');
+    const searchRegex = new RegExp(escapeRegex(q.trim().slice(0, 80)), 'i');
     filter.$or = [{ name: searchRegex }, { description: searchRegex }];
   }
 
@@ -300,7 +322,7 @@ export const getPublicProducts = async (req: Request, res: Response): Promise<vo
         $or: [
           { slug: schoolStr.toLowerCase() },
           { code: schoolStr.toUpperCase() },
-          { name: new RegExp(`^${schoolStr}$`, 'i') },
+          { name: new RegExp(`^${escapeRegex(schoolStr)}$`, 'i') },
         ],
       });
       if (foundSchool) {
@@ -321,7 +343,7 @@ export const getPublicProducts = async (req: Request, res: Response): Promise<vo
         $or: [
           { slug: slugify(catStr) },
           { slug: catStr.toLowerCase() },
-          { name: new RegExp(`^${catStr}$`, 'i') },
+          { name: new RegExp(`^${escapeRegex(catStr)}$`, 'i') },
         ],
       });
       if (foundCategory) {
@@ -429,7 +451,7 @@ export const getAdminProducts = async (req: Request, res: Response): Promise<voi
   const filter: any = {};
 
   if (q && typeof q === 'string' && q.trim().length > 0) {
-    const searchRegex = new RegExp(q.trim(), 'i');
+    const searchRegex = new RegExp(escapeRegex(q.trim().slice(0, 80)), 'i');
     filter.$or = [{ name: searchRegex }, { sku: searchRegex }, { description: searchRegex }];
   }
 
@@ -499,6 +521,7 @@ export const createProduct = async (req: Request, res: Response): Promise<void> 
   data.slug = slug;
 
   const product = await Product.create(data);
+  invalidateBrowseCache();
   res.status(201).json({ success: true, data: product });
 };
 
@@ -525,6 +548,7 @@ export const updateProduct = async (req: Request, res: Response): Promise<void> 
     return;
   }
 
+  invalidateBrowseCache();
   res.status(200).json({ success: true, data: product });
 };
 
@@ -542,6 +566,7 @@ export const deleteProduct = async (req: Request, res: Response): Promise<void> 
     return;
   }
 
+  invalidateBrowseCache();
   res.status(200).json({
     success: true,
     message: 'Product soft-deleted (deactivated) successfully',
@@ -652,6 +677,10 @@ export const importProductsCsv = async (req: Request, res: Response): Promise<vo
         } catch (err: any) {
           errors.push({ row: item.rowNumber, error: err.message || 'Import error' });
         }
+      }
+
+      if (importedCount > 0) {
+        invalidateBrowseCache();
       }
 
       res.status(200).json({

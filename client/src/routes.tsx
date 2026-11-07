@@ -49,6 +49,9 @@ const Inquiries = lazy(() =>
 const Settings = lazy(() =>
   import('./pages/admin/Settings').then((m) => ({ default: m.Settings }))
 );
+const Staff = lazy(() =>
+  import('./pages/admin/Staff').then((m) => ({ default: m.Staff }))
+);
 
 const PageSuspense: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <Suspense
@@ -193,6 +196,14 @@ export const routes: RouteObject[] = [
         element: (
           <AdminSuspense>
             <Settings />
+          </AdminSuspense>
+        ),
+      },
+      {
+        path: 'staff',
+        element: (
+          <AdminSuspense>
+            <Staff />
           </AdminSuspense>
         ),
       },

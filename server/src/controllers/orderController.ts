@@ -34,8 +34,15 @@ export const trackOrder = async (req: Request, res: Response): Promise<void> => 
     return;
   }
 
-  // Clean phone input (last 10 digits)
-  const cleanPhone = phone.replace(/\D/g, '').slice(-10);
+  // Clean phone input (must have 10 digits)
+  const cleanPhone = phone.replace(/\D/g, '');
+  if (cleanPhone.length !== 10) {
+    res.status(400).json({
+      success: false,
+      error: 'Please provide a valid 10-digit phone number',
+    });
+    return;
+  }
 
   const order = await Order.findOne({
     orderNumber: orderNumber.trim(),
@@ -150,24 +157,38 @@ export const exportOrdersCsv = async (_req: Request, res: Response): Promise<voi
   try {
     const orders = await Order.find().sort({ createdAt: -1 }).lean();
 
-    const flatOrders = orders.map((o) => ({
-      OrderNumber: o.orderNumber,
-      Date: new Date(o.createdAt).toLocaleString('en-IN'),
-      CustomerName: o.customer.name,
-      Phone: o.customer.phone,
-      Email: o.customer.email || '',
-      Fulfilment: o.fulfilment,
-      PickupBranch: o.pickupBranch || '',
-      Address: o.customer.address ? `${o.customer.address.line1}, ${o.customer.address.city} - ${o.customer.address.pincode}` : '',
-      Status: o.status,
-      PaymentMethod: o.paymentMethod,
-      PaymentStatus: o.paymentStatus,
-      Subtotal: o.subtotal,
-      DeliveryFee: o.deliveryFee,
-      Total: o.total,
-      ItemCount: o.items.length,
-      ItemDetails: o.items.map((i) => `${i.nameSnapshot} (${i.size}) x${i.qty}`).join('; '),
-    }));
+    const sanitizeCell = (val: any): any => {
+      if (typeof val === 'string' && /^[=+\-@\t\r]/.test(val)) {
+        return `'${val}`;
+      }
+      return val;
+    };
+
+    const flatOrders = orders.map((o) => {
+      const row = {
+        OrderNumber: o.orderNumber,
+        Date: new Date(o.createdAt).toLocaleString('en-IN'),
+        CustomerName: o.customer.name,
+        Phone: o.customer.phone,
+        Email: o.customer.email || '',
+        Fulfilment: o.fulfilment,
+        PickupBranch: o.pickupBranch || '',
+        Address: o.customer.address ? `${o.customer.address.line1}, ${o.customer.address.city} - ${o.customer.address.pincode}` : '',
+        Status: o.status,
+        PaymentMethod: o.paymentMethod,
+        PaymentStatus: o.paymentStatus,
+        Subtotal: o.subtotal,
+        DeliveryFee: o.deliveryFee,
+        Total: o.total,
+        ItemCount: o.items.length,
+        ItemDetails: o.items.map((i) => `${i.nameSnapshot} (${i.size}) x${i.qty}`).join('; '),
+      };
+      const sanitizedRow: any = {};
+      for (const [key, value] of Object.entries(row)) {
+        sanitizedRow[key] = sanitizeCell(value);
+      }
+      return sanitizedRow;
+    });
 
     const json2csvParser = new Parser();
     const csv = json2csvParser.parse(flatOrders);

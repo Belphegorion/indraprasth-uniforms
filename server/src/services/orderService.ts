@@ -250,27 +250,66 @@ export const updateOrderStatus = async (
   // Stock restoration on cancel
   if (newStatus === 'cancelled' && previousStatus !== 'cancelled') {
     for (const item of order.items) {
-      await Product.updateOne(
-        { _id: item.product, 'sizes.label': item.size },
-        { $inc: { 'sizes.$.stock': item.qty } }
-      );
+      if (item.color) {
+        await Product.updateOne(
+          { _id: item.product },
+          { $inc: { 'variants.$[v].sizes.$[s].stock': item.qty } },
+          {
+            arrayFilters: [
+              { 'v.colorName': new RegExp(`^${item.color.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')}$`, 'i') },
+              { 's.label': item.size },
+            ],
+          }
+        );
+      } else {
+        await Product.updateOne(
+          { _id: item.product, 'sizes.label': item.size },
+          { $inc: { 'sizes.$.stock': item.qty } }
+        );
+      }
     }
   }
 
   // Stock re-decrement if reactivated from cancelled
   if (previousStatus === 'cancelled' && newStatus !== 'cancelled') {
     for (const item of order.items) {
-      const updated = await Product.findOneAndUpdate(
-        {
-          _id: item.product,
-          'sizes.label': item.size,
-          'sizes.stock': { $gte: item.qty },
-        },
-        { $inc: { 'sizes.$.stock': -item.qty } }
-      );
+      let updated;
+      if (item.color) {
+        const escapedColor = item.color.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+        updated = await Product.findOneAndUpdate(
+          {
+            _id: item.product,
+            variants: {
+              $elemMatch: {
+                colorName: new RegExp(`^${escapedColor}$`, 'i'),
+                sizes: { $elemMatch: { label: item.size, stock: { $gte: item.qty } } },
+              },
+            },
+          },
+          { $inc: { 'variants.$[v].sizes.$[s].stock': -item.qty } },
+          {
+            arrayFilters: [
+              { 'v.colorName': new RegExp(`^${escapedColor}$`, 'i') },
+              { 's.label': item.size },
+            ],
+            new: true,
+          }
+        );
+      } else {
+        updated = await Product.findOneAndUpdate(
+          {
+            _id: item.product,
+            'sizes.label': item.size,
+            'sizes.stock': { $gte: item.qty },
+          },
+          { $inc: { 'sizes.$.stock': -item.qty } },
+          { new: true }
+        );
+      }
+
       if (!updated) {
         throw new Error(
-          `Cannot reactivate order: insufficient stock for product item "${item.nameSnapshot}" (${item.size})`
+          `Cannot reactivate order: insufficient stock for product item "${item.nameSnapshot}" (${item.color ? item.color + ' / ' : ''}${item.size})`
         );
       }
     }

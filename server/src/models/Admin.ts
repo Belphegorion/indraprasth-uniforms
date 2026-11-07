@@ -8,6 +8,7 @@ export interface IAdminDocument extends Document {
   passwordHash: string;
   role: AdminRole;
   isActive: boolean;
+  tokenVersion: number;
   lastLoginAt?: Date;
   createdAt: Date;
   updatedAt: Date;
@@ -33,6 +34,7 @@ const adminSchema = new Schema<IAdminDocument>(
       required: true,
     },
     isActive: { type: Boolean, default: true },
+    tokenVersion: { type: Number, default: 0 },
     lastLoginAt: { type: Date },
   },
   {

@@ -20,9 +20,7 @@ const envSchema = z.object({
   MONGODB_URI: cleanStr(
     z
       .string()
-      .default(
-        'mongodb+srv://Vercel-Admin-atlas-bole-candle:a40i7Bz1r66uSegK@atlas-bole-candle.xohkesq.mongodb.net/indraprasth?retryWrites=true&w=majority'
-      )
+      .default('mongodb://127.0.0.1:27017/indraprasth')
   ),
   JWT_SECRET: cleanStr(
     z.string().min(16).default('change-me-32-chars-long-secret-key-indraprasth-uniforms')

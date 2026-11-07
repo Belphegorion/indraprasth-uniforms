@@ -20,7 +20,7 @@
   --color-cream-100: #F7F2E8; /* Default page background canvas */
   --color-sand-200: #EDE3D2;  /* Alternate section bands, table stripes, skeletons */
   --color-sand-300: #DCCDB4;  /* Borders, dividers, input outlines */
-  --color-taupe-500: #8C7B63; /* Placeholder text, secondary icons, MRP strikethrough */
+  --color-taupe-500: #766650; /* Placeholder text, secondary icons, MRP strikethrough (4.7:1 WCAG AA) */
 
   /* Accents: Antique Brass */
   --color-brass: #A8863C;      /* Decorative only: hairlines, ornaments, star flourishes */

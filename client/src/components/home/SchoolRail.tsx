@@ -17,17 +17,22 @@ export const SchoolRail: React.FC<SchoolRailProps> = ({
 }) => {
   const [filterQuery, setFilterQuery] = useState('');
 
+  // Filter out ghost schools with 0 products (e.g. STJ without catalogue entries)
+  const activeSchools = useMemo(() => {
+    return schools.filter((s) => s.productCount === undefined || s.productCount > 0);
+  }, [schools]);
+
   // Filter schools list when search query is entered
   const filteredSchools = useMemo(() => {
-    if (!filterQuery.trim()) return schools;
+    if (!filterQuery.trim()) return activeSchools;
     const q = filterQuery.toLowerCase();
-    return schools.filter(
+    return activeSchools.filter(
       (s) =>
         s.name.toLowerCase().includes(q) ||
         s.code.toLowerCase().includes(q) ||
         (s.branchLabel && s.branchLabel.toLowerCase().includes(q))
     );
-  }, [schools, filterQuery]);
+  }, [activeSchools, filterQuery]);
 
   const isAllSelected = !selectedSchoolSlug || selectedSchoolSlug === 'all';
 
@@ -47,13 +52,13 @@ export const SchoolRail: React.FC<SchoolRailProps> = ({
               Schools
             </span>
           </div>
-          <span className="text-[11px] font-mono font-semibold text-slate bg-sand-200 px-2 py-0.5 rounded-full">
-            {schools.length}
+          <span className="text-xs font-mono font-semibold text-slate bg-sand-200 px-2 py-0.5 rounded-full">
+            {activeSchools.length}
           </span>
         </div>
 
         {/* Search input when school list > 8 */}
-        {schools.length > 8 && (
+        {activeSchools.length > 8 && (
           <div className="relative">
             <Search className="w-3.5 h-3.5 text-taupe-500 absolute left-2.5 top-1/2 -translate-y-1/2" />
             <input
@@ -138,7 +143,7 @@ export const SchoolRail: React.FC<SchoolRailProps> = ({
                     />
                   ) : (
                     <span
-                      className={`w-7 h-7 rounded-[6px] flex items-center justify-center shrink-0 text-[10px] font-mono font-bold uppercase ${
+                      className={`w-7 h-7 rounded-[6px] flex items-center justify-center shrink-0 text-xs font-mono font-bold uppercase ${
                         isSelected
                           ? 'bg-blue-600 text-white'
                           : 'bg-sand-200 text-navy-800 border border-sand-300'
@@ -150,7 +155,7 @@ export const SchoolRail: React.FC<SchoolRailProps> = ({
                   <div className="min-w-0">
                     <span className="block truncate font-medium">{s.name}</span>
                     <span
-                      className={`text-[10px] font-mono block ${
+                      className={`text-xs font-mono block ${
                         isSelected ? 'text-blue-600 font-bold' : 'text-slate font-medium'
                       }`}
                     >
@@ -161,7 +166,7 @@ export const SchoolRail: React.FC<SchoolRailProps> = ({
 
                 {s.productCount !== undefined && (
                   <span
-                    className={`text-[11px] font-mono px-1.5 py-0.5 rounded-full shrink-0 ml-1 ${
+                    className={`text-xs font-mono px-1.5 py-0.5 rounded-full shrink-0 ml-1 ${
                       isSelected
                         ? 'bg-blue-600 text-white'
                         : 'bg-sand-200 text-slate'
@@ -198,7 +203,7 @@ export const SchoolRail: React.FC<SchoolRailProps> = ({
           <span>All Schools</span>
           {totalAllSchoolsCount > 0 && (
             <span
-              className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
+              className={`text-xs font-mono px-1.5 py-0.2 rounded-full ${
                 isAllSelected ? 'bg-cream-50/20 text-cream-50' : 'bg-sand-200 text-slate'
               }`}
             >
@@ -208,7 +213,7 @@ export const SchoolRail: React.FC<SchoolRailProps> = ({
         </button>
 
         {/* School Pills */}
-        {schools.map((s) => {
+        {activeSchools.map((s) => {
           const isSelected =
             selectedSchoolSlug.toLowerCase() === s.slug.toLowerCase() ||
             selectedSchoolSlug.toLowerCase() === s.code.toLowerCase();
@@ -228,7 +233,7 @@ export const SchoolRail: React.FC<SchoolRailProps> = ({
               <span>{s.code || s.name}</span>
               {s.productCount !== undefined && (
                 <span
-                  className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
+                  className={`text-xs font-mono px-1.5 py-0.2 rounded-full ${
                     isSelected ? 'bg-cream-50/20 text-cream-50' : 'bg-sand-200 text-slate'
                   }`}
                 >

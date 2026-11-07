@@ -246,8 +246,7 @@ export async function runImporter() {
     const files = fs.readdirSync(EXTRACTED_IMAGES_DIR);
     const matched = files.find((f) => f.includes(`_xref${xref}.`) || f.startsWith(`p${String(pno).padStart(3, '0')}_`));
     if (!matched) return null;
-    const buf = fs.readFileSync(path.join(EXTRACTED_IMAGES_DIR, matched));
-    return `data:image/jpeg;base64,${buf.toString('base64')}`;
+    return `/catalogue-images/${matched}`;
   }
 
   // 4. Upsert Products

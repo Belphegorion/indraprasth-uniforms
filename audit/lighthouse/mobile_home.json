@@ -1,16 +1,16 @@
 {
   "lighthouseVersion": "13.5.0",
-  "requestedUrl": "http://localhost:5173/",
-  "mainDocumentUrl": "http://localhost:5173/",
-  "finalDisplayedUrl": "http://localhost:5173/",
-  "finalUrl": "http://localhost:5173/",
-  "fetchTime": "2026-11-05T08:54:53.830Z",
+  "requestedUrl": "https://indraprasth-uniforms.vercel.app/",
+  "mainDocumentUrl": "https://indraprasth-uniforms.vercel.app/",
+  "finalDisplayedUrl": "https://indraprasth-uniforms.vercel.app/",
+  "finalUrl": "https://indraprasth-uniforms.vercel.app/",
+  "fetchTime": "2026-11-07T12:54:49.124Z",
   "gatherMode": "navigation",
   "runWarnings": [],
   "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
   "environment": {
     "hostUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
-    "benchmarkIndex": 3443,
+    "benchmarkIndex": 3269.5,
     "credits": {
       "axe-core": "4.13.0"
     }
@@ -50,11 +50,11 @@
       "id": "cumulative-layout-shift",
       "title": "Cumulative Layout Shift",
       "description": "Cumulative Layout Shift measures the movement of visible elements within the viewport. [Learn more about the Cumulative Layout Shift metric](https://web.dev/articles/cls).",
-      "score": 1,
+      "score": 0.98,
       "scoreDisplayMode": "numeric",
-      "numericValue": 0,
+      "numericValue": 0.05928085519922255,
       "numericUnit": "unitless",
-      "displayValue": "0",
+      "displayValue": "0.059",
       "scoringOptions": {
         "p10": 0.1,
         "median": 0.25
@@ -63,10 +63,10 @@
         "type": "debugdata",
         "items": [
           {
-            "cumulativeLayoutShiftMainFrame": 0,
+            "cumulativeLayoutShiftMainFrame": 0.05928085519922255,
             "newEngineResult": {
-              "cumulativeLayoutShift": 0,
-              "cumulativeLayoutShiftMainFrame": 0
+              "cumulativeLayoutShift": 0.05928085519922255,
+              "cumulativeLayoutShiftMainFrame": 0.05928085519922255
             },
             "newEngineResultDiffered": false
           }
@@ -236,348 +236,7 @@
             "label": "Map URL"
           }
         ],
-        "items": [
-          {
-            "scriptUrl": "http://localhost:5173/src/utils/cloudinary.ts",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/src/store/cart.ts",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/src/store/auth.ts",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/src/routes.tsx?t=1793868587769",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/src/pages/public/Shop.tsx",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/src/pages/public/Home.tsx",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/src/main.tsx?t=1793868587769",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/src/hooks/useBrowseFilters.ts",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/src/components/ui/Skeleton.tsx",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/src/components/product/ProductCard.tsx",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/src/components/layout/PublicLayout.tsx",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/src/components/layout/Header.tsx",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/src/components/layout/Footer.tsx",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/src/components/layout/AdminLayout.tsx",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/src/components/home/SchoolShopSection.tsx",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/src/components/home/SchoolRail.tsx",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/src/components/home/FilterSheet.tsx",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/src/components/home/FilterBar.tsx",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/src/components/home/BrowseProductCard.tsx",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/src/components/home/ActiveChips.tsx",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/src/components/cart/CartDrawer.tsx",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/src/App.tsx?t=1793868587769",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/src/api/index.ts",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/src/api/client.ts",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/src/api/browse.ts",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/node_modules/.vite/deps/zustand.js?v=a4ac04d9",
-            "sourceMapUrl": "http://localhost:5173/node_modules/.vite/deps/zustand.js.map",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/node_modules/.vite/deps/zustand_middleware.js?v=a4ac04d9",
-            "sourceMapUrl": "http://localhost:5173/node_modules/.vite/deps/zustand_middleware.js.map",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/node_modules/.vite/deps/tailwind-merge.js?v=a4ac04d9",
-            "sourceMapUrl": "http://localhost:5173/node_modules/.vite/deps/tailwind-merge.js.map",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/node_modules/.vite/deps/react.js?v=a4ac04d9",
-            "sourceMapUrl": "http://localhost:5173/node_modules/.vite/deps/react.js.map",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=a4ac04d9",
-            "sourceMapUrl": "http://localhost:5173/node_modules/.vite/deps/react-router-dom.js.map",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/node_modules/.vite/deps/react-hot-toast.js?v=a4ac04d9",
-            "sourceMapUrl": "http://localhost:5173/node_modules/.vite/deps/react-hot-toast.js.map",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/node_modules/.vite/deps/react-helmet-async.js?v=a4ac04d9",
-            "sourceMapUrl": "http://localhost:5173/node_modules/.vite/deps/react-helmet-async.js.map",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=a4ac04d9",
-            "sourceMapUrl": "http://localhost:5173/node_modules/.vite/deps/react-dom_client.js.map",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=a4ac04d9",
-            "sourceMapUrl": "http://localhost:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js.map",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/node_modules/.vite/deps/lucide-react.js?v=a4ac04d9",
-            "sourceMapUrl": "http://localhost:5173/node_modules/.vite/deps/lucide-react.js.map",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/node_modules/.vite/deps/clsx.js?v=a4ac04d9",
-            "sourceMapUrl": "http://localhost:5173/node_modules/.vite/deps/clsx.js.map",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/node_modules/.vite/deps/chunk-WOOG5QLI.js?v=a4ac04d9",
-            "sourceMapUrl": "http://localhost:5173/node_modules/.vite/deps/chunk-WOOG5QLI.js.map",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/node_modules/.vite/deps/chunk-QLG26ATY.js?v=a4ac04d9",
-            "sourceMapUrl": "http://localhost:5173/node_modules/.vite/deps/chunk-QLG26ATY.js.map",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/node_modules/.vite/deps/chunk-OHY7G46N.js?v=a4ac04d9",
-            "sourceMapUrl": "http://localhost:5173/node_modules/.vite/deps/chunk-OHY7G46N.js.map",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/node_modules/.vite/deps/chunk-MKYRKYXK.js?v=a4ac04d9",
-            "sourceMapUrl": "http://localhost:5173/node_modules/.vite/deps/chunk-MKYRKYXK.js.map",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/node_modules/.vite/deps/chunk-GNC7SI6A.js?v=a4ac04d9",
-            "sourceMapUrl": "http://localhost:5173/node_modules/.vite/deps/chunk-GNC7SI6A.js.map",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/node_modules/.vite/deps/axios.js?v=a4ac04d9",
-            "sourceMapUrl": "http://localhost:5173/node_modules/.vite/deps/axios.js.map",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/node_modules/.vite/deps/@tanstack_react-query.js?v=a4ac04d9",
-            "sourceMapUrl": "http://localhost:5173/node_modules/.vite/deps/@tanstack_react-query.js.map",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/@vite/client",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/@react-refresh",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          },
-          {
-            "scriptUrl": "http://localhost:5173/@fs/C:/Users/atlas/OneDrive/%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88/indrapresth/node_modules/vite/dist/client/env.mjs",
-            "subItems": {
-              "type": "subitems",
-              "items": []
-            }
-          }
-        ]
+        "items": []
       }
     },
     "csp-xss": {
@@ -626,8 +285,8 @@
       "id": "has-hsts",
       "title": "Use a strong HSTS policy",
       "description": "Deployment of the HSTS header significantly reduces the risk of downgrading HTTP connections and eavesdropping attacks. A rollout in stages, starting with a low max-age is recommended. [Learn more about using a strong HSTS policy.](https://developer.chrome.com/docs/lighthouse/best-practices/has-hsts)",
-      "score": 1,
-      "scoreDisplayMode": "informative",
+      "score": null,
+      "scoreDisplayMode": "notApplicable",
       "details": {
         "type": "table",
         "headings": [
@@ -656,12 +315,7 @@
             "label": "Severity"
           }
         ],
-        "items": [
-          {
-            "severity": "High",
-            "description": "No HSTS header found"
-          }
-        ]
+        "items": []
       }
     },
     "origin-isolation": {
@@ -894,8 +548,23 @@
       "id": "aria-hidden-focus",
       "title": "`[aria-hidden=\"true\"]` elements do not contain focusable descendents",
       "description": "Focusable descendents within an `[aria-hidden=\"true\"]` element prevent those interactive elements from being available to users of assistive technologies like screen readers. [Learn how `aria-hidden` affects focusable elements](https://dequeuniversity.com/rules/axe/4.13/aria-hidden-focus).",
-      "score": null,
-      "scoreDisplayMode": "notApplicable"
+      "score": 1,
+      "scoreDisplayMode": "binary",
+      "details": {
+        "type": "table",
+        "headings": [
+          {
+            "key": "node",
+            "valueType": "node",
+            "subItemsHeading": {
+              "key": "relatedNode",
+              "valueType": "node"
+            },
+            "label": "Failing Elements"
+          }
+        ],
+        "items": []
+      }
     },
     "aria-input-field-name": {
       "id": "aria-input-field-name",
@@ -1123,19 +792,19 @@
             "node": {
               "type": "node",
               "lhId": "1-0-SPAN",
-              "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,4,SECTION,0,DIV,0,DIV,0,SPAN",
-              "selector": "section.bg-linen-100 > div.max-w-7xl > div.text-center > span.text-xs",
+              "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,2,SECTION,1,DIV,0,DIV,1,DIV,2,DIV,0,DIV,0,DIV,1,SPAN",
+              "selector": "div.pt-2 > div > div.flex > span.text-xs",
               "boundingRect": {
-                "top": 6941,
-                "bottom": 6957,
-                "left": 109,
-                "right": 303,
-                "width": 195,
+                "top": 3355,
+                "bottom": 3371,
+                "left": 73,
+                "right": 96,
+                "width": 23,
                 "height": 16
               },
-              "snippet": "<span class=\"text-xs font-serif italic uppercase tracking-widest text-gold-700 font-bold\">",
-              "nodeLabel": "INSTITUTIONAL EXPERTISE",
-              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.27 (foreground color: #8c6b3e, background color: #f4efe6, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio of 4.5:1"
+              "snippet": "<span class=\"text-xs text-taupe-500 line-through font-sans\">",
+              "nodeLabel": "₹115",
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.86 (foreground color: #8c7b63, background color: #fbf8f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
             },
             "subItems": {
               "type": "subitems",
@@ -1143,19 +812,19 @@
                 {
                   "relatedNode": {
                     "type": "node",
-                    "lhId": "1-1-SECTION",
-                    "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,4,SECTION",
-                    "selector": "div.min-h-screen > main.flex-grow > div.space-y-16 > section.bg-linen-100",
+                    "lhId": "1-1-DIV",
+                    "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,2,SECTION,1,DIV,0,DIV,1,DIV",
+                    "selector": "section.max-w-7xl > div.grid > div.group > div.p-4",
                     "boundingRect": {
-                      "top": 6870,
-                      "bottom": 8205,
-                      "left": 0,
-                      "right": 412,
-                      "width": 412,
-                      "height": 1335
+                      "top": 3172,
+                      "bottom": 3406,
+                      "left": 17,
+                      "right": 197,
+                      "width": 180,
+                      "height": 234
                     },
-                    "snippet": "<section class=\"bg-linen-100 py-16 sm:py-20 border-y border-linen-300\">",
-                    "nodeLabel": "INSTITUTIONAL EXPERTISE\nTailored Across Every Sector\n\nFrom kindergarten primary…"
+                    "snippet": "<div class=\"p-4 flex-1 flex flex-col justify-between space-y-3 bg-cream-50\">",
+                    "nodeLabel": "Delhi Public School Bhopal\nWINTER-WARE\nDPS Winter Tie\nSize:\n16\n16\n₹100\n₹115\nOff…"
                   }
                 }
               ]
@@ -1164,20 +833,20 @@
           {
             "node": {
               "type": "node",
-              "lhId": "1-2-A",
-              "path": "1,HTML,1,BODY,0,DIV,0,DIV,2,FOOTER,0,DIV,0,DIV,2,DIV,1,UL,4,LI,0,A",
-              "selector": "div > ul.space-y-2.5 > li > a.text-navy-700",
+              "lhId": "1-2-SPAN",
+              "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,2,SECTION,1,DIV,1,DIV,1,DIV,2,DIV,0,DIV,0,DIV,1,SPAN",
+              "selector": "div.pt-2 > div > div.flex > span.text-xs",
               "boundingRect": {
-                "top": 11257,
-                "bottom": 11272,
-                "left": 16,
-                "right": 165,
-                "width": 149,
-                "height": 15
+                "top": 3333,
+                "bottom": 3349,
+                "left": 305,
+                "right": 332,
+                "width": 26,
+                "height": 16
               },
-              "snippet": "<a class=\"text-navy-700 hover:text-navy-500 text-xs transition-colors\" href=\"/admin/login\">",
-              "nodeLabel": "Staff Administration Portal",
-              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 1.64 (foreground color: #1e3a60, background color: #0a111e, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+              "snippet": "<span class=\"text-xs text-taupe-500 line-through font-sans\">",
+              "nodeLabel": "₹103",
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.86 (foreground color: #8c7b63, background color: #fbf8f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
             },
             "subItems": {
               "type": "subitems",
@@ -1185,19 +854,649 @@
                 {
                   "relatedNode": {
                     "type": "node",
-                    "lhId": "1-3-FOOTER",
-                    "path": "1,HTML,1,BODY,0,DIV,0,DIV,2,FOOTER",
-                    "selector": "body.bg-[#FAF7F2] > div#root > div.min-h-screen > footer.bg-navy-950",
+                    "lhId": "1-3-DIV",
+                    "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,2,SECTION,1,DIV,1,DIV,1,DIV",
+                    "selector": "section.max-w-7xl > div.grid > div.group > div.p-4",
                     "boundingRect": {
-                      "top": 10517,
-                      "bottom": 11823,
-                      "left": 0,
-                      "right": 412,
-                      "width": 412,
-                      "height": 1306
+                      "top": 3172,
+                      "bottom": 3406,
+                      "left": 215,
+                      "right": 395,
+                      "width": 180,
+                      "height": 234
                     },
-                    "snippet": "<footer class=\"bg-navy-950 text-linen-300 text-sm mt-24 border-t border-navy-800\">",
-                    "nodeLabel": "IU\nIndraprasth Uniforms\nThe Uniform Icons Since 1975\n\nBhopal’s most trusted ret…"
+                    "snippet": "<div class=\"p-4 flex-1 flex flex-col justify-between space-y-3 bg-cream-50\">",
+                    "nodeLabel": "Delhi Public School Bhopal\nWINTER-WARE\nDPS Winter Socks\nSize:\n3\n3\n4\n5\n6\n7\nFrom …"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "1-4-SPAN",
+              "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,2,SECTION,1,DIV,2,DIV,1,DIV,2,DIV,0,DIV,0,DIV,1,SPAN",
+              "selector": "div.pt-2 > div > div.flex > span.text-xs",
+              "boundingRect": {
+                "top": 3862,
+                "bottom": 3878,
+                "left": 106,
+                "right": 134,
+                "width": 28,
+                "height": 16
+              },
+              "snippet": "<span class=\"text-xs text-taupe-500 line-through font-sans\">",
+              "nodeLabel": "₹874",
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.86 (foreground color: #8c7b63, background color: #fbf8f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "relatedNode": {
+                    "type": "node",
+                    "lhId": "1-5-DIV",
+                    "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,2,SECTION,1,DIV,2,DIV,1,DIV",
+                    "selector": "section.max-w-7xl > div.grid > div.group > div.p-4",
+                    "boundingRect": {
+                      "top": 3649,
+                      "bottom": 3935,
+                      "left": 17,
+                      "right": 197,
+                      "width": 180,
+                      "height": 286
+                    },
+                    "snippet": "<div class=\"p-4 flex-1 flex flex-col justify-between space-y-3 bg-cream-50\">",
+                    "nodeLabel": "Delhi Public School Bhopal\nWINTER-WARE\nDPS Winter Divider\nSize:\n18\n18\n20\n22\n24\n…"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "1-6-SPAN",
+              "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,2,SECTION,1,DIV,3,DIV,1,DIV,2,DIV,0,DIV,0,DIV,1,SPAN",
+              "selector": "div.pt-2 > div > div.flex > span.text-xs",
+              "boundingRect": {
+                "top": 3862,
+                "bottom": 3878,
+                "left": 303,
+                "right": 332,
+                "width": 29,
+                "height": 16
+              },
+              "snippet": "<span class=\"text-xs text-taupe-500 line-through font-sans\">",
+              "nodeLabel": "₹690",
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.86 (foreground color: #8c7b63, background color: #fbf8f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "relatedNode": {
+                    "type": "node",
+                    "lhId": "1-7-DIV",
+                    "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,2,SECTION,1,DIV,3,DIV,1,DIV",
+                    "selector": "section.max-w-7xl > div.grid > div.group > div.p-4",
+                    "boundingRect": {
+                      "top": 3649,
+                      "bottom": 3935,
+                      "left": 215,
+                      "right": 395,
+                      "width": 180,
+                      "height": 286
+                    },
+                    "snippet": "<div class=\"p-4 flex-1 flex flex-col justify-between space-y-3 bg-cream-50\">",
+                    "nodeLabel": "Delhi Public School Bhopal\nWINTER-WARE\nDPS Winter Pant\nSize:\n26\n26\n28\n30\n32\n34\n…"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "1-8-SPAN",
+              "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,2,SECTION,1,DIV,4,DIV,1,DIV,2,DIV,0,DIV,0,DIV,1,SPAN",
+              "selector": "div.pt-2 > div > div.flex > span.text-xs",
+              "boundingRect": {
+                "top": 4392,
+                "bottom": 4408,
+                "left": 106,
+                "right": 134,
+                "width": 28,
+                "height": 16
+              },
+              "snippet": "<span class=\"text-xs text-taupe-500 line-through font-sans\">",
+              "nodeLabel": "₹793",
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.86 (foreground color: #8c7b63, background color: #fbf8f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "relatedNode": {
+                    "type": "node",
+                    "lhId": "1-9-DIV",
+                    "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,2,SECTION,1,DIV,4,DIV,1,DIV",
+                    "selector": "section.max-w-7xl > div.grid > div.group > div.p-4",
+                    "boundingRect": {
+                      "top": 4178,
+                      "bottom": 4464,
+                      "left": 17,
+                      "right": 197,
+                      "width": 180,
+                      "height": 286
+                    },
+                    "snippet": "<div class=\"p-4 flex-1 flex flex-col justify-between space-y-3 bg-cream-50\">",
+                    "nodeLabel": "Delhi Public School Bhopal\nWINTER-WARE\nDPS Winter Full Shirt\nSize:\n24\n24\n26\n28\n…"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "1-10-SPAN",
+              "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,2,SECTION,1,DIV,5,DIV,1,DIV,2,DIV,0,DIV,0,DIV,1,SPAN",
+              "selector": "div.pt-2 > div > div.flex > span.text-xs",
+              "boundingRect": {
+                "top": 4392,
+                "bottom": 4408,
+                "left": 295,
+                "right": 332,
+                "width": 36,
+                "height": 16
+              },
+              "snippet": "<span class=\"text-xs text-taupe-500 line-through font-sans\">",
+              "nodeLabel": "₹1,087",
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.86 (foreground color: #8c7b63, background color: #fbf8f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "relatedNode": {
+                    "type": "node",
+                    "lhId": "1-11-DIV",
+                    "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,2,SECTION,1,DIV,5,DIV,1,DIV",
+                    "selector": "section.max-w-7xl > div.grid > div.group > div.p-4",
+                    "boundingRect": {
+                      "top": 4178,
+                      "bottom": 4464,
+                      "left": 215,
+                      "right": 395,
+                      "width": 180,
+                      "height": 286
+                    },
+                    "snippet": "<div class=\"p-4 flex-1 flex flex-col justify-between space-y-3 bg-cream-50\">",
+                    "nodeLabel": "Delhi Public School Kolar Road\nWINTER-WARE\nDPS Kolar Upper\nAvailable Options:\n2…"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "1-12-SPAN",
+              "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,2,SECTION,1,DIV,6,DIV,1,DIV,2,DIV,0,DIV,0,DIV,1,SPAN",
+              "selector": "div.pt-2 > div > div.flex > span.text-xs",
+              "boundingRect": {
+                "top": 4921,
+                "bottom": 4937,
+                "left": 98,
+                "right": 134,
+                "width": 36,
+                "height": 16
+              },
+              "snippet": "<span class=\"text-xs text-taupe-500 line-through font-sans\">",
+              "nodeLabel": "₹1,897",
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.86 (foreground color: #8c7b63, background color: #fbf8f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "relatedNode": {
+                    "type": "node",
+                    "lhId": "1-13-DIV",
+                    "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,2,SECTION,1,DIV,6,DIV,1,DIV",
+                    "selector": "section.max-w-7xl > div.grid > div.group > div.p-4",
+                    "boundingRect": {
+                      "top": 4707,
+                      "bottom": 4994,
+                      "left": 17,
+                      "right": 197,
+                      "width": 180,
+                      "height": 286
+                    },
+                    "snippet": "<div class=\"p-4 flex-1 flex flex-col justify-between space-y-3 bg-cream-50\">",
+                    "nodeLabel": "Delhi Public School Kolar Road\nWINTER-WARE\nDPS Kolar Blazer\nSize:\n26\n26\n28\n30\n3…"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "1-14-SPAN",
+              "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,2,SECTION,1,DIV,7,DIV,1,DIV,2,DIV,0,DIV,0,DIV,1,SPAN",
+              "selector": "div.pt-2 > div > div.flex > span.text-xs",
+              "boundingRect": {
+                "top": 4921,
+                "bottom": 4937,
+                "left": 296,
+                "right": 332,
+                "width": 36,
+                "height": 16
+              },
+              "snippet": "<span class=\"text-xs text-taupe-500 line-through font-sans\">",
+              "nodeLabel": "₹1,897",
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.86 (foreground color: #8c7b63, background color: #fbf8f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "relatedNode": {
+                    "type": "node",
+                    "lhId": "1-15-DIV",
+                    "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,2,SECTION,1,DIV,7,DIV,1,DIV",
+                    "selector": "section.max-w-7xl > div.grid > div.group > div.p-4",
+                    "boundingRect": {
+                      "top": 4707,
+                      "bottom": 4994,
+                      "left": 215,
+                      "right": 395,
+                      "width": 180,
+                      "height": 286
+                    },
+                    "snippet": "<div class=\"p-4 flex-1 flex flex-col justify-between space-y-3 bg-cream-50\">",
+                    "nodeLabel": "Delhi Public School Bhopal\nWINTER-WARE\nDPS Bhopal Blazer\nSize:\n26\n26\n28\n30\n32\n3…"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "1-16-SPAN",
+              "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,3,SECTION,0,DIV,1,DIV,2,MAIN,2,DIV,0,DIV,1,DIV,1,DIV,0,DIV,0,DIV,1,SPAN",
+              "selector": "div.relative > div > div.flex > span.text-xs",
+              "boundingRect": {
+                "top": 5810,
+                "bottom": 5826,
+                "left": 85,
+                "right": 121,
+                "width": 36,
+                "height": 16
+              },
+              "snippet": "<span class=\"text-xs text-taupe-500 line-through font-sans\">",
+              "nodeLabel": "₹1,897",
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.86 (foreground color: #8c7b63, background color: #fbf8f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "relatedNode": {
+                    "type": "node",
+                    "lhId": "1-17-DIV",
+                    "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,3,SECTION,0,DIV,1,DIV,2,MAIN,2,DIV,0,DIV,1,DIV",
+                    "selector": "main.flex-1 > div.grid > div.group > div.p-3.5",
+                    "boundingRect": {
+                      "top": 5724,
+                      "bottom": 5881,
+                      "left": 17,
+                      "right": 199,
+                      "width": 182,
+                      "height": 157
+                    },
+                    "snippet": "<div class=\"p-3.5 sm:p-4 flex-1 flex flex-col justify-between space-y-3 bg-cream-50\">",
+                    "nodeLabel": "Delhi Public School Bhopal\nBLAZER\nDPS Bhopal Blazer\nFrom ₹1,650\n₹1,897\nOfficial…"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "1-18-SPAN",
+              "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,3,SECTION,0,DIV,1,DIV,2,MAIN,2,DIV,1,DIV,1,DIV,1,DIV,0,DIV,0,DIV,1,SPAN",
+              "selector": "div.relative > div > div.flex > span.text-xs",
+              "boundingRect": {
+                "top": 5810,
+                "bottom": 5826,
+                "left": 281,
+                "right": 317,
+                "width": 36,
+                "height": 16
+              },
+              "snippet": "<span class=\"text-xs text-taupe-500 line-through font-sans\">",
+              "nodeLabel": "₹1,897",
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.86 (foreground color: #8c7b63, background color: #fbf8f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "relatedNode": {
+                    "type": "node",
+                    "lhId": "1-19-DIV",
+                    "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,3,SECTION,0,DIV,1,DIV,2,MAIN,2,DIV,1,DIV,1,DIV",
+                    "selector": "main.flex-1 > div.grid > div.group > div.p-3.5",
+                    "boundingRect": {
+                      "top": 5724,
+                      "bottom": 5881,
+                      "left": 213,
+                      "right": 395,
+                      "width": 182,
+                      "height": 157
+                    },
+                    "snippet": "<div class=\"p-3.5 sm:p-4 flex-1 flex flex-col justify-between space-y-3 bg-cream-50\">",
+                    "nodeLabel": "Delhi Public School Kolar Road\nBLAZER\nDPS Kolar Blazer\nFrom ₹1,650\n₹1,897\nOffic…"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "1-20-SPAN",
+              "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,3,SECTION,0,DIV,1,DIV,2,MAIN,2,DIV,2,DIV,1,DIV,1,DIV,0,DIV,0,DIV,1,SPAN",
+              "selector": "div.relative > div > div.flex > span.text-xs",
+              "boundingRect": {
+                "top": 6209,
+                "bottom": 6225,
+                "left": 75,
+                "right": 112,
+                "width": 36,
+                "height": 16
+              },
+              "snippet": "<span class=\"text-xs text-taupe-500 line-through font-sans\">",
+              "nodeLabel": "₹1,087",
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.86 (foreground color: #8c7b63, background color: #fbf8f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "relatedNode": {
+                    "type": "node",
+                    "lhId": "1-21-DIV",
+                    "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,3,SECTION,0,DIV,1,DIV,2,MAIN,2,DIV,2,DIV,1,DIV",
+                    "selector": "main.flex-1 > div.grid > div.group > div.p-3.5",
+                    "boundingRect": {
+                      "top": 6122,
+                      "bottom": 6279,
+                      "left": 17,
+                      "right": 199,
+                      "width": 182,
+                      "height": 157
+                    },
+                    "snippet": "<div class=\"p-3.5 sm:p-4 flex-1 flex flex-col justify-between space-y-3 bg-cream-50\">",
+                    "nodeLabel": "Delhi Public School Kolar Road\nUPPER\nDPS Kolar Upper\nFrom ₹945\n₹1,087\nOfficial …"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "1-22-SPAN",
+              "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,3,SECTION,0,DIV,1,DIV,2,MAIN,2,DIV,3,DIV,1,DIV,1,DIV,0,DIV,0,DIV,1,SPAN",
+              "selector": "div.relative > div > div.flex > span.text-xs",
+              "boundingRect": {
+                "top": 6209,
+                "bottom": 6225,
+                "left": 286,
+                "right": 314,
+                "width": 28,
+                "height": 16
+              },
+              "snippet": "<span class=\"text-xs text-taupe-500 line-through font-sans\">",
+              "nodeLabel": "₹793",
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.86 (foreground color: #8c7b63, background color: #fbf8f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "relatedNode": {
+                    "type": "node",
+                    "lhId": "1-23-DIV",
+                    "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,3,SECTION,0,DIV,1,DIV,2,MAIN,2,DIV,3,DIV,1,DIV",
+                    "selector": "main.flex-1 > div.grid > div.group > div.p-3.5",
+                    "boundingRect": {
+                      "top": 6122,
+                      "bottom": 6279,
+                      "left": 213,
+                      "right": 395,
+                      "width": 182,
+                      "height": 157
+                    },
+                    "snippet": "<div class=\"p-3.5 sm:p-4 flex-1 flex flex-col justify-between space-y-3 bg-cream-50\">",
+                    "nodeLabel": "Delhi Public School Bhopal\nSHIRT\nDPS Winter Full Shirt\nFrom ₹690\n₹793\nOfficial …"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "1-24-SPAN",
+              "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,3,SECTION,0,DIV,1,DIV,2,MAIN,2,DIV,4,DIV,1,DIV,1,DIV,0,DIV,0,DIV,1,SPAN",
+              "selector": "div.relative > div > div.flex > span.text-xs",
+              "boundingRect": {
+                "top": 6607,
+                "bottom": 6623,
+                "left": 89,
+                "right": 118,
+                "width": 29,
+                "height": 16
+              },
+              "snippet": "<span class=\"text-xs text-taupe-500 line-through font-sans\">",
+              "nodeLabel": "₹690",
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.86 (foreground color: #8c7b63, background color: #fbf8f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "relatedNode": {
+                    "type": "node",
+                    "lhId": "1-25-DIV",
+                    "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,3,SECTION,0,DIV,1,DIV,2,MAIN,2,DIV,4,DIV,1,DIV",
+                    "selector": "main.flex-1 > div.grid > div.group > div.p-3.5",
+                    "boundingRect": {
+                      "top": 6521,
+                      "bottom": 6677,
+                      "left": 17,
+                      "right": 199,
+                      "width": 182,
+                      "height": 157
+                    },
+                    "snippet": "<div class=\"p-3.5 sm:p-4 flex-1 flex flex-col justify-between space-y-3 bg-cream-50\">",
+                    "nodeLabel": "Delhi Public School Bhopal\nPANT\nDPS Winter Pant\nFrom ₹600\n₹690\nOfficial Dye Lot…"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "1-26-SPAN",
+              "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,3,SECTION,0,DIV,1,DIV,2,MAIN,2,DIV,5,DIV,1,DIV,1,DIV,0,DIV,0,DIV,1,SPAN",
+              "selector": "div.relative > div > div.flex > span.text-xs",
+              "boundingRect": {
+                "top": 6607,
+                "bottom": 6623,
+                "left": 285,
+                "right": 313,
+                "width": 28,
+                "height": 16
+              },
+              "snippet": "<span class=\"text-xs text-taupe-500 line-through font-sans\">",
+              "nodeLabel": "₹874",
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.86 (foreground color: #8c7b63, background color: #fbf8f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "relatedNode": {
+                    "type": "node",
+                    "lhId": "1-27-DIV",
+                    "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,3,SECTION,0,DIV,1,DIV,2,MAIN,2,DIV,5,DIV,1,DIV",
+                    "selector": "main.flex-1 > div.grid > div.group > div.p-3.5",
+                    "boundingRect": {
+                      "top": 6521,
+                      "bottom": 6677,
+                      "left": 213,
+                      "right": 395,
+                      "width": 182,
+                      "height": 157
+                    },
+                    "snippet": "<div class=\"p-3.5 sm:p-4 flex-1 flex flex-col justify-between space-y-3 bg-cream-50\">",
+                    "nodeLabel": "Delhi Public School Bhopal\nDIVIDER\nDPS Winter Divider\nFrom ₹760\n₹874\nOfficial D…"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "1-28-SPAN",
+              "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,3,SECTION,0,DIV,1,DIV,2,MAIN,2,DIV,6,DIV,1,DIV,1,DIV,0,DIV,0,DIV,1,SPAN",
+              "selector": "div.relative > div > div.flex > span.text-xs",
+              "boundingRect": {
+                "top": 7005,
+                "bottom": 7021,
+                "left": 89,
+                "right": 115,
+                "width": 26,
+                "height": 16
+              },
+              "snippet": "<span class=\"text-xs text-taupe-500 line-through font-sans\">",
+              "nodeLabel": "₹103",
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.86 (foreground color: #8c7b63, background color: #fbf8f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "relatedNode": {
+                    "type": "node",
+                    "lhId": "1-29-DIV",
+                    "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,3,SECTION,0,DIV,1,DIV,2,MAIN,2,DIV,6,DIV,1,DIV",
+                    "selector": "main.flex-1 > div.grid > div.group > div.p-3.5",
+                    "boundingRect": {
+                      "top": 6919,
+                      "bottom": 7076,
+                      "left": 17,
+                      "right": 199,
+                      "width": 182,
+                      "height": 157
+                    },
+                    "snippet": "<div class=\"p-3.5 sm:p-4 flex-1 flex flex-col justify-between space-y-3 bg-cream-50\">",
+                    "nodeLabel": "Delhi Public School Bhopal\nSOCKS\nDPS Winter Socks\nFrom ₹90\n₹103\nOfficial Dye Lo…"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "1-30-SPAN",
+              "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,3,SECTION,0,DIV,1,DIV,2,MAIN,2,DIV,7,DIV,1,DIV,1,DIV,0,DIV,0,DIV,1,SPAN",
+              "selector": "div.relative > div > div.flex > span.text-xs",
+              "boundingRect": {
+                "top": 7027,
+                "bottom": 7043,
+                "left": 267,
+                "right": 290,
+                "width": 23,
+                "height": 16
+              },
+              "snippet": "<span class=\"text-xs text-taupe-500 line-through font-sans\">",
+              "nodeLabel": "₹115",
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.86 (foreground color: #8c7b63, background color: #fbf8f2, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "relatedNode": {
+                    "type": "node",
+                    "lhId": "1-31-DIV",
+                    "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,3,SECTION,0,DIV,1,DIV,2,MAIN,2,DIV,7,DIV,1,DIV",
+                    "selector": "main.flex-1 > div.grid > div.group > div.p-3.5",
+                    "boundingRect": {
+                      "top": 6919,
+                      "bottom": 7076,
+                      "left": 213,
+                      "right": 395,
+                      "width": 182,
+                      "height": 157
+                    },
+                    "snippet": "<div class=\"p-3.5 sm:p-4 flex-1 flex flex-col justify-between space-y-3 bg-cream-50\">",
+                    "nodeLabel": "Delhi Public School Bhopal\nTIE\nDPS Winter Tie\n₹100\n₹115\nOfficial Dye Lot\nAdd"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "node": {
+              "type": "node",
+              "lhId": "1-32-SPAN",
+              "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,5,SECTION,0,DIV,0,DIV,0,SPAN",
+              "selector": "section.max-w-7xl > div.bg-navy-800 > div.max-w-3xl > span.text-xs",
+              "boundingRect": {
+                "top": 9501,
+                "bottom": 9517,
+                "left": 49,
+                "right": 265,
+                "width": 216,
+                "height": 16
+              },
+              "snippet": "<span class=\"text-xs font-serif italic uppercase tracking-widest text-brass font-bold\">",
+              "nodeLabel": "THE INDRAPRASTH STANDARD",
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #a8863c, background color: #0e2747, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio of 4.5:1"
+            },
+            "subItems": {
+              "type": "subitems",
+              "items": [
+                {
+                  "relatedNode": {
+                    "type": "node",
+                    "lhId": "1-33-DIV",
+                    "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,5,SECTION,0,DIV",
+                    "selector": "main.flex-grow > div.space-y-16 > section.max-w-7xl > div.bg-navy-800",
+                    "boundingRect": {
+                      "top": 9463,
+                      "bottom": 10258,
+                      "left": 16,
+                      "right": 396,
+                      "width": 380,
+                      "height": 795
+                    },
+                    "snippet": "<div class=\"bg-navy-800 text-cream-50 rounded-[12px] p-8 sm:p-12 lg:p-16 relative over…\">",
+                    "nodeLabel": "THE INDRAPRASTH STANDARD\nWhy Bhopal Has Trusted Us For Over Half a Century\n\nEst…"
                   }
                 }
               ]
@@ -1288,9 +1587,9 @@
     },
     "heading-order": {
       "id": "heading-order",
-      "title": "Heading elements are not in a sequentially-descending order",
+      "title": "Heading elements appear in a sequentially-descending order",
       "description": "Properly ordered headings that do not skip levels convey the semantic structure of the page, making it easier to navigate and understand when using assistive technologies. [Learn more about heading order](https://dequeuniversity.com/rules/axe/4.13/heading-order).",
-      "score": 0,
+      "score": 1,
       "scoreDisplayMode": "binary",
       "details": {
         "type": "table",
@@ -1305,54 +1604,7 @@
             "label": "Failing Elements"
           }
         ],
-        "items": [
-          {
-            "node": {
-              "type": "node",
-              "lhId": "1-4-H3",
-              "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,0,SECTION,0,DIV,0,DIV,1,DIV,0,DIV,0,DIV,1,DIV,1,H3",
-              "selector": "div.relative > div.relative > div.p-5 > h3.text-xl",
-              "boundingRect": {
-                "top": 1125,
-                "bottom": 1153,
-                "left": 38,
-                "right": 374,
-                "width": 337,
-                "height": 28
-              },
-              "snippet": "<h3 class=\"text-xl font-serif font-bold text-linen-50 mt-1\">",
-              "nodeLabel": "Delhi Public School Official Blazer",
-              "explanation": "Fix any of the following:\n  Heading order invalid"
-            }
-          },
-          {
-            "node": {
-              "type": "node",
-              "lhId": "1-5-H4",
-              "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,5,SECTION,0,DIV,0,DIV,3,DIV,0,DIV,1,H4",
-              "selector": "div.max-w-3xl > div.grid > div.space-y-2 > h4.font-serif",
-              "boundingRect": {
-                "top": 8712,
-                "bottom": 8736,
-                "left": 49,
-                "right": 363,
-                "width": 314,
-                "height": 24
-              },
-              "snippet": "<h4 class=\"font-serif font-bold text-base text-white\">",
-              "nodeLabel": "Double-Stitched Seams",
-              "explanation": "Fix any of the following:\n  Heading order invalid"
-            }
-          }
-        ],
-        "debugData": {
-          "type": "debugdata",
-          "impact": "moderate",
-          "tags": [
-            "cat.semantics",
-            "best-practice"
-          ]
-        }
+        "items": []
       }
     },
     "html-has-lang": {
@@ -1429,18 +1681,18 @@
           {
             "node": {
               "type": "node",
-              "lhId": "1-9-A",
+              "lhId": "1-37-A",
               "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,6,SECTION,1,DIV,0,DIV,1,A",
-              "selector": "section.max-w-7xl > div.grid > div.bg-white > a.mt-5",
+              "selector": "section.max-w-7xl > div.grid > div.bg-cream-50 > a.mt-5",
               "boundingRect": {
-                "top": 9534,
-                "bottom": 9563,
+                "top": 10729,
+                "bottom": 10758,
                 "left": 41,
                 "right": 371,
                 "width": 330,
                 "height": 29
               },
-              "snippet": "<a href=\"https://maps.google.com/?q=Plot+23+New+MLA+Colony+Jawahar+Chowk+Bhopal\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"mt-5 pt-3 border-t border-linen-200 text-xs font-serif font-bold text-gold…\">",
+              "snippet": "<a href=\"https://maps.google.com/?q=Plot+23+New+MLA+Colony+Jawahar+Chowk+Bhopal\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"mt-5 pt-3 border-t border-sand-300 text-xs font-serif font-bold text-blue-…\">",
               "nodeLabel": "Google Maps Directions",
               "explanation": "Fix all of the following:\n  Check that links have the same purpose, or are intentionally ambiguous."
             },
@@ -1450,54 +1702,54 @@
                 {
                   "relatedNode": {
                     "type": "node",
-                    "lhId": "1-10-A",
+                    "lhId": "1-38-A",
                     "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,6,SECTION,1,DIV,1,DIV,1,A",
-                    "selector": "section.max-w-7xl > div.grid > div.bg-white > a.mt-5",
+                    "selector": "section.max-w-7xl > div.grid > div.bg-cream-50 > a.mt-5",
                     "boundingRect": {
-                      "top": 9805,
-                      "bottom": 9834,
+                      "top": 11002,
+                      "bottom": 11031,
                       "left": 41,
                       "right": 371,
                       "width": 330,
                       "height": 29
                     },
-                    "snippet": "<a href=\"https://maps.google.com/?q=Ultimate+Arcade+Kolar+Road+Bhopal\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"mt-5 pt-3 border-t border-linen-200 text-xs font-serif font-bold text-gold…\">",
+                    "snippet": "<a href=\"https://maps.google.com/?q=Ultimate+Arcade+Kolar+Road+Bhopal\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"mt-5 pt-3 border-t border-sand-300 text-xs font-serif font-bold text-blue-…\">",
                     "nodeLabel": "Google Maps Directions"
                   }
                 },
                 {
                   "relatedNode": {
                     "type": "node",
-                    "lhId": "1-11-A",
+                    "lhId": "1-39-A",
                     "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,6,SECTION,1,DIV,2,DIV,1,A",
-                    "selector": "section.max-w-7xl > div.grid > div.bg-white > a.mt-5",
+                    "selector": "section.max-w-7xl > div.grid > div.bg-cream-50 > a.mt-5",
                     "boundingRect": {
-                      "top": 10076,
-                      "bottom": 10105,
+                      "top": 11275,
+                      "bottom": 11303,
                       "left": 41,
                       "right": 371,
                       "width": 330,
                       "height": 29
                     },
-                    "snippet": "<a href=\"https://maps.google.com/?q=68+Gandhi+Market+Piplani+Bhopal\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"mt-5 pt-3 border-t border-linen-200 text-xs font-serif font-bold text-gold…\">",
+                    "snippet": "<a href=\"https://maps.google.com/?q=68+Gandhi+Market+Piplani+Bhopal\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"mt-5 pt-3 border-t border-sand-300 text-xs font-serif font-bold text-blue-…\">",
                     "nodeLabel": "Google Maps Directions"
                   }
                 },
                 {
                   "relatedNode": {
                     "type": "node",
-                    "lhId": "1-12-A",
+                    "lhId": "1-40-A",
                     "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,6,SECTION,1,DIV,3,DIV,1,A",
-                    "selector": "section.max-w-7xl > div.grid > div.bg-white > a.mt-5",
+                    "selector": "section.max-w-7xl > div.grid > div.bg-cream-50 > a.mt-5",
                     "boundingRect": {
-                      "top": 10367,
-                      "bottom": 10396,
+                      "top": 11567,
+                      "bottom": 11596,
                       "left": 41,
                       "right": 371,
                       "width": 330,
                       "height": 29
                     },
-                    "snippet": "<a href=\"https://maps.google.com/?q=Atal+Multi+Speciality+Hospital+Karond+Bypass+Ro…\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"mt-5 pt-3 border-t border-linen-200 text-xs font-serif font-bold text-gold…\">",
+                    "snippet": "<a href=\"https://maps.google.com/?q=Atal+Multi+Speciality+Hospital+Karond+Bypass+Ro…\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"mt-5 pt-3 border-t border-sand-300 text-xs font-serif font-bold text-blue-…\">",
                     "nodeLabel": "Google Maps Directions"
                   }
                 }
@@ -1582,15 +1834,15 @@
           {
             "node": {
               "type": "node",
-              "lhId": "1-6-BUTTON",
+              "lhId": "1-34-BUTTON",
               "path": "1,HTML,1,BODY,0,DIV,0,DIV,1,MAIN,0,DIV,3,SECTION,0,DIV,1,DIV,2,MAIN,0,DIV,0,DIV,0,DIV,1,DIV,0,BUTTON",
-              "selector": "div.bg-white > div.flex > div.flex > button.lg:hidden",
+              "selector": "div.bg-cream-50 > div.flex > div.flex > button.lg:hidden",
               "boundingRect": {
-                "top": 4761,
-                "bottom": 4805,
+                "top": 5382,
+                "bottom": 5426,
                 "left": 29,
-                "right": 210,
-                "width": 182,
+                "right": 209,
+                "width": 180,
                 "height": 44
               },
               "snippet": "<button type=\"button\" class=\"lg:hidden flex-1 sm:flex-initial inline-flex items-center justify-center g…\" aria-label=\"Open filter options\">",
@@ -2107,6 +2359,25 @@
           {
             "featureId": {
               "type": "link",
+              "text": "cookie-store",
+              "url": "https://webstatus.dev/features/cookie-store"
+            },
+            "displayStatus": {
+              "type": "baseline-status",
+              "status": "limited",
+              "displayString": "Limited Availability"
+            },
+            "source": {
+              "type": "source-location",
+              "url": "https://indraprasth-uniforms.vercel.app/assets/vendor-query-FySYeA0O.js",
+              "urlProvider": "network",
+              "line": 11,
+              "column": 12426
+            }
+          },
+          {
+            "featureId": {
+              "type": "link",
               "text": "jpegxl",
               "url": "https://webstatus.dev/features/jpegxl"
             },
@@ -2117,7 +2388,7 @@
             },
             "source": {
               "type": "source-location",
-              "url": "http://localhost:5173/",
+              "url": "https://indraprasth-uniforms.vercel.app/",
               "urlProvider": "network",
               "line": -2,
               "column": -2
@@ -2136,10 +2407,10 @@
             },
             "source": {
               "type": "source-location",
-              "url": "http://localhost:5173/node_modules/.vite/deps/axios.js?v=a4ac04d9",
+              "url": "https://indraprasth-uniforms.vercel.app/assets/vendor-query-FySYeA0O.js",
               "urlProvider": "network",
-              "line": 3141,
-              "column": 40
+              "line": 13,
+              "column": 4523
             }
           },
           {
@@ -2155,10 +2426,10 @@
             },
             "source": {
               "type": "source-location",
-              "url": "http://localhost:5173/@vite/client",
+              "url": "https://indraprasth-uniforms.vercel.app/",
               "urlProvider": "network",
-              "line": 796,
-              "column": 20
+              "line": -2,
+              "column": -2
             }
           },
           {
@@ -2174,10 +2445,29 @@
             },
             "source": {
               "type": "source-location",
-              "url": "http://localhost:5173/@vite/client",
+              "url": "https://indraprasth-uniforms.vercel.app/",
               "urlProvider": "network",
-              "line": 796,
-              "column": 20
+              "line": -2,
+              "column": -2
+            }
+          },
+          {
+            "featureId": {
+              "type": "link",
+              "text": "focus-visible",
+              "url": "https://webstatus.dev/features/focus-visible"
+            },
+            "displayStatus": {
+              "type": "baseline-status",
+              "status": "high",
+              "displayString": "Widely Available (2022-03-14)"
+            },
+            "source": {
+              "type": "source-location",
+              "url": "https://indraprasth-uniforms.vercel.app/",
+              "urlProvider": "network",
+              "line": -2,
+              "column": -2
             }
           },
           {
@@ -2193,10 +2483,10 @@
             },
             "source": {
               "type": "source-location",
-              "url": "http://localhost:5173/@vite/client",
+              "url": "https://indraprasth-uniforms.vercel.app/",
               "urlProvider": "network",
-              "line": 796,
-              "column": 20
+              "line": -2,
+              "column": -2
             }
           },
           {
@@ -2212,10 +2502,10 @@
             },
             "source": {
               "type": "source-location",
-              "url": "http://localhost:5173/@vite/client",
+              "url": "https://indraprasth-uniforms.vercel.app/",
               "urlProvider": "network",
-              "line": 796,
-              "column": 20
+              "line": -2,
+              "column": -2
             }
           },
           {
@@ -2231,10 +2521,10 @@
             },
             "source": {
               "type": "source-location",
-              "url": "http://localhost:5173/@vite/client",
+              "url": "https://indraprasth-uniforms.vercel.app/",
               "urlProvider": "network",
-              "line": 796,
-              "column": 20
+              "line": -2,
+              "column": -2
             }
           },
           {
@@ -2250,10 +2540,10 @@
             },
             "source": {
               "type": "source-location",
-              "url": "http://localhost:5173/@vite/client",
+              "url": "https://indraprasth-uniforms.vercel.app/",
               "urlProvider": "network",
-              "line": 796,
-              "column": 20
+              "line": -2,
+              "column": -2
             }
           },
           {
@@ -2269,7 +2559,7 @@
             },
             "source": {
               "type": "source-location",
-              "url": "http://localhost:5173/",
+              "url": "https://indraprasth-uniforms.vercel.app/",
               "urlProvider": "network",
               "line": 0,
               "column": 0
@@ -2288,10 +2578,10 @@
             },
             "source": {
               "type": "source-location",
-              "url": "http://localhost:5173/node_modules/.vite/deps/chunk-GNC7SI6A.js?v=a4ac04d9",
+              "url": "https://indraprasth-uniforms.vercel.app/assets/vendor-react-Bi8fcJ64.js",
               "urlProvider": "network",
-              "line": 7505,
-              "column": 41
+              "line": 31,
+              "column": 16782
             }
           },
           {
@@ -2307,10 +2597,10 @@
             },
             "source": {
               "type": "source-location",
-              "url": "http://localhost:5173/node_modules/.vite/deps/@tanstack_react-query.js?v=a4ac04d9",
+              "url": "https://indraprasth-uniforms.vercel.app/assets/vendor-query-FySYeA0O.js",
               "urlProvider": "network",
-              "line": 1466,
-              "column": 28
+              "line": 8,
+              "column": 13838
             }
           },
           {
@@ -2326,7 +2616,7 @@
             },
             "source": {
               "type": "source-location",
-              "url": "http://localhost:5173/",
+              "url": "https://indraprasth-uniforms.vercel.app/",
               "urlProvider": "network",
               "line": -2,
               "column": -2
@@ -2345,7 +2635,7 @@
             },
             "source": {
               "type": "source-location",
-              "url": "http://localhost:5173/",
+              "url": "https://indraprasth-uniforms.vercel.app/",
               "urlProvider": "network",
               "line": -2,
               "column": -2
@@ -2364,7 +2654,7 @@
             },
             "source": {
               "type": "source-location",
-              "url": "http://localhost:5173/",
+              "url": "https://indraprasth-uniforms.vercel.app/",
               "urlProvider": "network",
               "line": -2,
               "column": -2
@@ -2383,10 +2673,10 @@
             },
             "source": {
               "type": "source-location",
-              "url": "http://localhost:5173/@vite/client",
+              "url": "https://indraprasth-uniforms.vercel.app/",
               "urlProvider": "network",
-              "line": 796,
-              "column": 20
+              "line": -2,
+              "column": -2
             }
           },
           {
@@ -2402,10 +2692,10 @@
             },
             "source": {
               "type": "source-location",
-              "url": "http://localhost:5173/node_modules/.vite/deps/react-helmet-async.js?v=a4ac04d9",
+              "url": "https://indraprasth-uniforms.vercel.app/assets/index-BoHDTfav.js",
               "urlProvider": "network",
-              "line": 765,
-              "column": 22
+              "line": 1,
+              "column": 12763
             }
           }
         ]
@@ -2580,62 +2870,17 @@
     },
     "llms-txt": {
       "id": "llms-txt",
-      "title": "llms.txt does not follow recommendations",
+      "title": "llms.txt follows recommendations",
       "description": "If your llms.txt file does not follow recommendations, large language models may not be able to understand how you want your website to be crawled or used for training. The [llms.txt](https://llmstxt.org/) file should be a Markdown file containing at least one H1 header. [Learn more about the llms.txt audit](https://developer.chrome.com/docs/lighthouse/agentic-browsing/llms-txt).",
-      "score": 0,
-      "scoreDisplayMode": "binary",
-      "details": {
-        "type": "table",
-        "headings": [
-          {
-            "key": "message",
-            "valueType": "text",
-            "label": "Error"
-          }
-        ],
-        "items": [
-          {
-            "message": "File is missing a required H1 header (e.g., \"# Title\")."
-          },
-          {
-            "message": "File does not appear to contain any links."
-          }
-        ]
-      }
+      "score": null,
+      "scoreDisplayMode": "notApplicable"
     },
     "ard-schema": {
       "id": "ard-schema",
-      "title": "`ai-catalog.json` schema is invalid",
+      "title": "`ai-catalog.json` schema is valid",
       "description": "Valid `ai-catalog.json` manifests are required for autonomous AI agents and registries to discover and verify your resources. [Learn more about the ARD specification](https://agenticresourcediscovery.org/spec/).",
-      "score": 0,
-      "scoreDisplayMode": "binary",
-      "details": {
-        "type": "table",
-        "headings": [
-          {
-            "key": "element",
-            "valueType": "text",
-            "label": "Element"
-          },
-          {
-            "key": "issue",
-            "valueType": "text",
-            "label": "Issue"
-          },
-          {
-            "key": "severity",
-            "valueType": "text",
-            "label": "Severity"
-          }
-        ],
-        "items": [
-          {
-            "element": "Root",
-            "issue": "Malformed JSON in manifest: SyntaxError: Unexpected token '<', \"<!doctype \"... is not valid JSON",
-            "severity": "Error"
-          }
-        ]
-      }
+      "score": null,
+      "scoreDisplayMode": "notApplicable"
     }
   },
   "configSettings": {
@@ -2744,7 +2989,7 @@
         },
         {
           "id": "aria-hidden-focus",
-          "weight": 0,
+          "weight": 7,
           "group": "a11y-aria"
         },
         {
@@ -3079,7 +3324,7 @@
         }
       ],
       "id": "accessibility",
-      "score": 0.95
+      "score": 0.97
     },
     "best-practices": {
       "title": "Best Practices",
@@ -3301,17 +3546,17 @@
         },
         {
           "id": "llms-txt",
-          "weight": 1,
+          "weight": 0,
           "group": "agent-discoverability"
         },
         {
           "id": "ard-schema",
-          "weight": 1,
+          "weight": 0,
           "group": "agent-discoverability"
         }
       ],
       "id": "agentic-browsing",
-      "score": 0.5
+      "score": 0.99
     }
   },
   "categoryGroups": {
@@ -3403,973 +3648,973 @@
   "timing": {
     "entries": [
       {
-        "startTime": 1995543.93,
+        "startTime": 12592350.34,
         "name": "lh:config",
-        "duration": 323.52,
+        "duration": 195.87,
         "entryType": "measure"
       },
       {
-        "startTime": 1995544.54,
+        "startTime": 12592350.96,
         "name": "lh:config:resolveArtifactsToDefns",
+        "duration": 0.35,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12592546.3,
+        "name": "lh:runner:gather",
+        "duration": 29439.26,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12592546.34,
+        "name": "lh:driver:connect",
+        "duration": 6.08,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12592552.47,
+        "name": "lh:driver:navigate",
+        "duration": 51.88,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12592604.41,
+        "name": "lh:gather:getBenchmarkIndex",
+        "duration": 1016.74,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12593621.18,
+        "name": "lh:gather:getVersion",
+        "duration": 0.95,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12593622.16,
+        "name": "lh:gather:getDevicePixelRatio",
+        "duration": 1.32,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12593623.57,
+        "name": "lh:prepare:navigationMode",
+        "duration": 99.45,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12593624.83,
+        "name": "lh:gather:getVersion",
         "duration": 0.58,
         "entryType": "measure"
       },
       {
-        "startTime": 1995867.57,
-        "name": "lh:runner:gather",
-        "duration": 7444.15,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 1995867.64,
-        "name": "lh:driver:connect",
-        "duration": 7,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 1995874.71,
-        "name": "lh:driver:navigate",
-        "duration": 45.74,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 1995920.58,
-        "name": "lh:gather:getBenchmarkIndex",
-        "duration": 1015.38,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 1996936.01,
-        "name": "lh:gather:getVersion",
-        "duration": 1.54,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 1996937.59,
-        "name": "lh:gather:getDevicePixelRatio",
-        "duration": 1.44,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 1996939.4,
-        "name": "lh:prepare:navigationMode",
-        "duration": 92.35,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 1996940.61,
-        "name": "lh:gather:getVersion",
-        "duration": 0.62,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 1996963.88,
+        "startTime": 12593642.13,
         "name": "lh:storage:clearDataForOrigin",
-        "duration": 24.67,
+        "duration": 26.79,
         "entryType": "measure"
       },
       {
-        "startTime": 1996988.68,
+        "startTime": 12593669.01,
         "name": "lh:storage:clearBrowserCaches",
-        "duration": 40.51,
+        "duration": 51.88,
         "entryType": "measure"
       },
       {
-        "startTime": 1997030.09,
+        "startTime": 12593721.77,
         "name": "lh:gather:prepareThrottlingAndNetwork",
-        "duration": 1.62,
+        "duration": 1.22,
         "entryType": "measure"
       },
       {
-        "startTime": 1997044.18,
+        "startTime": 12593736.53,
         "name": "lh:driver:navigate",
-        "duration": 3654.9,
+        "duration": 24533.24,
         "entryType": "measure"
       },
       {
-        "startTime": 2001221.21,
+        "startTime": 12619361.05,
         "name": "lh:computed:NetworkRecords",
-        "duration": 1.62,
+        "duration": 0.63,
         "entryType": "measure"
       },
       {
-        "startTime": 2001222.94,
+        "startTime": 12619361.79,
         "name": "lh:gather:getArtifact:WebMCP",
-        "duration": 5.33,
+        "duration": 3.38,
         "entryType": "measure"
       },
       {
-        "startTime": 2001228.32,
+        "startTime": 12619365.19,
         "name": "lh:gather:getArtifact:WebMcpSchemaIssues",
         "duration": 0.02,
         "entryType": "measure"
       },
       {
-        "startTime": 2001228.36,
+        "startTime": 12619365.21,
         "name": "lh:gather:getArtifact:LlmsTxt",
-        "duration": 10.57,
+        "duration": 76.34,
         "entryType": "measure"
       },
       {
-        "startTime": 2001238.97,
+        "startTime": 12619441.6,
         "name": "lh:gather:getArtifact:DevtoolsLog",
-        "duration": 0.02,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2001239.01,
-        "name": "lh:gather:getArtifact:Trace",
         "duration": 0.01,
         "entryType": "measure"
       },
       {
-        "startTime": 2001239.04,
+        "startTime": 12619441.63,
+        "name": "lh:gather:getArtifact:Trace",
+        "duration": 0,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12619441.64,
         "name": "lh:gather:getArtifact:Accessibility",
-        "duration": 877.41,
+        "duration": 1134.11,
         "entryType": "measure"
       },
       {
-        "startTime": 2002116.5,
+        "startTime": 12620575.79,
         "name": "lh:gather:getArtifact:AnchorElements",
-        "duration": 81.57,
+        "duration": 61.78,
         "entryType": "measure"
       },
       {
-        "startTime": 2002198.11,
+        "startTime": 12620637.59,
         "name": "lh:gather:getArtifact:ConsoleMessages",
-        "duration": 0.02,
+        "duration": 0.01,
         "entryType": "measure"
       },
       {
-        "startTime": 2002198.14,
+        "startTime": 12620637.61,
         "name": "lh:gather:getArtifact:Doctype",
-        "duration": 1.48,
+        "duration": 1.21,
         "entryType": "measure"
       },
       {
-        "startTime": 2002199.68,
+        "startTime": 12620638.84,
         "name": "lh:gather:getArtifact:Inputs",
-        "duration": 8.71,
+        "duration": 8.85,
         "entryType": "measure"
       },
       {
-        "startTime": 2002208.44,
+        "startTime": 12620647.72,
         "name": "lh:gather:getArtifact:ImageElements",
-        "duration": 852.09,
+        "duration": 970.93,
         "entryType": "measure"
       },
       {
-        "startTime": 2003060.67,
+        "startTime": 12621618.72,
         "name": "lh:gather:getArtifact:InspectorIssues",
+        "duration": 0.04,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12621618.77,
+        "name": "lh:gather:getArtifact:LinkElements",
+        "duration": 7.28,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12621625.91,
+        "name": "lh:computed:MainResource",
         "duration": 0.09,
         "entryType": "measure"
       },
       {
-        "startTime": 2003060.79,
-        "name": "lh:gather:getArtifact:LinkElements",
-        "duration": 5.89,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003066.49,
-        "name": "lh:computed:MainResource",
-        "duration": 0.11,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003066.73,
+        "startTime": 12621626.08,
         "name": "lh:gather:getArtifact:MainDocumentContent",
         "duration": 1.22,
         "entryType": "measure"
       },
       {
-        "startTime": 2003067.99,
+        "startTime": 12621627.33,
         "name": "lh:gather:getArtifact:MetaElements",
-        "duration": 6.92,
+        "duration": 5.73,
         "entryType": "measure"
       },
       {
-        "startTime": 2003074.97,
+        "startTime": 12621633.1,
         "name": "lh:gather:getArtifact:NetworkUserAgent",
-        "duration": 0.02,
+        "duration": 0.01,
         "entryType": "measure"
       },
       {
-        "startTime": 2003075,
+        "startTime": 12621633.14,
         "name": "lh:gather:getArtifact:RobotsTxt",
-        "duration": 6.53,
+        "duration": 166.95,
         "entryType": "measure"
       },
       {
-        "startTime": 2003081.59,
+        "startTime": 12621800.15,
         "name": "lh:gather:getArtifact:AgentResourceDiscovery",
-        "duration": 11.45,
+        "duration": 163.42,
         "entryType": "measure"
       },
       {
-        "startTime": 2003093.12,
+        "startTime": 12621963.6,
         "name": "lh:gather:getArtifact:Scripts",
-        "duration": 0.07,
+        "duration": 0.03,
         "entryType": "measure"
       },
       {
-        "startTime": 2003093.23,
+        "startTime": 12621963.67,
         "name": "lh:gather:getArtifact:SourceMaps",
-        "duration": 195.39,
+        "duration": 0.01,
         "entryType": "measure"
       },
       {
-        "startTime": 2003288.68,
+        "startTime": 12621963.69,
         "name": "lh:gather:getArtifact:Stacks",
-        "duration": 16.03,
+        "duration": 17.3,
         "entryType": "measure"
       },
       {
-        "startTime": 2003288.71,
+        "startTime": 12621963.7,
         "name": "lh:gather:collectStacks",
-        "duration": 15.96,
+        "duration": 17.26,
         "entryType": "measure"
       },
       {
-        "startTime": 2003304.74,
+        "startTime": 12621981,
         "name": "lh:gather:getArtifact:ViewportDimensions",
-        "duration": 1.5,
+        "duration": 1.32,
         "entryType": "measure"
       },
       {
-        "startTime": 2003306.27,
+        "startTime": 12621982.35,
         "name": "lh:gather:getArtifact:FullPageScreenshot",
         "duration": 0.01,
         "entryType": "measure"
       },
       {
-        "startTime": 2003311.8,
+        "startTime": 12621985.61,
         "name": "lh:runner:audit",
-        "duration": 670.58,
+        "duration": 293.44,
         "entryType": "measure"
       },
       {
-        "startTime": 2003311.81,
+        "startTime": 12621985.62,
         "name": "lh:runner:auditing",
-        "duration": 670.2,
+        "duration": 293.14,
         "entryType": "measure"
       },
       {
-        "startTime": 2003314.67,
+        "startTime": 12621985.99,
         "name": "lh:audit:is-on-https",
-        "duration": 1.89,
+        "duration": 0.63,
         "entryType": "measure"
       },
       {
-        "startTime": 2003316.96,
+        "startTime": 12621986.8,
         "name": "lh:audit:redirects-http",
-        "duration": 1.19,
+        "duration": 0.5,
         "entryType": "measure"
       },
       {
-        "startTime": 2003318.48,
+        "startTime": 12621987.44,
         "name": "lh:audit:cumulative-layout-shift",
-        "duration": 112.82,
+        "duration": 93.19,
         "entryType": "measure"
       },
       {
-        "startTime": 2003318.82,
+        "startTime": 12621987.58,
         "name": "lh:computed:CumulativeLayoutShift",
-        "duration": 111.23,
+        "duration": 92.14,
         "entryType": "measure"
       },
       {
-        "startTime": 2003319.19,
+        "startTime": 12621987.64,
         "name": "lh:computed:ProcessedTrace",
-        "duration": 62.43,
+        "duration": 75.72,
         "entryType": "measure"
       },
       {
-        "startTime": 2003433.08,
+        "startTime": 12622080.88,
         "name": "lh:audit:errors-in-console",
-        "duration": 118.98,
+        "duration": 0.89,
         "entryType": "measure"
       },
       {
-        "startTime": 2003433.64,
+        "startTime": 12622081.14,
         "name": "lh:computed:JSBundles",
-        "duration": 117.21,
+        "duration": 0.02,
         "entryType": "measure"
       },
       {
-        "startTime": 2003552.44,
+        "startTime": 12622081.98,
         "name": "lh:audit:image-aspect-ratio",
-        "duration": 1.43,
+        "duration": 0.89,
         "entryType": "measure"
       },
       {
-        "startTime": 2003554.25,
+        "startTime": 12622083.07,
         "name": "lh:audit:image-size-responsive",
-        "duration": 1.78,
+        "duration": 0.94,
         "entryType": "measure"
       },
       {
-        "startTime": 2003554.65,
+        "startTime": 12622083.27,
         "name": "lh:computed:ImageRecords",
         "duration": 0.21,
         "entryType": "measure"
       },
       {
-        "startTime": 2003556.68,
+        "startTime": 12622084.19,
         "name": "lh:audit:deprecations",
-        "duration": 1.39,
+        "duration": 0.63,
         "entryType": "measure"
       },
       {
-        "startTime": 2003558.46,
+        "startTime": 12622085,
         "name": "lh:audit:third-party-cookies",
-        "duration": 1.22,
+        "duration": 0.61,
         "entryType": "measure"
       },
       {
-        "startTime": 2003560.17,
+        "startTime": 12622085.79,
         "name": "lh:audit:valid-source-maps",
-        "duration": 2.06,
+        "duration": 0.67,
         "entryType": "measure"
       },
       {
-        "startTime": 2003560.6,
+        "startTime": 12622085.97,
         "name": "lh:computed:EntityClassification",
-        "duration": 0.05,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003562.53,
-        "name": "lh:audit:csp-xss",
-        "duration": 1.15,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003564.05,
-        "name": "lh:audit:has-hsts",
-        "duration": 1.18,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003565.52,
-        "name": "lh:audit:origin-isolation",
-        "duration": 1.21,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003567.04,
-        "name": "lh:audit:clickjacking-mitigation",
-        "duration": 1.31,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003568.7,
-        "name": "lh:audit:trusted-types-xss",
-        "duration": 1.55,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003570.7,
-        "name": "lh:audit:accesskeys",
-        "duration": 1.39,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003572.53,
-        "name": "lh:audit:aria-allowed-attr",
-        "duration": 5.67,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003578.6,
-        "name": "lh:audit:aria-allowed-role",
-        "duration": 28.89,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003607.93,
-        "name": "lh:audit:aria-command-name",
-        "duration": 1.45,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003609.76,
-        "name": "lh:audit:aria-conditional-attr",
-        "duration": 5.58,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003615.72,
-        "name": "lh:audit:aria-deprecated-role",
-        "duration": 5.21,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003621.32,
-        "name": "lh:audit:aria-dialog-name",
-        "duration": 1.53,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003623.22,
-        "name": "lh:audit:aria-hidden-body",
-        "duration": 5.67,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003629.29,
-        "name": "lh:audit:aria-hidden-focus",
-        "duration": 1.67,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003631.33,
-        "name": "lh:audit:aria-input-field-name",
-        "duration": 1.72,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003633.42,
-        "name": "lh:audit:aria-meter-name",
-        "duration": 1.87,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003635.69,
-        "name": "lh:audit:aria-progressbar-name",
-        "duration": 1.97,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003638.03,
-        "name": "lh:audit:aria-prohibited-attr",
-        "duration": 5.52,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003643.92,
-        "name": "lh:audit:aria-required-attr",
-        "duration": 5.42,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003649.78,
-        "name": "lh:audit:aria-required-children",
-        "duration": 2.26,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003652.43,
-        "name": "lh:audit:aria-required-parent",
-        "duration": 2.19,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003654.97,
-        "name": "lh:audit:aria-roles",
-        "duration": 5.18,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003660.55,
-        "name": "lh:audit:aria-text",
-        "duration": 2.36,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003663.27,
-        "name": "lh:audit:aria-toggle-field-name",
-        "duration": 2.47,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003666.12,
-        "name": "lh:audit:aria-tooltip-name",
-        "duration": 2.54,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003669.04,
-        "name": "lh:audit:aria-treeitem-name",
-        "duration": 2.69,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003672.09,
-        "name": "lh:audit:aria-valid-attr-value",
-        "duration": 5.44,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003677.93,
-        "name": "lh:audit:aria-valid-attr",
-        "duration": 5.44,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003683.78,
-        "name": "lh:audit:button-name",
-        "duration": 5.45,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003689.6,
-        "name": "lh:audit:bypass",
-        "duration": 6.21,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003696.48,
-        "name": "lh:audit:color-contrast",
-        "duration": 5.39,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003702.34,
-        "name": "lh:audit:definition-list",
-        "duration": 3.15,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003705.87,
-        "name": "lh:audit:dlitem",
-        "duration": 3,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003709.42,
-        "name": "lh:audit:document-title",
-        "duration": 6.14,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003715.98,
-        "name": "lh:audit:duplicate-id-aria",
-        "duration": 6.01,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003722.43,
-        "name": "lh:audit:empty-heading",
-        "duration": 6.49,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003729.36,
-        "name": "lh:audit:form-field-multiple-labels",
-        "duration": 5.94,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003735.69,
-        "name": "lh:audit:frame-title",
-        "duration": 3.12,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003739.32,
-        "name": "lh:audit:heading-order",
-        "duration": 17.73,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003757.58,
-        "name": "lh:audit:html-has-lang",
-        "duration": 6.96,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003765,
-        "name": "lh:audit:html-lang-valid",
-        "duration": 5.73,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003771.51,
-        "name": "lh:audit:html-xml-lang-mismatch",
-        "duration": 3.72,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003775.67,
-        "name": "lh:audit:identical-links-same-purpose",
-        "duration": 6.8,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003782.87,
-        "name": "lh:audit:image-alt",
-        "duration": 5.58,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003788.86,
-        "name": "lh:audit:image-redundant-alt",
-        "duration": 6.52,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003795.78,
-        "name": "lh:audit:input-button-name",
-        "duration": 3.25,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003799.41,
-        "name": "lh:audit:input-image-alt",
-        "duration": 3.52,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003803.31,
-        "name": "lh:audit:label-content-name-mismatch",
-        "duration": 5.87,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003809.56,
-        "name": "lh:audit:label",
-        "duration": 5.42,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003815.35,
-        "name": "lh:audit:landmark-one-main",
-        "duration": 5.62,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003821.4,
-        "name": "lh:audit:link-name",
-        "duration": 5.95,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003827.75,
-        "name": "lh:audit:link-in-text-block",
-        "duration": 4.19,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003832.36,
-        "name": "lh:audit:list",
-        "duration": 6.43,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003839.21,
-        "name": "lh:audit:listitem",
-        "duration": 6,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003845.63,
-        "name": "lh:audit:meta-refresh",
-        "duration": 3.69,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003849.74,
-        "name": "lh:audit:meta-viewport",
-        "duration": 6.89,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003857.17,
-        "name": "lh:audit:object-alt",
-        "duration": 3.79,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003861.33,
-        "name": "lh:audit:select-name",
-        "duration": 5.54,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003867.24,
-        "name": "lh:audit:skip-link",
-        "duration": 3.61,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003871.24,
-        "name": "lh:audit:tabindex",
-        "duration": 5.72,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003877.37,
-        "name": "lh:audit:table-duplicate-name",
-        "duration": 4.33,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003882.11,
-        "name": "lh:audit:table-fake-caption",
-        "duration": 5.13,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003887.66,
-        "name": "lh:audit:target-size",
-        "duration": 5.48,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003893.68,
-        "name": "lh:audit:td-has-header",
-        "duration": 4.85,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003898.98,
-        "name": "lh:audit:td-headers-attr",
-        "duration": 5.27,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003904.72,
-        "name": "lh:audit:th-has-data-cells",
-        "duration": 5.05,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003910.16,
-        "name": "lh:audit:valid-lang",
-        "duration": 5.37,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003915.95,
-        "name": "lh:audit:video-caption",
-        "duration": 4.99,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003921.03,
-        "name": "lh:audit:custom-controls-labels",
-        "duration": 0.04,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003921.12,
-        "name": "lh:audit:custom-controls-roles",
         "duration": 0.02,
         "entryType": "measure"
       },
       {
-        "startTime": 2003921.15,
-        "name": "lh:audit:focus-traps",
-        "duration": 0.01,
+        "startTime": 12622086.63,
+        "name": "lh:audit:csp-xss",
+        "duration": 1.08,
         "entryType": "measure"
       },
       {
-        "startTime": 2003921.18,
-        "name": "lh:audit:focusable-controls",
-        "duration": 0.01,
+        "startTime": 12622088.01,
+        "name": "lh:audit:has-hsts",
+        "duration": 1.26,
         "entryType": "measure"
       },
       {
-        "startTime": 2003921.21,
-        "name": "lh:audit:interactive-element-affordance",
-        "duration": 0.01,
+        "startTime": 12622089.67,
+        "name": "lh:audit:origin-isolation",
+        "duration": 0.67,
         "entryType": "measure"
       },
       {
-        "startTime": 2003921.24,
-        "name": "lh:audit:logical-tab-order",
-        "duration": 0.01,
+        "startTime": 12622090.52,
+        "name": "lh:audit:clickjacking-mitigation",
+        "duration": 0.72,
         "entryType": "measure"
       },
       {
-        "startTime": 2003921.26,
-        "name": "lh:audit:managed-focus",
-        "duration": 0.01,
+        "startTime": 12622091.43,
+        "name": "lh:audit:trusted-types-xss",
+        "duration": 0.58,
         "entryType": "measure"
       },
       {
-        "startTime": 2003921.29,
-        "name": "lh:audit:offscreen-content-hidden",
-        "duration": 0.01,
+        "startTime": 12622092.22,
+        "name": "lh:audit:accesskeys",
+        "duration": 0.67,
         "entryType": "measure"
       },
       {
-        "startTime": 2003921.32,
-        "name": "lh:audit:use-landmarks",
-        "duration": 0.01,
+        "startTime": 12622093.09,
+        "name": "lh:audit:aria-allowed-attr",
+        "duration": 3.42,
         "entryType": "measure"
       },
       {
-        "startTime": 2003921.35,
-        "name": "lh:audit:visual-order-follows-dom",
-        "duration": 0.01,
+        "startTime": 12622096.78,
+        "name": "lh:audit:aria-allowed-role",
+        "duration": 3,
         "entryType": "measure"
       },
       {
-        "startTime": 2003921.74,
-        "name": "lh:audit:autocomplete-valid",
-        "duration": 2.79,
+        "startTime": 12622100.01,
+        "name": "lh:audit:aria-command-name",
+        "duration": 0.79,
         "entryType": "measure"
       },
       {
-        "startTime": 2003924.98,
-        "name": "lh:audit:presentation-role-conflict",
-        "duration": 4.37,
+        "startTime": 12622101.05,
+        "name": "lh:audit:aria-conditional-attr",
+        "duration": 2.93,
         "entryType": "measure"
       },
       {
-        "startTime": 2003929.75,
-        "name": "lh:audit:svg-img-alt",
-        "duration": 12.65,
+        "startTime": 12622104.23,
+        "name": "lh:audit:aria-deprecated-role",
+        "duration": 2.7,
         "entryType": "measure"
       },
       {
-        "startTime": 2003942.79,
-        "name": "lh:audit:doctype",
+        "startTime": 12622107.15,
+        "name": "lh:audit:aria-dialog-name",
+        "duration": 0.86,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622108.27,
+        "name": "lh:audit:aria-hidden-body",
+        "duration": 3.04,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622111.57,
+        "name": "lh:audit:aria-hidden-focus",
+        "duration": 2.88,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622114.69,
+        "name": "lh:audit:aria-input-field-name",
+        "duration": 0.95,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622115.85,
+        "name": "lh:audit:aria-meter-name",
+        "duration": 0.98,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622117.05,
+        "name": "lh:audit:aria-progressbar-name",
+        "duration": 1.08,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622118.36,
+        "name": "lh:audit:aria-prohibited-attr",
+        "duration": 2.77,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622121.34,
+        "name": "lh:audit:aria-required-attr",
+        "duration": 2.97,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622124.55,
+        "name": "lh:audit:aria-required-children",
         "duration": 1.14,
         "entryType": "measure"
       },
       {
-        "startTime": 2003944.46,
-        "name": "lh:audit:charset",
-        "duration": 1.6,
+        "startTime": 12622125.91,
+        "name": "lh:audit:aria-required-parent",
+        "duration": 1.13,
         "entryType": "measure"
       },
       {
-        "startTime": 2003946.61,
-        "name": "lh:audit:geolocation-on-start",
-        "duration": 1.42,
+        "startTime": 12622127.26,
+        "name": "lh:audit:aria-roles",
+        "duration": 7.87,
         "entryType": "measure"
       },
       {
-        "startTime": 2003948.42,
-        "name": "lh:audit:inspector-issues",
-        "duration": 1.23,
+        "startTime": 12622135.57,
+        "name": "lh:audit:aria-text",
+        "duration": 1.9,
         "entryType": "measure"
       },
       {
-        "startTime": 2003949.91,
-        "name": "lh:audit:js-libraries",
-        "duration": 0.9,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003951.2,
-        "name": "lh:audit:notification-on-start",
-        "duration": 1.3,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003952.87,
-        "name": "lh:audit:paste-preventing-inputs",
-        "duration": 1.21,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003954.37,
-        "name": "lh:audit:baseline",
-        "duration": 3.08,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003957.84,
-        "name": "lh:audit:meta-description",
-        "duration": 1.14,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003959.34,
-        "name": "lh:audit:http-status-code",
-        "duration": 1.12,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003960.83,
-        "name": "lh:audit:link-text",
-        "duration": 2.05,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003963.27,
-        "name": "lh:audit:crawlable-anchors",
-        "duration": 1.47,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003965.12,
-        "name": "lh:audit:is-crawlable",
-        "duration": 1.86,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003967.37,
-        "name": "lh:audit:robots-txt",
-        "duration": 1.37,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003969.11,
-        "name": "lh:audit:hreflang",
-        "duration": 1.16,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003970.62,
-        "name": "lh:audit:canonical",
-        "duration": 1.14,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003972.03,
-        "name": "lh:audit:structured-data",
-        "duration": 0.81,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 2003973.19,
-        "name": "lh:audit:agent-accessibility-tree",
+        "startTime": 12622137.81,
+        "name": "lh:audit:aria-toggle-field-name",
         "duration": 1.22,
         "entryType": "measure"
       },
       {
-        "startTime": 2003974.67,
-        "name": "lh:audit:webmcp-registered-tools",
-        "duration": 0.71,
+        "startTime": 12622139.23,
+        "name": "lh:audit:aria-tooltip-name",
+        "duration": 1.02,
         "entryType": "measure"
       },
       {
-        "startTime": 2003975.63,
-        "name": "lh:audit:webmcp-form-coverage",
+        "startTime": 12622140.43,
+        "name": "lh:audit:aria-treeitem-name",
+        "duration": 1.08,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622141.68,
+        "name": "lh:audit:aria-valid-attr-value",
+        "duration": 2.88,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622144.77,
+        "name": "lh:audit:aria-valid-attr",
+        "duration": 2.3,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622147.25,
+        "name": "lh:audit:button-name",
+        "duration": 2.3,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622149.75,
+        "name": "lh:audit:bypass",
+        "duration": 2.4,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622152.34,
+        "name": "lh:audit:color-contrast",
+        "duration": 2.15,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622154.67,
+        "name": "lh:audit:definition-list",
+        "duration": 1.12,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622156.05,
+        "name": "lh:audit:dlitem",
+        "duration": 1.18,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622157.41,
+        "name": "lh:audit:document-title",
+        "duration": 2.44,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622160.05,
+        "name": "lh:audit:duplicate-id-aria",
+        "duration": 2.24,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622162.47,
+        "name": "lh:audit:empty-heading",
+        "duration": 2.39,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622165.05,
+        "name": "lh:audit:form-field-multiple-labels",
+        "duration": 2.21,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622167.53,
+        "name": "lh:audit:frame-title",
+        "duration": 1.26,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622168.97,
+        "name": "lh:audit:heading-order",
+        "duration": 2.47,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622171.71,
+        "name": "lh:audit:html-has-lang",
+        "duration": 2.38,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622174.28,
+        "name": "lh:audit:html-lang-valid",
+        "duration": 2.18,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622176.7,
+        "name": "lh:audit:html-xml-lang-mismatch",
+        "duration": 1.43,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622178.41,
+        "name": "lh:audit:identical-links-same-purpose",
+        "duration": 2.32,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622180.91,
+        "name": "lh:audit:image-alt",
+        "duration": 1.99,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622183.06,
+        "name": "lh:audit:image-redundant-alt",
+        "duration": 2.46,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622185.71,
+        "name": "lh:audit:input-button-name",
+        "duration": 1.25,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622187.13,
+        "name": "lh:audit:input-image-alt",
+        "duration": 1.29,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622188.6,
+        "name": "lh:audit:label-content-name-mismatch",
+        "duration": 2.22,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622190.99,
+        "name": "lh:audit:label",
+        "duration": 2.25,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622193.49,
+        "name": "lh:audit:landmark-one-main",
+        "duration": 2.07,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622195.72,
+        "name": "lh:audit:link-name",
+        "duration": 2.08,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622197.97,
+        "name": "lh:audit:link-in-text-block",
+        "duration": 1.47,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622199.63,
+        "name": "lh:audit:list",
+        "duration": 2.2,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622202,
+        "name": "lh:audit:listitem",
+        "duration": 2.04,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622204.2,
+        "name": "lh:audit:meta-refresh",
+        "duration": 1.53,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622205.93,
+        "name": "lh:audit:meta-viewport",
+        "duration": 2.29,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622208.41,
+        "name": "lh:audit:object-alt",
+        "duration": 1.38,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622209.94,
+        "name": "lh:audit:select-name",
+        "duration": 2.12,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622212.24,
+        "name": "lh:audit:skip-link",
+        "duration": 1.55,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622213.98,
+        "name": "lh:audit:tabindex",
+        "duration": 2.1,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622216.25,
+        "name": "lh:audit:table-duplicate-name",
+        "duration": 8.99,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622225.6,
+        "name": "lh:audit:table-fake-caption",
+        "duration": 1.94,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622227.74,
+        "name": "lh:audit:target-size",
+        "duration": 2.18,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622230.1,
+        "name": "lh:audit:td-has-header",
+        "duration": 1.67,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622231.93,
+        "name": "lh:audit:td-headers-attr",
+        "duration": 1.92,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622234.21,
+        "name": "lh:audit:th-has-data-cells",
+        "duration": 1.95,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622236.4,
+        "name": "lh:audit:valid-lang",
+        "duration": 1.8,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622238.36,
+        "name": "lh:audit:video-caption",
+        "duration": 2.05,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622240.47,
+        "name": "lh:audit:custom-controls-labels",
+        "duration": 0.02,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622240.5,
+        "name": "lh:audit:custom-controls-roles",
+        "duration": 0.01,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622240.53,
+        "name": "lh:audit:focus-traps",
+        "duration": 0,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622240.54,
+        "name": "lh:audit:focusable-controls",
+        "duration": 0,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622240.55,
+        "name": "lh:audit:interactive-element-affordance",
+        "duration": 0,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622240.56,
+        "name": "lh:audit:logical-tab-order",
+        "duration": 0,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622240.57,
+        "name": "lh:audit:managed-focus",
+        "duration": 0,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622240.59,
+        "name": "lh:audit:offscreen-content-hidden",
+        "duration": 0,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622240.6,
+        "name": "lh:audit:use-landmarks",
+        "duration": 0,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622240.61,
+        "name": "lh:audit:visual-order-follows-dom",
+        "duration": 0,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622240.81,
+        "name": "lh:audit:autocomplete-valid",
+        "duration": 1.11,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622242.1,
+        "name": "lh:audit:presentation-role-conflict",
+        "duration": 1.67,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622243.94,
+        "name": "lh:audit:svg-img-alt",
+        "duration": 1.48,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622245.58,
+        "name": "lh:audit:doctype",
+        "duration": 0.46,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622246.28,
+        "name": "lh:audit:charset",
+        "duration": 0.67,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622247.16,
+        "name": "lh:audit:geolocation-on-start",
+        "duration": 0.6,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622248.02,
+        "name": "lh:audit:inspector-issues",
+        "duration": 0.5,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622248.65,
+        "name": "lh:audit:js-libraries",
+        "duration": 0.37,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622249.18,
+        "name": "lh:audit:notification-on-start",
+        "duration": 0.59,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622249.92,
+        "name": "lh:audit:paste-preventing-inputs",
+        "duration": 0.48,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622250.54,
+        "name": "lh:audit:baseline",
+        "duration": 3.18,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622254.05,
+        "name": "lh:audit:meta-description",
         "duration": 0.77,
         "entryType": "measure"
       },
       {
-        "startTime": 2003976.76,
+        "startTime": 12622255.05,
+        "name": "lh:audit:http-status-code",
+        "duration": 0.56,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622255.79,
+        "name": "lh:audit:link-text",
+        "duration": 0.81,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622256.77,
+        "name": "lh:audit:crawlable-anchors",
+        "duration": 0.62,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622257.57,
+        "name": "lh:audit:is-crawlable",
+        "duration": 0.86,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622258.79,
+        "name": "lh:audit:robots-txt",
+        "duration": 0.49,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622259.5,
+        "name": "lh:audit:hreflang",
+        "duration": 0.45,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622260.12,
+        "name": "lh:audit:canonical",
+        "duration": 0.82,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622261.2,
+        "name": "lh:audit:structured-data",
+        "duration": 0.64,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622262.08,
+        "name": "lh:audit:agent-accessibility-tree",
+        "duration": 0.6,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622262.83,
+        "name": "lh:audit:webmcp-registered-tools",
+        "duration": 0.39,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622263.34,
+        "name": "lh:audit:webmcp-form-coverage",
+        "duration": 0.33,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 12622263.84,
         "name": "lh:audit:webmcp-schema-validity",
-        "duration": 1.05,
+        "duration": 0.54,
         "entryType": "measure"
       },
       {
-        "startTime": 2003978.2,
+        "startTime": 12622264.55,
         "name": "lh:audit:llms-txt",
-        "duration": 1.72,
+        "duration": 13.49,
         "entryType": "measure"
       },
       {
-        "startTime": 2003980.36,
+        "startTime": 12622278.23,
         "name": "lh:audit:ard-schema",
-        "duration": 1.61,
+        "duration": 0.49,
         "entryType": "measure"
       },
       {
-        "startTime": 2003982.04,
+        "startTime": 12622278.77,
         "name": "lh:runner:generate",
-        "duration": 0.32,
+        "duration": 0.27,
         "entryType": "measure"
       }
     ],
-    "total": 8114.73
+    "total": 29732.699999999997
   },
   "i18n": {
     "rendererFormattedStrings": {},
@@ -4493,7 +4738,6 @@
       ],
       "core/lib/i18n/i18n.js | itemSeverityHigh": [
         "audits[csp-xss].details.items[0].severity",
-        "audits[has-hsts].details.items[0].severity",
         "audits[origin-isolation].details.items[0].severity",
         "audits[clickjacking-mitigation].details.items[0].severity",
         "audits[trusted-types-xss].details.items[0].severity"
@@ -4512,9 +4756,6 @@
       ],
       "core/audits/has-hsts.js | columnSeverity": [
         "audits[has-hsts].details.headings[2].label"
-      ],
-      "core/audits/has-hsts.js | noHsts": [
-        "audits[has-hsts].details.items[0].description"
       ],
       "core/audits/origin-isolation.js | title": [
         "audits[origin-isolation].title"
@@ -4572,6 +4813,7 @@
         "audits[aria-conditional-attr].details.headings[0].label",
         "audits[aria-deprecated-role].details.headings[0].label",
         "audits[aria-hidden-body].details.headings[0].label",
+        "audits[aria-hidden-focus].details.headings[0].label",
         "audits[aria-prohibited-attr].details.headings[0].label",
         "audits[aria-required-attr].details.headings[0].label",
         "audits[aria-roles].details.headings[0].label",
@@ -4783,7 +5025,7 @@
       "core/audits/accessibility/frame-title.js | description": [
         "audits[frame-title].description"
       ],
-      "core/audits/accessibility/heading-order.js | failureTitle": [
+      "core/audits/accessibility/heading-order.js | title": [
         "audits[heading-order].title"
       ],
       "core/audits/accessibility/heading-order.js | description": [
@@ -5127,35 +5369,17 @@
       "core/audits/webmcp-schema-validity.js | description": [
         "audits[webmcp-schema-validity].description"
       ],
-      "core/audits/agentic/llms-txt.js | failureTitle": [
+      "core/audits/agentic/llms-txt.js | title": [
         "audits[llms-txt].title"
       ],
       "core/audits/agentic/llms-txt.js | description": [
         "audits[llms-txt].description"
       ],
-      "core/audits/agentic/llms-txt.js | missingH1": [
-        "audits[llms-txt].details.items[0].message"
-      ],
-      "core/audits/agentic/llms-txt.js | missingLinks": [
-        "audits[llms-txt].details.items[1].message"
-      ],
-      "core/audits/agentic/ard-schema.js | failureTitle": [
+      "core/audits/agentic/ard-schema.js | title": [
         "audits[ard-schema].title"
       ],
       "core/audits/agentic/ard-schema.js | description": [
         "audits[ard-schema].description"
-      ],
-      "core/lib/i18n/i18n.js | columnElement": [
-        "audits[ard-schema].details.headings[0].label"
-      ],
-      "core/audits/agentic/ard-schema.js | columnIssue": [
-        "audits[ard-schema].details.headings[1].label"
-      ],
-      "core/audits/agentic/ard-schema.js | columnSeverity": [
-        "audits[ard-schema].details.headings[2].label"
-      ],
-      "core/audits/agentic/ard-schema.js | itemSeverityError": [
-        "audits[ard-schema].details.items[0].severity"
       ],
       "core/config/default-config.js | a11yCategoryTitle": [
         "categories.accessibility.title"

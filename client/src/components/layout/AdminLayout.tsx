@@ -13,6 +13,7 @@ import {
   Menu,
   X,
   Shield,
+  Users,
 } from 'lucide-react';
 import { useAuthStore } from '../../store/auth';
 
@@ -24,6 +25,7 @@ const NAV_ITEMS = [
   { label: 'Orders', path: '/admin/orders', icon: ShoppingBag },
   { label: 'Inquiries', path: '/admin/inquiries', icon: MessageSquare },
   { label: 'Settings', path: '/admin/settings', icon: Settings },
+  { label: 'Staff', path: '/admin/staff', icon: Users, ownerOnly: true },
 ];
 
 export const AdminLayout: React.FC = () => {
@@ -63,7 +65,7 @@ export const AdminLayout: React.FC = () => {
         </div>
         <button
           onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
-          className="p-1.5 rounded-lg text-sand-300 hover:text-white"
+          className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-sand-300 hover:text-white"
           aria-label="Toggle navigation menu"
         >
           {mobileSidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -96,7 +98,7 @@ export const AdminLayout: React.FC = () => {
 
           {/* Navigation Links */}
           <nav className="space-y-1">
-            {NAV_ITEMS.map((item) => {
+            {NAV_ITEMS.filter((item) => !(item as any).ownerOnly || user?.role === 'owner').map((item) => {
               const Icon = item.icon;
               const isActive = location.pathname.startsWith(item.path);
 
@@ -131,7 +133,7 @@ export const AdminLayout: React.FC = () => {
             </div>
             <button
               onClick={handleLogout}
-              className="p-1.5 rounded-lg text-sand-300 hover:text-crimson-400 hover:bg-navy-800 transition-colors btn-tactile"
+              className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-sand-300 hover:text-crimson-400 hover:bg-navy-800 transition-colors btn-tactile"
               title="Log out"
               aria-label="Log out"
             >

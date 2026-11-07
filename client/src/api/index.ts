@@ -7,6 +7,7 @@ import {
   ISetting,
   IOrder,
   IInquiry,
+  IAdmin,
   StatsResponse,
   PaginatedResponse,
 } from '@indraprasth/shared';
@@ -399,6 +400,54 @@ export const useImportProductsCsv = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin', 'products'] });
       queryClient.invalidateQueries({ queryKey: ['products'] });
+    },
+  });
+};
+
+export const useAdminStaff = () =>
+  useQuery<IAdmin[]>({
+    queryKey: ['admin', 'staff'],
+    queryFn: async () => {
+      const res = await api.get('/admin/staff');
+      return res.data.data;
+    },
+  });
+
+export const useCreateStaff = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (payload: { name: string; email: string; password: string; role?: 'owner' | 'staff' }) => {
+      const res = await api.post('/admin/staff', payload);
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin', 'staff'] });
+    },
+  });
+};
+
+export const useToggleStaffStatus = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const res = await api.patch(`/admin/staff/${id}/status`);
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin', 'staff'] });
+    },
+  });
+};
+
+export const useDeleteStaff = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const res = await api.delete(`/admin/staff/${id}`);
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin', 'staff'] });
     },
   });
 };

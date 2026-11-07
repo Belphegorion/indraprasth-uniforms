@@ -338,7 +338,8 @@ describe('5. Database Seeding & Data Integrity', () => {
 
 describe('6. Image & Video Upload & File Validation', () => {
   it('should accept valid image upload and return url & publicId', async () => {
-    const fakeImageBuffer = Buffer.from('fake image content for testing');
+    // Valid JPEG magic header (FF D8 FF E0 ... JFIF)
+    const fakeImageBuffer = Buffer.from([0xff, 0xd8, 0xff, 0xe0, 0x00, 0x10, 0x4a, 0x46, 0x49, 0x46, 0x00, 0x01, 0x01, 0x00]);
     const res = await request(app)
       .post('/api/v1/admin/uploads/image')
       .set('Cookie', adminCookie)
@@ -363,7 +364,8 @@ describe('6. Image & Video Upload & File Validation', () => {
   });
 
   it('should accept valid hero video upload and return url & publicId', async () => {
-    const fakeVideoBuffer = Buffer.from('fake mp4 video content for testing');
+    // Valid MP4 magic header (....ftypisom)
+    const fakeVideoBuffer = Buffer.from([0x00, 0x00, 0x00, 0x20, 0x66, 0x74, 0x79, 0x70, 0x69, 0x73, 0x6f, 0x6d, 0x00, 0x00]);
     const res = await request(app)
       .post('/api/v1/admin/uploads/video')
       .set('Cookie', adminCookie)
@@ -400,8 +402,8 @@ describe('6. Image & Video Upload & File Validation', () => {
   });
 
   it('should allow deleting uploaded video safely', async () => {
-    // First upload a test video
-    const fakeVideoBuffer = Buffer.from('temporary video');
+    // First upload a test video with valid MP4 header
+    const fakeVideoBuffer = Buffer.from([0x00, 0x00, 0x00, 0x20, 0x66, 0x74, 0x79, 0x70, 0x69, 0x73, 0x6f, 0x6d, 0x00, 0x00]);
     const uploadRes = await request(app)
       .post('/api/v1/admin/uploads/video')
       .set('Cookie', adminCookie)

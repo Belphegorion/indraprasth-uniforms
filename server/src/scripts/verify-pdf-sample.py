@@ -7,9 +7,15 @@ import json
 import pymupdf
 import re
 from pymongo import MongoClient
+import os
+try:
+    from dotenv import load_dotenv
+    load_dotenv('server/.env')
+except ImportError:
+    pass
 
 PDF_PATH = 'data/Indraprasth_Uniforms_Product_Catalogue.pdf'
-MONGO_URI = 'mongodb+srv://Vercel-Admin-atlas-bole-candle:a40i7Bz1r66uSegK@atlas-bole-candle.xohkesq.mongodb.net/?retryWrites=true&w=majority'
+MONGO_URI = os.environ.get('MONGODB_URI', 'mongodb://127.0.0.1:27017/indraprasth')
 
 client = MongoClient(MONGO_URI)
 db = client.get_default_database('test')

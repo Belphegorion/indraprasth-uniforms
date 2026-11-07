@@ -11,6 +11,7 @@ export interface AuthRequest extends Request {
 interface JwtPayload {
   id: string;
   role: AdminRole;
+  tokenVersion?: number;
 }
 
 export const authenticate = async (
@@ -35,6 +36,15 @@ export const authenticate = async (
 
     if (!admin || !admin.isActive) {
       res.status(401).json({ success: false, error: 'User is inactive or not found' });
+      return;
+    }
+
+    // Verify token version matches database record to reject revoked tokens
+    if (
+      decoded.tokenVersion !== undefined &&
+      decoded.tokenVersion !== (admin.tokenVersion || 0)
+    ) {
+      res.status(401).json({ success: false, error: 'Session invalidated or expired' });
       return;
     }
 

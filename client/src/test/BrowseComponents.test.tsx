@@ -110,7 +110,7 @@ describe('Browse Components', () => {
       expect(screen.getByText('₹1,850')).toBeDefined();
 
       // Click Add button to open size picker popover
-      const addBtn = screen.getByLabelText('Add DPS Winter Blazer to bag');
+      const addBtn = screen.getByLabelText('Add to Bag - DPS Winter Blazer');
       fireEvent.click(addBtn);
 
       // Size options popover should now be visible

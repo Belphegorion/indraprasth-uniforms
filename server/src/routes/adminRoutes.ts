@@ -87,25 +87,32 @@ router.get('/stats', async (_req, res, next) => {
   }
 });
 
+import {
+  listStaff,
+  createStaff,
+  toggleStaffStatus,
+  deleteStaff,
+} from '../controllers/staffController';
+
 // Products
 router.get('/products', getAdminProducts);
-router.post('/products/import', uploadCsvFile, importProductsCsv);
+router.post('/products/import', requireRole('owner'), uploadCsvFile, importProductsCsv);
 router.get('/products/:id', getProductById);
 router.post('/products', validateBody(productCreateSchema), createProduct);
 router.put('/products/:id', validateBody(productUpdateSchema), updateProduct);
-router.delete('/products/:id', deleteProduct);
+router.delete('/products/:id', requireRole('owner'), deleteProduct);
 
 // Schools
 router.get('/schools', getAdminSchools);
 router.post('/schools', validateBody(schoolCreateSchema), createSchool);
 router.put('/schools/:id', validateBody(schoolUpdateSchema), updateSchool);
-router.delete('/schools/:id', deleteSchool);
+router.delete('/schools/:id', requireRole('owner'), deleteSchool);
 
 // Categories
 router.get('/categories', getAdminCategories);
 router.post('/categories', validateBody(categoryCreateSchema), createCategory);
 router.put('/categories/:id', validateBody(categoryUpdateSchema), updateCategory);
-router.delete('/categories/:id', deleteCategory);
+router.delete('/categories/:id', requireRole('owner'), deleteCategory);
 
 // Orders
 router.get('/orders/export.csv', exportOrdersCsv);
@@ -117,12 +124,18 @@ router.patch('/orders/:id/status', validateBody(orderStatusUpdateSchema), patchO
 router.get('/inquiries', getAdminInquiries);
 router.patch('/inquiries/:id', validateBody(inquiryStatusUpdateSchema), patchInquiry);
 
+// Staff Management (Owner only)
+router.get('/staff', requireRole('owner'), listStaff);
+router.post('/staff', requireRole('owner'), createStaff);
+router.patch('/staff/:id/toggle', requireRole('owner'), toggleStaffStatus);
+router.delete('/staff/:id', requireRole('owner'), deleteStaff);
+
 // Uploads
 router.post('/uploads/image', uploadSingleImage, uploadProductImage);
-router.delete('/uploads/:publicId(*)', deleteProductImage);
-router.delete('/uploads', deleteProductImage);
+router.delete('/uploads/:publicId(*)', requireRole('owner'), deleteProductImage);
+router.delete('/uploads', requireRole('owner'), deleteProductImage);
 router.post('/uploads/video', uploadSingleVideo, uploadHeroVideo);
-router.delete('/uploads/video/:publicId(*)', deleteHeroVideo);
+router.delete('/uploads/video/:publicId(*)', requireRole('owner'), deleteHeroVideo);
 
 // Settings (Owner only for updates)
 router.get('/settings', getAdminSettings);

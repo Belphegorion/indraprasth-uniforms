@@ -161,12 +161,12 @@ export const FilterBar: React.FC<FilterBarProps> = ({
               type="button"
               onClick={() => setMobileSheetOpen(true)}
               className="lg:hidden flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 min-h-[44px] px-4 py-2.5 rounded-[8px] border border-sand-300 bg-cream-50 hover:bg-sand-200 text-navy-800 font-bold text-xs transition-colors shadow-subtle btn-tactile focus-visible:ring-2 focus-visible:ring-blue-600"
-              aria-label="Open filter options"
+              aria-label={activeChips.length > 0 ? `Filters - ${activeChips.length} active filters applied` : 'Filters - Open filter options'}
             >
               <SlidersHorizontal className="w-3.5 h-3.5 text-blue-600" />
               <span>Filters</span>
               {activeChips.length > 0 && (
-                <span className="w-5 h-5 rounded-full bg-crimson-600 text-white text-[10px] font-mono font-bold flex items-center justify-center">
+                <span className="w-5 h-5 rounded-full bg-crimson-600 text-white text-xs font-mono font-bold flex items-center justify-center">
                   {activeChips.length}
                 </span>
               )}

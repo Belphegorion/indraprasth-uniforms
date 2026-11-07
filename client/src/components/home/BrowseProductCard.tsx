@@ -132,7 +132,7 @@ export const BrowseProductCard: React.FC<BrowseProductCardProps> = ({ product })
 
         {/* Discount Badge */}
         {discountPercent && (
-          <span className="absolute top-2.5 right-2.5 bg-crimson-600 text-white text-[10px] font-bold uppercase px-1.5 py-0.5 rounded shadow-sm z-10 pointer-events-none">
+          <span className="absolute top-2.5 right-2.5 bg-crimson-600 text-white text-xs font-bold uppercase px-1.5 py-0.5 rounded shadow-sm z-10 pointer-events-none">
             {discountPercent}% OFF
           </span>
         )}
@@ -145,7 +145,7 @@ export const BrowseProductCard: React.FC<BrowseProductCardProps> = ({ product })
             </span>
           </div>
         ) : isLowStock ? (
-          <span className="absolute bottom-2.5 left-2.5 bg-amber-600 text-white text-[10px] font-mono font-bold px-2 py-0.5 rounded shadow-sm">
+          <span className="absolute bottom-2.5 left-2.5 bg-amber-600 text-white text-xs font-mono font-bold px-2 py-0.5 rounded shadow-sm">
             Only {totalStock} left
           </span>
         ) : null}
@@ -156,11 +156,11 @@ export const BrowseProductCard: React.FC<BrowseProductCardProps> = ({ product })
         <div>
           {/* School Name & Garment Category */}
           <div className="flex items-center justify-between text-xs mb-1">
-            <span className="text-[11px] font-serif italic text-brass-text tracking-wide truncate max-w-[150px]">
+            <span className="text-xs font-serif italic text-brass-text tracking-wide truncate max-w-[150px]">
               {school?.name || 'Academic Uniform'}
             </span>
             {(product.itemType || product.season) && (
-              <span className="text-[9px] uppercase font-mono font-bold tracking-wider text-slate bg-sand-200 px-1.5 py-0.5 rounded border border-sand-300">
+              <span className="text-xs uppercase font-mono font-bold tracking-wider text-slate bg-sand-200 px-1.5 py-0.5 rounded border border-sand-300">
                 {product.itemType || (product.season === 'all' ? 'All-season' : product.season)}
               </span>
             )}
@@ -187,7 +187,7 @@ export const BrowseProductCard: React.FC<BrowseProductCardProps> = ({ product })
                 </span>
               )}
             </div>
-            <span className="text-[10px] text-emerald-800 font-serif italic block">
+            <span className="text-xs text-emerald-800 font-serif italic block">
               Official Dye Lot
             </span>
           </div>
@@ -200,7 +200,7 @@ export const BrowseProductCard: React.FC<BrowseProductCardProps> = ({ product })
                 ? 'bg-sand-200 text-slate/50 border border-sand-300 cursor-not-allowed'
                 : 'bg-navy-800 hover:bg-navy-700 active:bg-navy-900 text-cream-50 border border-navy-700 shadow-sm'
             }`}
-            aria-label={hasVariants ? `View options for ${product.name}` : `Add ${product.name} to bag`}
+            aria-label={hasVariants ? `Options - ${product.name}` : `Add to Bag - ${product.name}`}
             aria-haspopup={!hasVariants && product.sizes.length > 1 ? 'true' : undefined}
             aria-expanded={showSizePicker}
           >
@@ -222,7 +222,7 @@ export const BrowseProductCard: React.FC<BrowseProductCardProps> = ({ product })
                 </span>
                 <button
                   onClick={() => setShowSizePicker(false)}
-                  className="p-1 text-slate hover:text-navy-800 rounded-md"
+                  className="p-1 text-slate hover:text-navy-800 rounded-md min-w-[44px] min-h-[44px] flex items-center justify-center"
                   aria-label="Close size selector"
                 >
                   <X className="w-3.5 h-3.5" />
@@ -236,7 +236,7 @@ export const BrowseProductCard: React.FC<BrowseProductCardProps> = ({ product })
                       key={s.label}
                       disabled={isOOS}
                       onClick={() => handleAddToCart(s.label)}
-                      className={`min-h-[36px] py-1.5 px-2 rounded-[6px] text-xs font-mono font-bold transition-all border ${
+                      className={`min-h-[44px] py-1.5 px-2 rounded-[6px] text-xs font-mono font-bold transition-all border flex items-center justify-center ${
                         isOOS
                           ? 'bg-sand-200 text-slate/40 border-sand-300 line-through cursor-not-allowed'
                           : 'bg-cream-100 hover:bg-blue-600 hover:text-white hover:border-blue-600 text-navy-800 border-sand-300'

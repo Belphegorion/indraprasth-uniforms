@@ -5,10 +5,19 @@ import {
   deleteImage,
   deleteVideo,
 } from '../services/cloudinaryService';
+import { validateImageBuffer, validateVideoBuffer } from '../middleware/upload';
 
 export const uploadProductImage = async (req: Request, res: Response): Promise<void> => {
-  if (!req.file) {
+  if (!req.file || !req.file.buffer) {
     res.status(400).json({ success: false, error: 'No image file uploaded' });
+    return;
+  }
+
+  if (!validateImageBuffer(req.file.buffer)) {
+    res.status(400).json({
+      success: false,
+      error: 'Invalid file content: only valid JPEG, PNG, and WebP images are allowed.',
+    });
     return;
   }
 
@@ -28,8 +37,16 @@ export const uploadProductImage = async (req: Request, res: Response): Promise<v
 };
 
 export const uploadHeroVideo = async (req: Request, res: Response): Promise<void> => {
-  if (!req.file) {
+  if (!req.file || !req.file.buffer) {
     res.status(400).json({ success: false, error: 'No video file uploaded' });
+    return;
+  }
+
+  if (!validateVideoBuffer(req.file.buffer)) {
+    res.status(400).json({
+      success: false,
+      error: 'Invalid file content: only valid MP4, WebM, and OGG videos are allowed.',
+    });
     return;
   }
 

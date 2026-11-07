@@ -130,7 +130,7 @@ export const Header: React.FC = () => {
                         onClick={() => setSchoolsDropdownOpen(false)}
                       >
                         <span className="font-serif font-medium">{school.name}</span>
-                        <span className="text-[11px] font-mono font-semibold bg-blue-100 px-2 py-0.5 rounded text-navy-800">
+                        <span className="text-xs font-mono font-semibold bg-blue-100 px-2 py-0.5 rounded text-navy-800">
                           {school.code}
                         </span>
                       </Link>
@@ -177,12 +177,12 @@ export const Header: React.FC = () => {
             {/* Cart Trigger */}
             <button
               onClick={openDrawer}
-              className="relative p-2.5 rounded-[10px] bg-navy-800 hover:bg-navy-700 active:bg-navy-900 text-cream-50 transition-all btn-tactile flex items-center justify-center border border-navy-700 shadow-sm focus-visible:ring-2 focus-visible:ring-blue-600"
+              className="relative p-2.5 min-w-[44px] min-h-[44px] rounded-[10px] bg-navy-800 hover:bg-navy-700 active:bg-navy-900 text-cream-50 transition-all btn-tactile flex items-center justify-center border border-navy-700 shadow-sm focus-visible:ring-2 focus-visible:ring-blue-600"
               aria-label={`Cart with ${totalCartCount} items`}
             >
               <ShoppingBag className="w-5 h-5 text-cream-50" />
               {totalCartCount > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 bg-crimson-600 text-white text-[11px] font-mono font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-md">
+                <span className="absolute -top-1.5 -right-1.5 bg-crimson-600 text-white text-xs font-mono font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-md">
                   {totalCartCount}
                 </span>
               )}
@@ -191,7 +191,7 @@ export const Header: React.FC = () => {
             {/* Mobile menu toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-[10px] text-navy-800 hover:bg-sand-200 transition-colors btn-tactile focus-visible:ring-2 focus-visible:ring-blue-600"
+              className="md:hidden p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-[10px] text-navy-800 hover:bg-sand-200 transition-colors btn-tactile focus-visible:ring-2 focus-visible:ring-blue-600"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

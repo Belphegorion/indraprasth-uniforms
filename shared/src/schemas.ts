@@ -213,7 +213,9 @@ export const orderStatusUpdateSchema = z.object({
 
 export const orderTrackQuerySchema = z.object({
   orderNumber: z.string().min(3, 'Order number is required'),
-  phone: z.string().min(10, 'Phone number is required'),
+  phone: z.string().refine((val) => val.replace(/\D/g, '').length === 10, {
+    message: 'Enter a valid 10-digit phone number',
+  }),
 });
 
 export const inquiryCreateSchema = z.object({

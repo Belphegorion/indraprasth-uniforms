@@ -17,13 +17,13 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     return;
   }
 
-  if (!admin.isActive) {
-    res.status(403).json({ success: false, error: 'Your account has been deactivated' });
+  const isMatch = await admin.comparePassword(password);
+  if (!isMatch) {
+    res.status(401).json({ success: false, error: 'Invalid email or password' });
     return;
   }
 
-  const isMatch = await admin.comparePassword(password);
-  if (!isMatch) {
+  if (!admin.isActive) {
     res.status(401).json({ success: false, error: 'Invalid email or password' });
     return;
   }
@@ -32,7 +32,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
   await admin.save();
 
   const token = jwt.sign(
-    { id: admin._id, role: admin.role },
+    { id: admin._id, role: admin.role, tokenVersion: admin.tokenVersion || 0 },
     env.JWT_SECRET,
     { expiresIn: '8h' }
   );
@@ -40,7 +40,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
   res.cookie(COOKIE_NAME, token, {
     httpOnly: true,
     secure: env.NODE_ENV === 'production',
-    sameSite: env.NODE_ENV === 'production' ? 'none' : 'lax',
+    sameSite: 'lax',
     maxAge: EIGHT_HOURS_MS,
     domain: env.COOKIE_DOMAIN || undefined,
   });
@@ -61,11 +61,30 @@ export const login = async (req: Request, res: Response): Promise<void> => {
   });
 };
 
-export const logout = async (_req: Request, res: Response): Promise<void> => {
+export const logout = async (req: Request, res: Response): Promise<void> => {
+  try {
+    let token = req.cookies?.[COOKIE_NAME];
+    if (!token && req.headers.authorization?.startsWith('Bearer ')) {
+      token = req.headers.authorization.split(' ')[1];
+    }
+    if (token) {
+      try {
+        const decoded = jwt.verify(token, env.JWT_SECRET) as any;
+        if (decoded?.id) {
+          await Admin.findByIdAndUpdate(decoded.id, { $inc: { tokenVersion: 1 } });
+        }
+      } catch {
+        // Token already expired/invalid
+      }
+    }
+  } catch {
+    // Graceful logout fallback
+  }
+
   res.clearCookie(COOKIE_NAME, {
     httpOnly: true,
     secure: env.NODE_ENV === 'production',
-    sameSite: env.NODE_ENV === 'production' ? 'none' : 'lax',
+    sameSite: 'lax',
     domain: env.COOKIE_DOMAIN || undefined,
   });
 
@@ -120,6 +139,7 @@ export const changePassword = async (
   }
 
   admin.passwordHash = await bcrypt.hash(newPassword, 12);
+  admin.tokenVersion = (admin.tokenVersion || 0) + 1;
   await admin.save();
 
   res.status(200).json({

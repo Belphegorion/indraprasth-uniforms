@@ -195,7 +195,7 @@ export const Orders: React.FC = () => {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="border-b border-sand-300 bg-sand-200/70 text-navy-800 font-serif font-semibold uppercase text-[10px] tracking-wider">
+                <tr className="border-b border-sand-300 bg-sand-200/70 text-navy-800 font-serif font-semibold uppercase text-xs tracking-wider">
                   <th className="py-3 px-4">Order ID & Date</th>
                   <th className="py-3 px-4">Customer Details</th>
                   <th className="py-3 px-4">Fulfillment / Branch</th>
@@ -290,7 +290,8 @@ export const Orders: React.FC = () => {
                       <td className="py-3.5 px-4 text-right">
                         <Link
                           to={`/admin/orders/${order._id}`}
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-sand-200 hover:bg-navy-800 hover:text-cream-50 font-bold text-xs transition-colors"
+                          className="inline-flex items-center justify-center gap-1.5 px-3 py-2 min-h-[44px] rounded-lg bg-sand-200 hover:bg-navy-800 hover:text-cream-50 font-bold text-xs transition-colors"
+                          aria-label={`View order ${order.orderNumber}`}
                         >
                           <Eye className="w-3.5 h-3.5" />
                           <span>View</span>
@@ -313,16 +314,20 @@ export const Orders: React.FC = () => {
             </span>
             <div className="flex items-center gap-2">
               <button
+                type="button"
+                aria-label="Previous page"
                 disabled={page <= 1}
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
-                className="p-2 rounded-lg border border-sand-300 disabled:opacity-40 hover:bg-sand-200 transition-colors"
+                className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg border border-sand-300 disabled:opacity-40 hover:bg-sand-200 transition-colors"
               >
                 <ChevronLeft className="w-4 h-4 text-slate" />
               </button>
               <button
+                type="button"
+                aria-label="Next page"
                 disabled={page >= totalPages}
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                className="p-2 rounded-lg border border-sand-300 disabled:opacity-40 hover:bg-sand-200 transition-colors"
+                className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg border border-sand-300 disabled:opacity-40 hover:bg-sand-200 transition-colors"
               >
                 <ChevronRight className="w-4 h-4 text-slate" />
               </button>

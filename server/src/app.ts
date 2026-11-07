@@ -19,7 +19,18 @@ const app: Express = express();
 // Security headers
 app.use(
   helmet({
-    contentSecurityPolicy: false, // Let frontend assets load comfortably across origins
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", 'https://cdnjs.cloudflare.com'],
+        styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+        fontSrc: ["'self'", 'https://fonts.gstatic.com', 'data:'],
+        imgSrc: ["'self'", 'data:', 'blob:', 'https://res.cloudinary.com', 'https://*.cloudinary.com'],
+        mediaSrc: ["'self'", 'data:', 'blob:', 'https://res.cloudinary.com', 'https://*.cloudinary.com'],
+        connectSrc: ["'self'", 'https://res.cloudinary.com', 'https://*.cloudinary.com'],
+        frameAncestors: ["'self'"],
+      },
+    },
     crossOriginEmbedderPolicy: false,
   })
 );
@@ -28,8 +39,9 @@ app.use(
 const allowedOrigins = [
   env.CLIENT_URL,
   'http://localhost:5173',
+  'http://127.0.0.1:5173',
   'http://localhost:4173',
-  'https://indraprasth-uniforms.netlify.app',
+  'https://indraprasth-uniforms.vercel.app',
 ].filter(Boolean);
 
 app.use(
@@ -38,7 +50,10 @@ app.use(
       // Allow requests with no origin (like mobile apps, curl, or server-to-server)
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
-      } else if (env.NODE_ENV !== 'production' || origin.endsWith('.vercel.app')) {
+      } else if (
+        env.NODE_ENV !== 'production' &&
+        (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin) || origin.endsWith('.vercel.app'))
+      ) {
         callback(null, true);
       } else {
         callback(new Error(`Origin ${origin} not allowed by CORS`));
@@ -48,14 +63,19 @@ app.use(
   })
 );
 
-// Health check endpoint (both /health and /api/health) - immediately responsive without DB dependency
-app.get(['/health', '/api/health'], (_req, res) => {
+// Health check endpoint (/health, /api/health, /api/v1/health) - immediately responsive without DB dependency
+app.get(['/health', '/api/health', '/api/v1/health'], (_req, res) => {
   res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
 // Ensure MongoDB is connected for API invocations
 app.use(async (req, _res, next) => {
-  if (req.path === '/health' || req.path === '/api/health' || req.path.startsWith('/uploads')) {
+  if (
+    req.path === '/health' ||
+    req.path === '/api/health' ||
+    req.path === '/api/v1/health' ||
+    req.path.startsWith('/uploads')
+  ) {
     return next();
   }
   try {

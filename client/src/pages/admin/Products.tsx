@@ -534,15 +534,17 @@ export const Products: React.FC = () => {
                         <div className="flex items-center justify-end gap-1">
                           <Link
                             to={`/admin/products/${prodId}`}
-                            className="p-1.5 rounded-lg text-slate hover:text-blue-600 hover:bg-sand-200 transition-colors"
+                            className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-slate hover:text-blue-600 hover:bg-sand-200 transition-colors"
                             title="Edit Product"
+                            aria-label={`Edit ${prod.name}`}
                           >
                             <Edit className="w-4 h-4" />
                           </Link>
                           <button
                             onClick={() => handleDelete(prodId, prod.name)}
-                            className="p-1.5 rounded-lg text-slate hover:text-crimson-600 hover:bg-crimson-100/50 transition-colors"
+                            className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-slate hover:text-crimson-600 hover:bg-crimson-100/50 transition-colors"
                             title="Deactivate Product"
+                            aria-label={`Deactivate ${prod.name}`}
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
@@ -565,16 +567,20 @@ export const Products: React.FC = () => {
             </span>
             <div className="flex items-center gap-2">
               <button
+                type="button"
+                aria-label="Previous page"
                 disabled={page <= 1}
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
-                className="p-2 rounded-lg border border-sand-300 disabled:opacity-40 hover:bg-sand-200 transition-colors"
+                className="min-w-[44px] min-h-[44px] p-2 flex items-center justify-center rounded-lg border border-sand-300 disabled:opacity-40 hover:bg-sand-200 transition-colors"
               >
                 <ChevronLeft className="w-4 h-4 text-slate" />
               </button>
               <button
+                type="button"
+                aria-label="Next page"
                 disabled={page >= totalPages}
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                className="p-2 rounded-lg border border-sand-300 disabled:opacity-40 hover:bg-sand-200 transition-colors"
+                className="min-w-[44px] min-h-[44px] p-2 flex items-center justify-center rounded-lg border border-sand-300 disabled:opacity-40 hover:bg-sand-200 transition-colors"
               >
                 <ChevronRight className="w-4 h-4 text-slate" />
               </button>

@@ -19,8 +19,14 @@ export const PublicLayout: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-cream-100 text-ink font-sans selection:bg-blue-100 selection:text-navy-900">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2.5 focus:bg-navy-900 focus:text-white focus:rounded-md focus:shadow-xl focus:ring-2 focus:ring-blue-500 font-medium text-sm transition-all"
+      >
+        Skip to main content
+      </a>
       <Header />
-      <main className="flex-grow">
+      <main id="main-content" tabIndex={-1} className="flex-grow outline-none">
         <Outlet />
       </main>
       <Footer />
