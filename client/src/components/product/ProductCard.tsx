@@ -103,19 +103,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
         />
 
-        {/* Top Floating Badges */}
-        <div className="absolute top-2.5 left-2.5 flex flex-wrap gap-1.5 z-10">
-          {school?.code && (
-            <span className="bg-blue-100 text-navy-800 text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded shadow-sm border border-blue-600/30 tracking-wide">
-              {school.code}
-            </span>
-          )}
-          {discountPercent && (
-            <span className="bg-crimson-600 text-white text-[10px] font-bold uppercase px-1.5 py-0.5 rounded shadow-sm">
-              {discountPercent}% OFF
-            </span>
-          )}
-        </div>
 
         {/* Stock status indicator */}
         {isOutOfStock ? (

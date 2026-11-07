@@ -130,28 +130,6 @@ export const BrowseProductCard: React.FC<BrowseProductCardProps> = ({ product })
           className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
         />
 
-        {/* Top Badges */}
-        <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between gap-1.5 z-10 pointer-events-none">
-          <div className="flex flex-wrap gap-1">
-            {school?.code && (
-              <span className="bg-blue-100 text-navy-800 text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded shadow-sm border border-blue-600/30 tracking-wide">
-                {school.code}
-              </span>
-            )}
-            {product.itemType && (
-              <span className="bg-cream-50/90 backdrop-blur-sm text-navy-800 text-[10px] font-semibold px-2 py-0.5 rounded shadow-sm border border-sand-300">
-                {product.itemType}
-              </span>
-            )}
-          </div>
-
-          {discountPercent && (
-            <span className="bg-crimson-600 text-white text-[10px] font-bold uppercase px-1.5 py-0.5 rounded shadow-sm">
-              {discountPercent}% OFF
-            </span>
-          )}
-        </div>
-
         {/* Stock Status Badge */}
         {isOutOfStock ? (
           <div className="absolute inset-0 bg-navy-900/70 backdrop-blur-[2px] flex items-center justify-center p-3">
@@ -174,9 +152,9 @@ export const BrowseProductCard: React.FC<BrowseProductCardProps> = ({ product })
             <span className="text-[11px] font-serif italic text-brass-text tracking-wide truncate max-w-[150px]">
               {school?.name || 'Academic Uniform'}
             </span>
-            {product.season && (
+            {(product.itemType || product.season) && (
               <span className="text-[9px] uppercase font-mono font-bold tracking-wider text-slate bg-sand-200 px-1.5 py-0.5 rounded border border-sand-300">
-                {product.season === 'all' ? 'All-season' : product.season}
+                {product.itemType || (product.season === 'all' ? 'All-season' : product.season)}
               </span>
             )}
           </div>
