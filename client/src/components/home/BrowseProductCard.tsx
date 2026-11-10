@@ -207,50 +207,81 @@ export const BrowseProductCard: React.FC<BrowseProductCardProps> = ({ product })
             <ShoppingBag className="w-3.5 h-3.5 text-cream-50" />
             <span>{hasVariants ? 'Options' : 'Add'}<span className="hidden sm:inline">{hasVariants ? '' : ' to Bag'}</span></span>
           </button>
-
-          {/* Quick Size Picker Popover */}
-          {showSizePicker && (
-            <div
-              ref={popoverRef}
-              className="absolute right-0 bottom-full mb-2 w-56 p-3 bg-cream-50 rounded-[10px] border border-sand-300 shadow-xl z-30 animate-in fade-in zoom-in-95 duration-150"
-              role="dialog"
-              aria-label="Select uniform size"
-            >
-              <div className="flex items-center justify-between pb-2 mb-2 border-b border-sand-300">
-                <span className="text-xs font-serif italic font-bold text-navy-800">
-                  Select Size
-                </span>
-                <button
-                  onClick={() => setShowSizePicker(false)}
-                  className="p-1 text-slate hover:text-navy-800 rounded-md min-w-[44px] min-h-[44px] flex items-center justify-center"
-                  aria-label="Close size selector"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              </div>
-              <div className="grid grid-cols-3 gap-1.5">
-                {product.sizes.map((s) => {
-                  const isOOS = (s.stock || 0) <= 0;
-                  return (
-                    <button
-                      key={s.label}
-                      disabled={isOOS}
-                      onClick={() => handleAddToCart(s.label)}
-                      className={`min-h-[44px] py-1.5 px-2 rounded-[6px] text-xs font-mono font-bold transition-all border flex items-center justify-center ${
-                        isOOS
-                          ? 'bg-sand-200 text-slate/40 border-sand-300 line-through cursor-not-allowed'
-                          : 'bg-cream-100 hover:bg-blue-600 hover:text-white hover:border-blue-600 text-navy-800 border-sand-300'
-                      }`}
-                    >
-                      {s.label}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          )}
         </div>
       </div>
+
+      {/* In-Card Size Selection Overlay - prevents clipping from card boundaries */}
+      {showSizePicker && (
+        <div
+          ref={popoverRef}
+          className="absolute inset-0 bg-cream-50 z-30 p-3.5 sm:p-4 rounded-[10px] flex flex-col justify-between border border-sand-300 shadow-2xl animate-in fade-in zoom-in-95 duration-150"
+          role="dialog"
+          aria-label="Select uniform size"
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between pb-2 border-b border-sand-300 shrink-0">
+            <div className="min-w-0 pr-2">
+              <span className="text-xs font-serif italic font-bold text-navy-800 block truncate">
+                Select Size
+              </span>
+              <span className="text-[11px] text-slate font-sans block truncate max-w-[160px] sm:max-w-[200px]">
+                {product.name}
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setShowSizePicker(false)}
+              className="p-1 text-slate hover:text-navy-800 rounded-md min-w-[36px] min-h-[36px] flex items-center justify-center hover:bg-sand-200 transition-colors"
+              aria-label="Close size selector"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Scrollable Size Grid with prices */}
+          <div className="my-2 flex-1 overflow-y-auto min-h-0 pr-0.5 space-y-1">
+            <div className="grid grid-cols-3 gap-1.5">
+              {product.sizes.map((s) => {
+                const isOOS = (s.stock || 0) <= 0;
+                const sizePrice = s.price || displayPrice;
+                return (
+                  <button
+                    key={s.label}
+                    type="button"
+                    disabled={isOOS}
+                    onClick={() => handleAddToCart(s.label)}
+                    className={`min-h-[44px] py-1.5 px-2 rounded-[6px] text-xs font-mono font-bold transition-all border flex flex-col items-center justify-center ${
+                      isOOS
+                        ? 'bg-sand-200 text-slate/40 border-sand-300 line-through cursor-not-allowed'
+                        : 'bg-cream-100 hover:bg-navy-800 hover:text-cream-50 text-navy-800 border-sand-300 shadow-xs active:scale-95'
+                    }`}
+                    aria-label={`Size ${s.label}, ₹${sizePrice}`}
+                  >
+                    <span>{s.label}</span>
+                    <span className="text-[10px] font-sans font-normal opacity-80">
+                      ₹{sizePrice.toLocaleString('en-IN')}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Guidance / Cancel footer */}
+          <div className="pt-2 border-t border-sand-300 flex items-center justify-between text-xs shrink-0">
+            <span className="text-[11px] text-slate font-serif italic">
+              Tap a size to add
+            </span>
+            <button
+              type="button"
+              onClick={() => setShowSizePicker(false)}
+              className="text-xs font-semibold text-crimson-600 hover:text-navy-800 transition-colors py-1 px-2"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

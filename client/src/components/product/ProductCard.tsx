@@ -17,7 +17,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [selectedSize, setSelectedSize] = useState<string>(
     product.sizes?.[0]?.label || product.variants?.[0]?.sizes?.[0]?.label || ''
   );
-  const [, setShowSizePicker] = useState(false);
 
   const school = product.school as ISchool;
   const category = product.category as ICategory;
@@ -57,8 +56,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       return;
     }
 
-    if (!selectedSize && product.sizes.length > 1) {
-      setShowSizePicker(true);
+    if (!selectedSize && product.sizes.length > 0) {
+      toast.error('Please select a size first');
       return;
     }
 
@@ -89,7 +88,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         fontFamily: 'Inter',
       },
     });
-    setShowSizePicker(false);
   };
 
   return (
