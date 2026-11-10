@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { Trash2, Plus, Minus, ShoppingBag, ArrowRight, Truck } from 'lucide-react';
 import { useCartStore } from '../../store/cart';
 import { usePublicSettings } from '../../api';
+import { getSchoolLogoUrl } from '../../utils/schoolLogos';
 
 export const Cart: React.FC = () => {
   const navigate = useNavigate();
@@ -84,16 +85,38 @@ export const Cart: React.FC = () => {
                 className="p-4 sm:p-6 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between hover:bg-sand-200/30 transition-colors"
               >
                 <div className="flex gap-4 items-center">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-20 h-24 object-cover rounded-[8px] bg-cream-100 border border-sand-300 shrink-0"
-                  />
+                  <div className="relative w-20 h-24 shrink-0">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-full h-full object-cover rounded-[8px] bg-cream-100 border border-sand-300"
+                    />
+                    {getSchoolLogoUrl({ code: item.schoolCode, name: item.schoolName }) && (
+                      <div className="absolute top-1 left-1 w-6 h-6 rounded-full bg-white/95 backdrop-blur-xs p-0.5 border border-sand-300 shadow-2xs flex items-center justify-center overflow-hidden">
+                        <img
+                          src={getSchoolLogoUrl({ code: item.schoolCode, name: item.schoolName })}
+                          alt=""
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                    )}
+                  </div>
                   <div>
-                    {item.schoolCode && (
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-navy-800 bg-blue-100 px-2 py-0.5 rounded-[4px] border border-blue-600/30">
-                        {item.schoolCode}
-                      </span>
+                    {(item.schoolName || item.schoolCode) && (
+                      <div className="flex items-center gap-1.5 mb-1">
+                        {getSchoolLogoUrl({ code: item.schoolCode, name: item.schoolName }) && (
+                          <div className="w-5 h-5 rounded-[4px] bg-white border border-sand-300 p-0.5 shrink-0 flex items-center justify-center overflow-hidden shadow-2xs">
+                            <img
+                              src={getSchoolLogoUrl({ code: item.schoolCode, name: item.schoolName })}
+                              alt=""
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                        )}
+                        <span className="text-xs font-serif italic text-brass-text font-semibold">
+                          {item.schoolName || 'Uniform'}
+                        </span>
+                      </div>
                     )}
                     <h3 className="text-base sm:text-lg font-serif font-bold text-navy-800 mt-1">
                       {item.name}

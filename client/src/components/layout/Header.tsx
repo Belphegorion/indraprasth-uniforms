@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import { useCartStore } from '../../store/cart';
 import { usePublicSettings, useSchools } from '../../api';
-import { getSchoolLogoUrl } from '../../utils/schoolLogos';
+import { getSchoolLogoUrl, getSchoolShortLabel } from '../../utils/schoolLogos';
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -127,31 +127,22 @@ export const Header: React.FC = () => {
                       const logoUrl = getSchoolLogoUrl(school);
                       return (
                         <Link
-                          key={school._id || school.code}
+                          key={school._id || school.slug}
                           to={`/school/${school.slug}`}
-                          className="flex items-center justify-between px-4 py-2.5 text-sm text-ink hover:bg-sand-200 hover:text-navy-900 transition-colors gap-2"
+                          className="flex items-center px-4 py-2.5 text-sm text-ink hover:bg-sand-200 hover:text-navy-900 transition-colors gap-3"
                           onClick={() => setSchoolsDropdownOpen(false)}
                         >
-                          <div className="flex items-center gap-2.5 min-w-0">
-                            {logoUrl ? (
-                              <div className="w-6 h-6 rounded-[5px] bg-white border border-sand-300 p-0.5 shrink-0 flex items-center justify-center overflow-hidden">
-                                <img
-                                  src={logoUrl}
-                                  alt={school.name}
-                                  className="w-full h-full object-contain"
-                                  loading="lazy"
-                                />
-                              </div>
-                            ) : (
-                              <span className="w-6 h-6 rounded-[5px] bg-sand-200 text-navy-800 text-[10px] font-mono font-bold flex items-center justify-center shrink-0">
-                                {school.code.slice(0, 3)}
-                              </span>
-                            )}
-                            <span className="font-serif font-medium truncate">{school.name}</span>
-                          </div>
-                          <span className="text-xs font-mono font-semibold bg-blue-100 px-2 py-0.5 rounded text-navy-800 shrink-0">
-                            {school.code}
-                          </span>
+                          {logoUrl ? (
+                            <div className="w-7 h-7 rounded-[6px] bg-white border border-sand-300 p-0.5 shrink-0 flex items-center justify-center overflow-hidden shadow-2xs">
+                              <img
+                                src={logoUrl}
+                                alt={school.name}
+                                className="w-full h-full object-contain"
+                                loading="lazy"
+                              />
+                            </div>
+                          ) : null}
+                          <span className="font-serif font-medium truncate text-xs sm:text-sm">{school.name}</span>
                         </Link>
                       );
                     })}
@@ -269,18 +260,18 @@ export const Header: React.FC = () => {
                         <div className="w-8 h-8 rounded-full bg-white p-1 border border-sand-300 shrink-0 flex items-center justify-center overflow-hidden shadow-2xs">
                           <img
                             src={logoUrl}
-                            alt={s.code}
+                            alt={s.name || 'School Emblem'}
                             className="w-full h-full object-contain"
                             loading="lazy"
                           />
                         </div>
                       ) : (
-                        <span className="w-8 h-8 rounded-full bg-sand-200 text-navy-800 text-[10px] font-mono font-bold flex items-center justify-center shrink-0">
-                          {s.code.slice(0, 3)}
+                        <span className="w-8 h-8 rounded-full bg-sand-200 text-navy-800 text-[10px] font-serif font-bold flex items-center justify-center shrink-0">
+                          {getSchoolShortLabel(s).slice(0, 2)}
                         </span>
                       )}
-                      <span className="font-mono text-xs font-bold text-navy-800 truncate">
-                        {s.code}
+                      <span className="font-serif text-xs font-semibold text-navy-800 truncate">
+                        {getSchoolShortLabel(s)}
                       </span>
                     </Link>
                   );

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { X, Trash2, Plus, Minus, ShoppingBag, ArrowRight, Truck } from 'lucide-react';
 import { useCartStore } from '../../store/cart';
 import { usePublicSettings } from '../../api';
+import { getSchoolLogoUrl } from '../../utils/schoolLogos';
 
 export const CartDrawer: React.FC = () => {
   const navigate = useNavigate();
@@ -121,27 +122,42 @@ export const CartDrawer: React.FC = () => {
                   className="bg-cream-50 p-3.5 rounded-[10px] border border-sand-300 shadow-subtle flex gap-3.5 relative hover:border-blue-600 transition-colors"
                 >
                   {/* Item Image */}
-                  <div className="w-16 h-20 rounded-[8px] bg-cream-100 overflow-hidden shrink-0 border border-sand-300">
+                  <div className="w-16 h-20 rounded-[8px] bg-cream-100 overflow-hidden shrink-0 border border-sand-300 relative">
                     <img
                       src={item.image}
                       alt={item.name}
                       className="w-full h-full object-cover object-center"
                     />
+                    {getSchoolLogoUrl({ code: item.schoolCode, name: item.schoolName }) && (
+                      <div className="absolute top-1 left-1 w-5 h-5 rounded-full bg-white/95 backdrop-blur-xs p-0.5 border border-sand-300 shadow-2xs flex items-center justify-center overflow-hidden">
+                        <img
+                          src={getSchoolLogoUrl({ code: item.schoolCode, name: item.schoolName })}
+                          alt=""
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                    )}
                   </div>
 
                   {/* Item Details */}
                   <div className="flex-1 min-w-0 flex flex-col justify-between">
                     <div>
-                      <div className="flex items-center justify-between gap-1">
-                        {item.schoolCode && (
-                          <span className="text-[10px] font-mono font-bold bg-blue-100 px-1.5 py-0.5 rounded text-navy-800 border border-blue-600/30">
-                            {item.schoolCode}
+                      {(item.schoolName || item.schoolCode) && (
+                        <div className="flex items-center gap-1.5 mb-0.5">
+                          {getSchoolLogoUrl({ code: item.schoolCode, name: item.schoolName }) && (
+                            <div className="w-4 h-4 rounded-[3px] bg-white border border-sand-300 p-0.5 shrink-0 flex items-center justify-center overflow-hidden">
+                              <img
+                                src={getSchoolLogoUrl({ code: item.schoolCode, name: item.schoolName })}
+                                alt=""
+                                className="w-full h-full object-contain"
+                              />
+                            </div>
+                          )}
+                          <span className="text-[11px] font-serif italic text-brass-text truncate">
+                            {item.schoolName || 'Uniform'}
                           </span>
-                        )}
-                        <span className="text-[11px] font-serif italic text-brass-text truncate">
-                          {item.schoolName}
-                        </span>
-                      </div>
+                        </div>
+                      )}
                       <h4 className="font-serif font-bold text-sm text-navy-800 truncate mt-0.5">
                         {item.name}
                       </h4>

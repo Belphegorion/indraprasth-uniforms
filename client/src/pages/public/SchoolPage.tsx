@@ -201,7 +201,7 @@ export const SchoolPage: React.FC = () => {
       <Modal
         isOpen={fullSetModalOpen}
         onClose={() => setFullSetModalOpen(false)}
-        title={`Add Complete ${school?.code || ''} Uniform Set`}
+        title={`Add Complete ${school?.name || 'School'} Uniform Set`}
         maxWidth="max-w-2xl"
       >
         <div className="space-y-6 text-ink">

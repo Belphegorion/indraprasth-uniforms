@@ -261,14 +261,14 @@ export const Home: React.FC = () => {
               const logoUrl = getSchoolLogoUrl(school);
               return (
                 <Link
-                  key={school._id || school.code}
+                  key={school._id || school.slug}
                   to={`/school/${school.slug}`}
                   aria-label={`View uniforms for ${school.name}`}
-                  className="group p-3.5 sm:p-6 bg-cream-50 rounded-[10px] border border-sand-300 shadow-plinth hover:shadow-plinth-hover hover:border-brass transition-all duration-200 hover:-translate-y-0.5 flex flex-col justify-between"
+                  className="group p-3.5 sm:p-5 bg-cream-50 rounded-[10px] border border-sand-300 shadow-plinth hover:shadow-plinth-hover hover:border-brass transition-all duration-200 hover:-translate-y-0.5 flex flex-col justify-between"
                 >
                   <div>
-                    {/* Header: Logo plinth + Count / Code */}
-                    <div className="flex items-start justify-between gap-2 mb-3">
+                    {/* Header: Prominent School Emblem — Takes Priority */}
+                    <div className="flex items-center justify-between gap-2 mb-3">
                       {logoUrl ? (
                         <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-[10px] bg-white border border-sand-300 p-1.5 shadow-xs flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform overflow-hidden">
                           <img
@@ -278,33 +278,23 @@ export const Home: React.FC = () => {
                             loading="lazy"
                           />
                         </div>
-                      ) : (
-                        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-[10px] bg-blue-100 border border-blue-600/30 flex items-center justify-center shrink-0 font-mono font-bold text-navy-800 text-sm">
-                          {school.code.slice(0, 3)}
-                        </div>
-                      )}
+                      ) : null}
 
-                      <div className="flex flex-col items-end">
-                        <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-blue-100 text-navy-800 border border-blue-600/30">
-                          {school.code}
-                        </span>
-                        <span className="text-[10px] sm:text-xs font-mono text-slate mt-1">
-                          {school.productCount || 0} items
-                        </span>
-                      </div>
+                      <span className="text-[10px] sm:text-xs font-mono font-semibold text-slate bg-sand-200 px-2 py-0.5 rounded-full border border-sand-300">
+                        {school.productCount || 0} items
+                      </span>
                     </div>
 
-                    {/* School Name & Branch */}
-                    <h3 className="font-serif font-bold text-sm sm:text-base text-navy-800 group-hover:text-blue-600 transition-colors leading-snug">
-                      <span className="sm:hidden">{school.code}</span>
-                      <span className="hidden sm:inline">{school.name}</span>
+                    {/* School Name & Campus (No raw acronyms) */}
+                    <h3 className="font-serif font-bold text-xs sm:text-sm text-navy-800 group-hover:text-blue-600 transition-colors leading-snug line-clamp-2">
+                      {school.name}
                     </h3>
                     {school.branchLabel && (
-                      <p className="text-xs text-slate font-serif italic mt-0.5">{school.branchLabel}</p>
+                      <p className="text-[11px] sm:text-xs text-slate font-serif italic mt-0.5">{school.branchLabel} Campus</p>
                     )}
                   </div>
 
-                  <div className="mt-3 sm:mt-5 pt-2.5 sm:pt-3 border-t border-sand-300 flex items-center justify-between text-xs font-serif font-bold text-navy-800 group-hover:text-blue-600">
+                  <div className="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-sand-300 flex items-center justify-between text-xs font-serif font-bold text-navy-800 group-hover:text-blue-600">
                     <span className="hidden sm:inline">Explore Uniform Set</span>
                     <span className="sm:hidden text-[11px]">Explore Set</span>
                     <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />

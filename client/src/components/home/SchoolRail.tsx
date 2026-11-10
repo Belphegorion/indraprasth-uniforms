@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Search, GraduationCap, Building2 } from 'lucide-react';
 import { ISchool } from '@indraprasth/shared';
-import { getSchoolLogoUrl } from '../../utils/schoolLogos';
+import { getSchoolLogoUrl, getSchoolShortLabel } from '../../utils/schoolLogos';
 
 interface SchoolRailProps {
   schools: (ISchool & { productCount?: number })[];
@@ -99,7 +99,7 @@ export const SchoolRail: React.FC<SchoolRailProps> = ({
                     : 'bg-sand-200 text-navy-800'
                 }`}
               >
-                ALL
+                All
               </span>
               <span className="truncate font-medium">All Schools</span>
             </div>
@@ -138,34 +138,22 @@ export const SchoolRail: React.FC<SchoolRailProps> = ({
               >
                 <div className="flex items-center gap-2.5 min-w-0">
                   {logoUrl ? (
-                    <div className="w-7 h-7 rounded-[6px] bg-white border border-sand-300 p-0.5 shrink-0 flex items-center justify-center overflow-hidden shadow-2xs">
+                    <div className="w-8 h-8 rounded-[6px] bg-white border border-sand-300 p-1 shrink-0 flex items-center justify-center overflow-hidden shadow-2xs">
                       <img
                         src={logoUrl}
-                        alt={s.code}
+                        alt={s.name}
                         className="w-full h-full object-contain"
                         loading="lazy"
                       />
                     </div>
-                  ) : (
-                    <span
-                      className={`w-7 h-7 rounded-[6px] flex items-center justify-center shrink-0 text-xs font-mono font-bold uppercase ${
-                        isSelected
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-sand-200 text-navy-800 border border-sand-300'
-                      }`}
-                    >
-                      {s.code.slice(0, 3)}
-                    </span>
-                  )}
+                  ) : null}
                   <div className="min-w-0">
-                    <span className="block truncate font-medium">{s.name}</span>
-                    <span
-                      className={`text-xs font-mono block ${
-                        isSelected ? 'text-blue-600 font-bold' : 'text-slate font-medium'
-                      }`}
-                    >
-                      {s.code}
-                    </span>
+                    <span className="block truncate font-serif font-bold text-xs">{s.name}</span>
+                    {s.branchLabel && (
+                      <span className="text-[11px] text-slate font-serif italic block truncate">
+                        {s.branchLabel} Campus
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -249,25 +237,15 @@ export const SchoolRail: React.FC<SchoolRailProps> = ({
                 <div className="w-8 h-8 rounded-full bg-white p-1 border border-sand-300 shrink-0 flex items-center justify-center overflow-hidden shadow-2xs">
                   <img
                     src={logoUrl}
-                    alt={s.code}
+                    alt={s.name}
                     className="w-full h-full object-contain"
                     loading="lazy"
                   />
                 </div>
-              ) : (
-                <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-[10px] font-mono font-bold uppercase ${
-                    isSelected
-                      ? 'bg-navy-700 text-cream-50'
-                      : 'bg-sand-200 text-navy-800 border border-sand-300'
-                  }`}
-                >
-                  {s.code.slice(0, 3)}
-                </div>
-              )}
-              {/* Phone mode: Uses official school logo and short code rather than long full name */}
-              <span className="font-mono text-xs font-bold tracking-tight">
-                {s.code}
+              ) : null}
+              {/* Phone mode: Uses official school logo and recognizable institution name */}
+              <span className="font-serif text-xs font-semibold tracking-tight">
+                {getSchoolShortLabel(s)}
               </span>
               {s.productCount !== undefined && (
                 <span

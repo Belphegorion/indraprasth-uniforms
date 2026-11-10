@@ -4,6 +4,7 @@ import { ShoppingBag } from 'lucide-react';
 import { IProduct, ISchool, ICategory } from '@indraprasth/shared';
 import { useCartStore } from '../../store/cart';
 import { getOptimizedImageUrl } from '../../utils/cloudinary';
+import { getSchoolLogoUrl } from '../../utils/schoolLogos';
 import toast from 'react-hot-toast';
 
 interface ProductCardProps {
@@ -19,6 +20,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   );
 
   const school = product.school as ISchool;
+  const schoolLogo = getSchoolLogoUrl(school);
   const category = product.category as ICategory;
   const primaryImage =
     product.images[0]?.url ||
@@ -101,6 +103,21 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
         />
 
+        {/* Floating School Logo Badge — Prioritizes emblem over text */}
+        {schoolLogo && (
+          <div
+            className="absolute top-2.5 left-2.5 w-8 h-8 rounded-full bg-white/95 backdrop-blur-xs p-1 shadow-md border border-sand-300 z-10 flex items-center justify-center overflow-hidden transition-transform group-hover:scale-110"
+            title={school?.name}
+          >
+            <img
+              src={schoolLogo}
+              alt={school?.name || 'School Emblem'}
+              className="w-full h-full object-contain"
+              loading="lazy"
+            />
+          </div>
+        )}
+
         {/* Discount Badge */}
         {discountPercent && (
           <span className="absolute top-2.5 right-2.5 bg-crimson-600 text-white text-[10px] font-bold uppercase px-1.5 py-0.5 rounded shadow-sm z-10 pointer-events-none">
@@ -125,12 +142,24 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       {/* Product Details */}
       <div className="p-4 flex-1 flex flex-col justify-between space-y-3 bg-cream-50">
         <div>
-          {/* School Name & Category */}
-          <div className="flex items-center justify-between text-xs mb-1">
-            <span className="text-[11px] font-serif italic text-brass-text tracking-wide truncate max-w-[150px]">
-              {school?.name || 'Academic Uniform'}
-            </span>
-            <span className="text-[10px] uppercase font-mono tracking-wider text-slate bg-sand-200 px-1.5 py-0.5 rounded border border-sand-300">
+          {/* School Emblem + Name & Category */}
+          <div className="flex items-center justify-between text-xs mb-1.5 gap-2">
+            <div className="flex items-center gap-1.5 min-w-0">
+              {schoolLogo && (
+                <div className="w-5 h-5 rounded-[4px] bg-white border border-sand-300 p-0.5 shrink-0 flex items-center justify-center overflow-hidden shadow-2xs">
+                  <img
+                    src={schoolLogo}
+                    alt=""
+                    className="w-full h-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+              <span className="text-[11px] font-serif italic text-brass-text tracking-wide truncate">
+                {school?.name || 'Academic Uniform'}
+              </span>
+            </div>
+            <span className="text-[10px] uppercase font-mono tracking-wider text-slate bg-sand-200 px-1.5 py-0.5 rounded border border-sand-300 shrink-0">
               {category?.name || 'Official'}
             </span>
           </div>

@@ -13,6 +13,7 @@ import { SchoolRail } from './SchoolRail';
 import { FilterBar } from './FilterBar';
 import { BrowseProductCard } from './BrowseProductCard';
 import { Skeleton } from '../ui/Skeleton';
+import { getSchoolLogoUrl } from '../../utils/schoolLogos';
 
 export const SchoolShopSection: React.FC = () => {
   const {
@@ -76,6 +77,10 @@ export const SchoolShopSection: React.FC = () => {
     ? selectedSchoolObj.name
     : 'All Schools';
 
+  const selectedSchoolLogo = selectedSchoolObj
+    ? getSchoolLogoUrl(selectedSchoolObj)
+    : null;
+
   // Total count across all schools
   const totalAllSchoolsCount = useMemo(() => {
     return schools.reduce((acc, s) => acc + (s.productCount || 0), 0);
@@ -137,6 +142,43 @@ export const SchoolShopSection: React.FC = () => {
 
           {/* Right Main Column */}
           <main className="flex-1 w-full space-y-4">
+            {/* Selected School Regulation Banner */}
+            {selectedSchoolObj && (
+              <div className="bg-blue-50/90 border border-blue-200/80 rounded-[10px] p-3.5 sm:p-4 flex items-center justify-between gap-4 shadow-2xs">
+                <div className="flex items-center gap-3 min-w-0">
+                  {selectedSchoolLogo && (
+                    <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-[10px] bg-white border border-sand-300 p-1.5 shadow-2xs shrink-0 flex items-center justify-center overflow-hidden">
+                      <img
+                        src={selectedSchoolLogo}
+                        alt={selectedSchoolObj.name}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  )}
+                  <div className="min-w-0">
+                    <span className="text-[10px] font-serif uppercase tracking-widest text-brass-text font-bold block">
+                      Official Partner Institution
+                    </span>
+                    <h3 className="font-serif font-bold text-sm sm:text-base text-navy-800 truncate">
+                      {selectedSchoolObj.name}
+                    </h3>
+                    {selectedSchoolObj.branchLabel && (
+                      <p className="text-[11px] text-slate font-serif italic">
+                        {selectedSchoolObj.branchLabel} Campus • Regulation Wear
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setSchool('all')}
+                  className="text-xs text-crimson-600 hover:text-crimson-700 font-serif italic font-semibold shrink-0"
+                >
+                  View All Schools
+                </button>
+              </div>
+            )}
+
             {/* Top Bar with Search, Dropdowns, and Active Chips */}
             <FilterBar
               filters={filters}

@@ -153,10 +153,27 @@ export function getSchoolLogoUrl(school?: Partial<ISchool> | null): string | und
 }
 
 /**
- * Returns a concise label (code or short name) suitable for phone mode.
+ * Returns a concise institution name (e.g. "Sanskaar Valley", "Billabong High", "DPS Bhopal")
+ * prioritizing institution identity over raw acronyms.
  */
 export function getSchoolShortLabel(school?: Partial<ISchool> | null): string {
   if (!school) return '';
-  return school.code || school.name || '';
+  const codeKey = school.code?.toLowerCase().trim() || '';
+  const slugKey = school.slug?.toLowerCase().trim() || '';
+  const nameKey = school.name?.toLowerCase().trim() || '';
+
+  let meta = SCHOOL_LOGO_MAP[codeKey] || SCHOOL_LOGO_MAP[slugKey];
+  if (!meta && nameKey) {
+    if (nameKey.includes('billabong')) meta = SCHOOL_LOGO_MAP['bhis'];
+    else if (nameKey.includes('sanskaar')) meta = SCHOOL_LOGO_MAP['tsvs'];
+    else if (nameKey.includes('kolar')) meta = SCHOOL_LOGO_MAP['dps-kolar'];
+    else if (nameKey.includes('delhi public') || nameKey.includes('dps')) meta = SCHOOL_LOGO_MAP['dps'];
+    else if (nameKey.includes('sagar')) meta = SCHOOL_LOGO_MAP['sps'];
+    else if (nameKey.includes('ies')) meta = SCHOOL_LOGO_MAP['ies'];
+    else if (nameKey.includes('joseph')) meta = SCHOOL_LOGO_MAP['jss'];
+  }
+
+  return meta?.shortName || school.name || '';
 }
+
 

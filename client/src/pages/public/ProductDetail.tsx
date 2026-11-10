@@ -18,6 +18,7 @@ import { ProductCard } from '../../components/product/ProductCard';
 import { SizeGuideModal } from '../../components/product/SizeGuideModal';
 import { Skeleton } from '../../components/ui/Skeleton';
 import { getOptimizedImageUrl } from '../../utils/cloudinary';
+import { getSchoolLogoUrl } from '../../utils/schoolLogos';
 import toast from 'react-hot-toast';
 
 export const ProductDetail: React.FC = () => {
@@ -96,6 +97,7 @@ export const ProductDetail: React.FC = () => {
   }
 
   const school = product.school as ISchool;
+  const schoolLogo = getSchoolLogoUrl(school);
   const category = product.category as ICategory;
   const activeImage = availableImages[selectedImageIndex]?.url || availableImages[0]?.url || product.images[0]?.url;
 
@@ -237,16 +239,39 @@ export const ProductDetail: React.FC = () => {
 
         {/* Right: Info & Actions */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="space-y-2">
-            <div className="flex items-center gap-2">
-              {school?.code && (
-                <span className="bg-blue-100 text-navy-800 text-xs font-mono font-bold uppercase px-2.5 py-0.5 rounded border border-blue-600/30">
-                  {school.code}
+          <div className="space-y-3">
+            {school && (
+              <div className="flex items-center gap-3 p-3 bg-cream-50 border border-sand-300 rounded-[10px] shadow-2xs">
+                {schoolLogo && (
+                  <div className="w-10 h-10 rounded-[8px] bg-white border border-sand-300 p-1 flex items-center justify-center shrink-0 shadow-2xs overflow-hidden">
+                    <img src={schoolLogo} alt={school.name} className="w-full h-full object-contain" />
+                  </div>
+                )}
+                <div className="min-w-0 flex-1">
+                  <span className="text-[10px] font-serif uppercase tracking-widest text-brass-text font-bold block">
+                    Official School Partner
+                  </span>
+                  <Link
+                    to={`/school/${school.slug}`}
+                    className="text-xs sm:text-sm font-serif font-bold text-navy-800 hover:text-blue-600 transition-colors truncate block"
+                  >
+                    {school.name}
+                  </Link>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <span className="text-[11px] font-serif uppercase tracking-wider text-slate bg-sand-200 px-2.5 py-1 rounded border border-sand-300">
+                    {category?.name || 'Regulation Uniform'}
+                  </span>
+                </div>
+              </div>
+            )}
+
+            <div className="flex items-center justify-between">
+              {!school && (
+                <span className="text-xs font-serif uppercase tracking-wider text-slate bg-sand-200 px-2 py-0.5 rounded border border-sand-300">
+                  {category?.name || 'Regulation Uniform'}
                 </span>
               )}
-              <span className="text-xs font-serif uppercase tracking-wider text-slate bg-sand-200 px-2 py-0.5 rounded border border-sand-300">
-                {category?.name || 'Regulation Uniform'}
-              </span>
               {product.sku && (
                 <span className="text-[11px] text-slate font-mono ml-auto">
                   SKU: {product.sku}
@@ -257,12 +282,6 @@ export const ProductDetail: React.FC = () => {
             <h1 className="text-3xl sm:text-4xl font-serif font-bold text-navy-800 tracking-tight leading-tight">
               {product.name}
             </h1>
-
-            {school?.name && (
-              <p className="text-sm text-slate font-serif italic">
-                Official uniform requirement for <span className="text-navy-800 font-bold not-italic">{school.name}</span>
-              </p>
-            )}
           </div>
 
           {/* Price Block */}
