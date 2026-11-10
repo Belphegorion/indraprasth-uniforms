@@ -1,56 +1,68 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense } from 'react';
 import { RouteObject, Navigate } from 'react-router-dom';
 import { PublicLayout } from './components/layout/PublicLayout';
 import { AdminLayout } from './components/layout/AdminLayout';
 import { Skeleton } from './components/ui/Skeleton';
+import { lazyWithRetry } from './utils/lazyWithRetry';
+import { RouteErrorBoundary } from './components/common/RouteErrorBoundary';
 
 // Public storefront entry pages
 import { Home } from './pages/public/Home';
 import { Shop } from './pages/public/Shop';
 
-// Code-split subpages for lightweight storefront initial load
-const ProductDetail = lazy(() => import('./pages/public/ProductDetail').then((m) => ({ default: m.ProductDetail })));
-const SchoolPage = lazy(() => import('./pages/public/SchoolPage').then((m) => ({ default: m.SchoolPage })));
-const Cart = lazy(() => import('./pages/public/Cart').then((m) => ({ default: m.Cart })));
-const Checkout = lazy(() => import('./pages/public/Checkout').then((m) => ({ default: m.Checkout })));
-const OrderSuccess = lazy(() => import('./pages/public/OrderSuccess').then((m) => ({ default: m.OrderSuccess })));
-const TrackOrder = lazy(() => import('./pages/public/TrackOrder').then((m) => ({ default: m.TrackOrder })));
-const About = lazy(() => import('./pages/public/About').then((m) => ({ default: m.About })));
-const Contact = lazy(() => import('./pages/public/Contact').then((m) => ({ default: m.Contact })));
-const BulkInquiry = lazy(() => import('./pages/public/BulkInquiry').then((m) => ({ default: m.BulkInquiry })));
-const NotFound = lazy(() => import('./pages/public/NotFound').then((m) => ({ default: m.NotFound })));
+// Code-split subpages with automatic reload recovery on stale deployment chunks
+const ProductDetail = lazyWithRetry(() => import('./pages/public/ProductDetail').then((m) => ({ default: m.ProductDetail })), 'ProductDetail');
+const SchoolPage = lazyWithRetry(() => import('./pages/public/SchoolPage').then((m) => ({ default: m.SchoolPage })), 'SchoolPage');
+const Cart = lazyWithRetry(() => import('./pages/public/Cart').then((m) => ({ default: m.Cart })), 'Cart');
+const Checkout = lazyWithRetry(() => import('./pages/public/Checkout').then((m) => ({ default: m.Checkout })), 'Checkout');
+const OrderSuccess = lazyWithRetry(() => import('./pages/public/OrderSuccess').then((m) => ({ default: m.OrderSuccess })), 'OrderSuccess');
+const TrackOrder = lazyWithRetry(() => import('./pages/public/TrackOrder').then((m) => ({ default: m.TrackOrder })), 'TrackOrder');
+const About = lazyWithRetry(() => import('./pages/public/About').then((m) => ({ default: m.About })), 'About');
+const Contact = lazyWithRetry(() => import('./pages/public/Contact').then((m) => ({ default: m.Contact })), 'Contact');
+const BulkInquiry = lazyWithRetry(() => import('./pages/public/BulkInquiry').then((m) => ({ default: m.BulkInquiry })), 'BulkInquiry');
+const NotFound = lazyWithRetry(() => import('./pages/public/NotFound').then((m) => ({ default: m.NotFound })), 'NotFound');
 
-// Code-splitting Admin routes for optimal storefront performance
-const Login = lazy(() => import('./pages/admin/Login').then((m) => ({ default: m.Login })));
-const Dashboard = lazy(() =>
-  import('./pages/admin/Dashboard').then((m) => ({ default: m.Dashboard }))
+// Code-splitting Admin routes with automatic reload recovery on stale deployment chunks
+const Login = lazyWithRetry(() => import('./pages/admin/Login').then((m) => ({ default: m.Login })), 'Login');
+const Dashboard = lazyWithRetry(
+  () => import('./pages/admin/Dashboard').then((m) => ({ default: m.Dashboard })),
+  'Dashboard'
 );
-const Products = lazy(() =>
-  import('./pages/admin/Products').then((m) => ({ default: m.Products }))
+const Products = lazyWithRetry(
+  () => import('./pages/admin/Products').then((m) => ({ default: m.Products })),
+  'Products'
 );
-const ProductForm = lazy(() =>
-  import('./pages/admin/ProductForm').then((m) => ({ default: m.ProductForm }))
+const ProductForm = lazyWithRetry(
+  () => import('./pages/admin/ProductForm').then((m) => ({ default: m.ProductForm })),
+  'ProductForm'
 );
-const Schools = lazy(() =>
-  import('./pages/admin/Schools').then((m) => ({ default: m.Schools }))
+const Schools = lazyWithRetry(
+  () => import('./pages/admin/Schools').then((m) => ({ default: m.Schools })),
+  'Schools'
 );
-const Categories = lazy(() =>
-  import('./pages/admin/Categories').then((m) => ({ default: m.Categories }))
+const Categories = lazyWithRetry(
+  () => import('./pages/admin/Categories').then((m) => ({ default: m.Categories })),
+  'Categories'
 );
-const Orders = lazy(() =>
-  import('./pages/admin/Orders').then((m) => ({ default: m.Orders }))
+const Orders = lazyWithRetry(
+  () => import('./pages/admin/Orders').then((m) => ({ default: m.Orders })),
+  'Orders'
 );
-const OrderDetail = lazy(() =>
-  import('./pages/admin/OrderDetail').then((m) => ({ default: m.OrderDetail }))
+const OrderDetail = lazyWithRetry(
+  () => import('./pages/admin/OrderDetail').then((m) => ({ default: m.OrderDetail })),
+  'OrderDetail'
 );
-const Inquiries = lazy(() =>
-  import('./pages/admin/Inquiries').then((m) => ({ default: m.Inquiries }))
+const Inquiries = lazyWithRetry(
+  () => import('./pages/admin/Inquiries').then((m) => ({ default: m.Inquiries })),
+  'Inquiries'
 );
-const Settings = lazy(() =>
-  import('./pages/admin/Settings').then((m) => ({ default: m.Settings }))
+const Settings = lazyWithRetry(
+  () => import('./pages/admin/Settings').then((m) => ({ default: m.Settings })),
+  'Settings'
 );
-const Staff = lazy(() =>
-  import('./pages/admin/Staff').then((m) => ({ default: m.Staff }))
+const Staff = lazyWithRetry(
+  () => import('./pages/admin/Staff').then((m) => ({ default: m.Staff })),
+  'Staff'
 );
 
 const PageSuspense: React.FC<{ children: React.ReactNode }> = ({ children }) => (
@@ -84,6 +96,7 @@ export const routes: RouteObject[] = [
   {
     path: '/',
     element: <PublicLayout />,
+    errorElement: <RouteErrorBoundary />,
     children: [
       { index: true, element: <Home /> },
       { path: 'shop', element: <Shop /> },
@@ -106,6 +119,7 @@ export const routes: RouteObject[] = [
   // Admin Auth Route (Standalone full page)
   {
     path: '/admin/login',
+    errorElement: <RouteErrorBoundary />,
     element: (
       <AdminSuspense>
         <Login />
@@ -117,6 +131,7 @@ export const routes: RouteObject[] = [
   {
     path: '/admin',
     element: <AdminLayout />,
+    errorElement: <RouteErrorBoundary />,
     children: [
       { index: true, element: <Navigate to="/admin/dashboard" replace /> },
       {
