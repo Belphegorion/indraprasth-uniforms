@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { useCartStore } from '../../store/cart';
 import { usePublicSettings, useSchools } from '../../api';
+import { getSchoolLogoUrl } from '../../utils/schoolLogos';
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -122,19 +123,38 @@ export const Header: React.FC = () => {
                     Select Institution
                   </div>
                   <div className="py-1">
-                    {schools?.map((school) => (
-                      <Link
-                        key={school._id || school.code}
-                        to={`/school/${school.slug}`}
-                        className="flex items-center justify-between px-4 py-2.5 text-sm text-ink hover:bg-sand-200 hover:text-navy-900 transition-colors"
-                        onClick={() => setSchoolsDropdownOpen(false)}
-                      >
-                        <span className="font-serif font-medium">{school.name}</span>
-                        <span className="text-xs font-mono font-semibold bg-blue-100 px-2 py-0.5 rounded text-navy-800">
-                          {school.code}
-                        </span>
-                      </Link>
-                    ))}
+                    {schools?.map((school) => {
+                      const logoUrl = getSchoolLogoUrl(school);
+                      return (
+                        <Link
+                          key={school._id || school.code}
+                          to={`/school/${school.slug}`}
+                          className="flex items-center justify-between px-4 py-2.5 text-sm text-ink hover:bg-sand-200 hover:text-navy-900 transition-colors gap-2"
+                          onClick={() => setSchoolsDropdownOpen(false)}
+                        >
+                          <div className="flex items-center gap-2.5 min-w-0">
+                            {logoUrl ? (
+                              <div className="w-6 h-6 rounded-[5px] bg-white border border-sand-300 p-0.5 shrink-0 flex items-center justify-center overflow-hidden">
+                                <img
+                                  src={logoUrl}
+                                  alt={school.name}
+                                  className="w-full h-full object-contain"
+                                  loading="lazy"
+                                />
+                              </div>
+                            ) : (
+                              <span className="w-6 h-6 rounded-[5px] bg-sand-200 text-navy-800 text-[10px] font-mono font-bold flex items-center justify-center shrink-0">
+                                {school.code.slice(0, 3)}
+                              </span>
+                            )}
+                            <span className="font-serif font-medium truncate">{school.name}</span>
+                          </div>
+                          <span className="text-xs font-mono font-semibold bg-blue-100 px-2 py-0.5 rounded text-navy-800 shrink-0">
+                            {school.code}
+                          </span>
+                        </Link>
+                      );
+                    })}
                   </div>
                   <div className="border-t border-sand-300 mt-1 pt-1.5 px-4">
                     <Link
@@ -234,17 +254,37 @@ export const Header: React.FC = () => {
                 Partner Institutions
               </span>
               <div className="grid grid-cols-2 gap-2">
-                {schools?.map((s) => (
-                  <Link
-                    key={s.code}
-                    to={`/school/${s.slug}`}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="text-xs font-serif font-medium text-ink bg-cream-50 hover:bg-sand-200 p-2 rounded-[8px] border border-sand-300 flex items-center justify-between"
-                  >
-                    <span className="truncate mr-1">{s.name}</span>
-                    <span className="font-mono text-[10px] font-bold text-navy-800 bg-blue-100 px-1 rounded">{s.code}</span>
-                  </Link>
-                ))}
+                {schools?.map((s) => {
+                  const logoUrl = getSchoolLogoUrl(s);
+                  return (
+                    <Link
+                      key={s.code}
+                      to={`/school/${s.slug}`}
+                      onClick={() => setMobileMenuOpen(false)}
+                      title={s.name}
+                      aria-label={`View uniforms for ${s.name}`}
+                      className="text-xs font-serif font-medium text-ink bg-cream-50 hover:bg-sand-200 p-2 rounded-[8px] border border-sand-300 flex items-center gap-2.5 min-h-[44px] transition-colors btn-tactile"
+                    >
+                      {logoUrl ? (
+                        <div className="w-8 h-8 rounded-full bg-white p-1 border border-sand-300 shrink-0 flex items-center justify-center overflow-hidden shadow-2xs">
+                          <img
+                            src={logoUrl}
+                            alt={s.code}
+                            className="w-full h-full object-contain"
+                            loading="lazy"
+                          />
+                        </div>
+                      ) : (
+                        <span className="w-8 h-8 rounded-full bg-sand-200 text-navy-800 text-[10px] font-mono font-bold flex items-center justify-center shrink-0">
+                          {s.code.slice(0, 3)}
+                        </span>
+                      )}
+                      <span className="font-mono text-xs font-bold text-navy-800 truncate">
+                        {s.code}
+                      </span>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
             <Link

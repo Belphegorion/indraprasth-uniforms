@@ -102,13 +102,13 @@ export async function runImporter() {
 
   // 1. School Upsert Configuration (7 canonical schools)
   const canonicalSchools = [
-    { name: 'The Sanskaar Valley School', code: 'TSVS', slug: 'the-sanskaar-valley-school', branchLabel: 'Bhopal' },
-    { name: 'St Joseph Higher Secondary School', code: 'JSS', slug: 'st-joseph-higher-secondary-school', branchLabel: 'Idgah Hills' },
-    { name: 'Delhi Public School Bhopal', code: 'DPS', slug: 'dps-bhopal', branchLabel: 'Bhadbhada Road' },
-    { name: 'Delhi Public School Kolar Road', code: 'DPS KOLAR', slug: 'dps-kolar', branchLabel: 'Kolar Road' },
-    { name: 'IES Public School', code: 'IES', slug: 'ies-public-school', branchLabel: 'Bhopal' },
-    { name: 'Sagar Public School', code: 'SPS', slug: 'sps-bhopal', branchLabel: 'Saket Nagar' },
-    { name: 'Billabong High International School', code: 'BHIS', slug: 'billabong-high-international-school', branchLabel: 'Bhopal' },
+    { name: 'The Sanskaar Valley School', code: 'TSVS', slug: 'the-sanskaar-valley-school', branchLabel: 'Bhopal', logoUrl: '/school-logos/tsvs.webp' },
+    { name: 'St Joseph Higher Secondary School', code: 'JSS', slug: 'st-joseph-higher-secondary-school', branchLabel: 'Idgah Hills', logoUrl: '/school-logos/jss.webp' },
+    { name: 'Delhi Public School Bhopal', code: 'DPS', slug: 'dps-bhopal', branchLabel: 'Bhadbhada Road', logoUrl: '/school-logos/dps.webp' },
+    { name: 'Delhi Public School Kolar Road', code: 'DPS KOLAR', slug: 'dps-kolar', branchLabel: 'Kolar Road', logoUrl: '/school-logos/dps.webp' },
+    { name: 'IES Public School', code: 'IES', slug: 'ies-public-school', branchLabel: 'Bhopal', logoUrl: '/school-logos/ies.webp' },
+    { name: 'Sagar Public School', code: 'SPS', slug: 'sps-bhopal', branchLabel: 'Saket Nagar', logoUrl: '/school-logos/sps.webp' },
+    { name: 'Billabong High International School', code: 'BHIS', slug: 'billabong-high-international-school', branchLabel: 'Bhopal', logoUrl: '/school-logos/bhis.webp' },
   ];
 
   // 2. Category Upsert Configuration (21 canonical categories)
@@ -202,6 +202,7 @@ export async function runImporter() {
           code: s.code,
           slug: s.slug,
           branchLabel: s.branchLabel,
+          logoUrl: s.logoUrl,
           isActive: true,
         },
       },

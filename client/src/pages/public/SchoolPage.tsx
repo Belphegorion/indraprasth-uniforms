@@ -8,11 +8,13 @@ import { Modal } from '../../components/ui/Modal';
 import { useCartStore } from '../../store/cart';
 import { IProduct, ICategory } from '@indraprasth/shared';
 import toast from 'react-hot-toast';
+import { getSchoolLogoUrl } from '../../utils/schoolLogos';
 
 export const SchoolPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const { data: schools } = useSchools();
   const school = schools?.find((s) => s.slug === slug || s.code.toLowerCase() === slug?.toLowerCase());
+  const schoolLogo = getSchoolLogoUrl(school);
 
   const { data: productsData, isLoading } = useProducts({
     school: slug,
@@ -91,16 +93,34 @@ export const SchoolPage: React.FC = () => {
       </Helmet>
 
       {/* School Header Banner — Academic Heraldry */}
-      <div className="relative rounded-[10px] bg-navy-900 border border-navy-700 text-cream-50 p-8 sm:p-12 overflow-hidden shadow-2xl">
-        <div className="relative z-10 max-w-3xl space-y-4">
+      <div className="relative rounded-[10px] bg-navy-900 border border-navy-700 text-cream-50 p-6 sm:p-12 overflow-hidden shadow-2xl">
+        <div className="relative z-10 max-w-4xl space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-navy-800 border border-navy-700 text-cream-50 text-xs font-serif font-semibold uppercase tracking-wider">
             <Award className="w-3.5 h-3.5 text-brass" />
             <span>Official Institution Regulation Store</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold tracking-tight text-white leading-tight">
-            {school?.name || 'Academic Uniforms'}
-          </h1>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 pt-1">
+            {schoolLogo && (
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-[12px] bg-white border border-sand-300 p-2 shadow-xl shrink-0 flex items-center justify-center overflow-hidden">
+                <img
+                  src={schoolLogo}
+                  alt={school?.name || 'School Logo'}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            )}
+            <div>
+              <h1 className="text-3xl sm:text-5xl font-serif font-bold tracking-tight text-white leading-tight">
+                {school?.name || 'Academic Uniforms'}
+              </h1>
+              {school?.branchLabel && (
+                <p className="text-sand-300 text-xs sm:text-sm font-serif italic mt-1">
+                  {school.branchLabel} Campus • Official Uniform Partner
+                </p>
+              )}
+            </div>
+          </div>
 
           <p className="text-sand-200 text-sm sm:text-base leading-relaxed font-sans max-w-2xl">
             Certified regulation uniform specifications for the current academic session. Guaranteed institutional dye-lot compliance, double-stitched reinforcements, and shrink-resistant thermal winter woollens.

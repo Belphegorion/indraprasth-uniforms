@@ -19,6 +19,7 @@ import { useSchools, useFeaturedProducts, usePublicSettings } from '../../api';
 import { ProductCard } from '../../components/product/ProductCard';
 import { Skeleton } from '../../components/ui/Skeleton';
 import { SchoolShopSection } from '../../components/home/SchoolShopSection';
+import { getSchoolLogoUrl } from '../../utils/schoolLogos';
 
 const getVideoMimeType = (url: string): string => {
   const clean = url.split('?')[0].split('#')[0].toLowerCase();
@@ -249,42 +250,68 @@ export const Home: React.FC = () => {
         </div>
 
         {schoolsLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             {[1, 2, 3, 4].map((n) => (
-              <Skeleton key={n} className="h-36 rounded-[10px]" />
+              <Skeleton key={n} className="h-40 rounded-[10px]" />
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
-            {schools?.map((school) => (
-              <Link
-                key={school._id || school.code}
-                to={`/school/${school.slug}`}
-                className="group p-6 bg-cream-50 rounded-[10px] border border-sand-300 shadow-plinth hover:shadow-plinth-hover hover:border-brass transition-all duration-200 hover:-translate-y-0.5 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-[11px] font-mono font-bold uppercase px-2.5 py-0.5 rounded bg-blue-100 text-navy-800 border border-blue-600/30">
-                      {school.code}
-                    </span>
-                    <span className="text-xs font-mono text-slate">
-                      {school.productCount || 0} items
-                    </span>
-                  </div>
-                  <h3 className="font-serif font-bold text-base text-navy-800 group-hover:text-blue-600 transition-colors leading-snug">
-                    {school.name}
-                  </h3>
-                  {school.branchLabel && (
-                    <p className="text-xs text-slate font-serif italic mt-1">{school.branchLabel}</p>
-                  )}
-                </div>
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+            {schools?.map((school) => {
+              const logoUrl = getSchoolLogoUrl(school);
+              return (
+                <Link
+                  key={school._id || school.code}
+                  to={`/school/${school.slug}`}
+                  aria-label={`View uniforms for ${school.name}`}
+                  className="group p-3.5 sm:p-6 bg-cream-50 rounded-[10px] border border-sand-300 shadow-plinth hover:shadow-plinth-hover hover:border-brass transition-all duration-200 hover:-translate-y-0.5 flex flex-col justify-between"
+                >
+                  <div>
+                    {/* Header: Logo plinth + Count / Code */}
+                    <div className="flex items-start justify-between gap-2 mb-3">
+                      {logoUrl ? (
+                        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-[10px] bg-white border border-sand-300 p-1.5 shadow-xs flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform overflow-hidden">
+                          <img
+                            src={logoUrl}
+                            alt={school.name}
+                            className="w-full h-full object-contain"
+                            loading="lazy"
+                          />
+                        </div>
+                      ) : (
+                        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-[10px] bg-blue-100 border border-blue-600/30 flex items-center justify-center shrink-0 font-mono font-bold text-navy-800 text-sm">
+                          {school.code.slice(0, 3)}
+                        </div>
+                      )}
 
-                <div className="mt-5 pt-3 border-t border-sand-300 flex items-center justify-between text-xs font-serif font-bold text-navy-800 group-hover:text-blue-600">
-                  <span>Explore Uniform Set</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </Link>
-            ))}
+                      <div className="flex flex-col items-end">
+                        <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-blue-100 text-navy-800 border border-blue-600/30">
+                          {school.code}
+                        </span>
+                        <span className="text-[10px] sm:text-xs font-mono text-slate mt-1">
+                          {school.productCount || 0} items
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* School Name & Branch */}
+                    <h3 className="font-serif font-bold text-sm sm:text-base text-navy-800 group-hover:text-blue-600 transition-colors leading-snug">
+                      <span className="sm:hidden">{school.code}</span>
+                      <span className="hidden sm:inline">{school.name}</span>
+                    </h3>
+                    {school.branchLabel && (
+                      <p className="text-xs text-slate font-serif italic mt-0.5">{school.branchLabel}</p>
+                    )}
+                  </div>
+
+                  <div className="mt-3 sm:mt-5 pt-2.5 sm:pt-3 border-t border-sand-300 flex items-center justify-between text-xs font-serif font-bold text-navy-800 group-hover:text-blue-600">
+                    <span className="hidden sm:inline">Explore Uniform Set</span>
+                    <span className="sm:hidden text-[11px]">Explore Set</span>
+                    <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         )}
       </section>

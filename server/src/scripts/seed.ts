@@ -26,14 +26,14 @@ const slugify = (text: string) => {
 export const seedDatabase = async () => {
   console.log('🌱 Starting database seeding for Indraprasth Uniforms...');
 
-  // 1. Seed / Upsert Schools
+  // 1. Seed / Upsert Schools (7 canonical Bhopal partner institutions)
   const schoolsData = [
     {
       name: 'Delhi Public School Bhopal',
       code: 'DPS',
       slug: 'dps-bhopal',
       branchLabel: 'Bhadbhada Road',
-      logoUrl: 'https://res.cloudinary.com/dvaynkflu/image/upload/v1791284239/indraprasth/products/y3sgf8q8kydtlarcydnb.jpg',
+      logoUrl: '/school-logos/dps.webp',
       isActive: true,
     },
     {
@@ -41,14 +41,31 @@ export const seedDatabase = async () => {
       code: 'DPS KOLAR',
       slug: 'dps-kolar',
       branchLabel: 'Kolar Road',
-      logoUrl: 'https://res.cloudinary.com/dvaynkflu/image/upload/v1791284736/indraprasth/products/lhr4qpes6dxelbgo77vo.jpg',
+      logoUrl: '/school-logos/dps.webp',
       isActive: true,
     },
     {
-      name: "St. Joseph's Co-Ed School",
-      code: 'STJ',
-      slug: 'st-josephs-coed',
-      branchLabel: 'Arera Colony',
+      name: 'The Sanskaar Valley School',
+      code: 'TSVS',
+      slug: 'the-sanskaar-valley-school',
+      branchLabel: 'Bhopal',
+      logoUrl: '/school-logos/tsvs.webp',
+      isActive: true,
+    },
+    {
+      name: 'St Joseph Higher Secondary School',
+      code: 'JSS',
+      slug: 'st-joseph-higher-secondary-school',
+      branchLabel: 'Idgah Hills',
+      logoUrl: '/school-logos/jss.webp',
+      isActive: true,
+    },
+    {
+      name: 'IES Public School',
+      code: 'IES',
+      slug: 'ies-public-school',
+      branchLabel: 'Bhopal',
+      logoUrl: '/school-logos/ies.webp',
       isActive: true,
     },
     {
@@ -56,6 +73,15 @@ export const seedDatabase = async () => {
       code: 'SPS',
       slug: 'sps-bhopal',
       branchLabel: 'Saket Nagar',
+      logoUrl: '/school-logos/sps.webp',
+      isActive: true,
+    },
+    {
+      name: 'Billabong High International School',
+      code: 'BHIS',
+      slug: 'billabong-high-international-school',
+      branchLabel: 'Bhopal',
+      logoUrl: '/school-logos/bhis.webp',
       isActive: true,
     },
   ];

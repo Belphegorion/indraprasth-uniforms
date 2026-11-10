@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Search, GraduationCap, Building2 } from 'lucide-react';
 import { ISchool } from '@indraprasth/shared';
+import { getSchoolLogoUrl } from '../../utils/schoolLogos';
 
 interface SchoolRailProps {
   schools: (ISchool & { productCount?: number })[];
@@ -120,6 +121,7 @@ export const SchoolRail: React.FC<SchoolRailProps> = ({
             const isSelected =
               selectedSchoolSlug.toLowerCase() === s.slug.toLowerCase() ||
               selectedSchoolSlug.toLowerCase() === s.code.toLowerCase();
+            const logoUrl = getSchoolLogoUrl(s);
 
             return (
               <button
@@ -135,12 +137,15 @@ export const SchoolRail: React.FC<SchoolRailProps> = ({
                 }`}
               >
                 <div className="flex items-center gap-2.5 min-w-0">
-                  {s.logoUrl ? (
-                    <img
-                      src={s.logoUrl}
-                      alt={s.code}
-                      className="w-7 h-7 rounded-[6px] object-contain bg-cream-50 border border-sand-300 shrink-0 p-0.5"
-                    />
+                  {logoUrl ? (
+                    <div className="w-7 h-7 rounded-[6px] bg-white border border-sand-300 p-0.5 shrink-0 flex items-center justify-center overflow-hidden shadow-2xs">
+                      <img
+                        src={logoUrl}
+                        alt={s.code}
+                        className="w-full h-full object-contain"
+                        loading="lazy"
+                      />
+                    </div>
                   ) : (
                     <span
                       className={`w-7 h-7 rounded-[6px] flex items-center justify-center shrink-0 text-xs font-mono font-bold uppercase ${
@@ -182,7 +187,7 @@ export const SchoolRail: React.FC<SchoolRailProps> = ({
       </nav>
 
       {/* ======================================================== */}
-      {/* TABLET & MOBILE RAIL (<1024px): Horizontally scrollable  */}
+      {/* TABLET & MOBILE RAIL (<1024px): Phone mode school logos  */}
       {/* ======================================================== */}
       <nav
         aria-label="Schools mobile selection"
@@ -193,17 +198,24 @@ export const SchoolRail: React.FC<SchoolRailProps> = ({
           type="button"
           onClick={() => onSelectSchool('all')}
           aria-pressed={isAllSelected}
-          className={`shrink-0 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold min-h-[44px] transition-all btn-tactile ${
+          aria-label="All Schools"
+          className={`shrink-0 inline-flex items-center gap-2 pl-3 pr-3.5 py-1.5 rounded-full text-xs font-semibold min-h-[44px] transition-all btn-tactile border ${
             isAllSelected
-              ? 'bg-navy-800 text-cream-50 shadow-sm border border-navy-700'
-              : 'bg-cream-50 text-navy-800 border border-sand-300 hover:bg-sand-200'
+              ? 'bg-navy-800 text-cream-50 shadow-sm border-navy-700'
+              : 'bg-cream-50 text-navy-800 border-sand-300 hover:bg-sand-200'
           }`}
         >
-          <GraduationCap className="w-3.5 h-3.5" />
+          <div
+            className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${
+              isAllSelected ? 'bg-cream-50/20 text-cream-50' : 'bg-sand-200 text-navy-800'
+            }`}
+          >
+            <GraduationCap className="w-4 h-4" />
+          </div>
           <span>All Schools</span>
           {totalAllSchoolsCount > 0 && (
             <span
-              className={`text-xs font-mono px-1.5 py-0.2 rounded-full ${
+              className={`text-xs font-mono px-1.5 py-0.5 rounded-full ${
                 isAllSelected ? 'bg-cream-50/20 text-cream-50' : 'bg-sand-200 text-slate'
               }`}
             >
@@ -212,11 +224,12 @@ export const SchoolRail: React.FC<SchoolRailProps> = ({
           )}
         </button>
 
-        {/* School Pills */}
+        {/* School Pills with Official Logos */}
         {activeSchools.map((s) => {
           const isSelected =
             selectedSchoolSlug.toLowerCase() === s.slug.toLowerCase() ||
             selectedSchoolSlug.toLowerCase() === s.code.toLowerCase();
+          const logoUrl = getSchoolLogoUrl(s);
 
           return (
             <button
@@ -224,16 +237,41 @@ export const SchoolRail: React.FC<SchoolRailProps> = ({
               type="button"
               onClick={() => onSelectSchool(s.slug)}
               aria-pressed={isSelected}
-              className={`shrink-0 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold min-h-[44px] transition-all btn-tactile ${
+              aria-label={`Select ${s.name}`}
+              title={s.name}
+              className={`shrink-0 inline-flex items-center gap-2 pl-1.5 pr-3.5 py-1.5 rounded-full text-xs font-semibold min-h-[44px] transition-all btn-tactile border ${
                 isSelected
-                  ? 'bg-navy-800 text-cream-50 shadow-sm border border-navy-700'
-                  : 'bg-cream-50 text-navy-800 border border-sand-300 hover:bg-sand-200'
+                  ? 'bg-navy-800 text-cream-50 shadow-md border-navy-700'
+                  : 'bg-cream-50 text-navy-800 border-sand-300 hover:bg-sand-200 shadow-xs'
               }`}
             >
-              <span>{s.code || s.name}</span>
+              {logoUrl ? (
+                <div className="w-8 h-8 rounded-full bg-white p-1 border border-sand-300 shrink-0 flex items-center justify-center overflow-hidden shadow-2xs">
+                  <img
+                    src={logoUrl}
+                    alt={s.code}
+                    className="w-full h-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+              ) : (
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-[10px] font-mono font-bold uppercase ${
+                    isSelected
+                      ? 'bg-navy-700 text-cream-50'
+                      : 'bg-sand-200 text-navy-800 border border-sand-300'
+                  }`}
+                >
+                  {s.code.slice(0, 3)}
+                </div>
+              )}
+              {/* Phone mode: Uses official school logo and short code rather than long full name */}
+              <span className="font-mono text-xs font-bold tracking-tight">
+                {s.code}
+              </span>
               {s.productCount !== undefined && (
                 <span
-                  className={`text-xs font-mono px-1.5 py-0.2 rounded-full ${
+                  className={`text-[11px] font-mono px-1.5 py-0.5 rounded-full ${
                     isSelected ? 'bg-cream-50/20 text-cream-50' : 'bg-sand-200 text-slate'
                   }`}
                 >
