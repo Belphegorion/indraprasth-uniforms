@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import {
   ShoppingBag,
@@ -22,6 +22,7 @@ import { getSchoolLogoUrl } from '../../utils/schoolLogos';
 import toast from 'react-hot-toast';
 
 export const ProductDetail: React.FC = () => {
+  const navigate = useNavigate();
   const { slug } = useParams<{ slug: string }>();
   const { data: product, isLoading, error } = useProduct(slug || '');
   const { data: settings } = usePublicSettings();
@@ -151,6 +152,18 @@ export const ProductDetail: React.FC = () => {
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
+  const handleBack = () => {
+    if (window.history.state && window.history.state.idx > 0) {
+      navigate(-1);
+    } else if (window.history.length > 2) {
+      navigate(-1);
+    } else if (school?.slug) {
+      navigate(`/school/${school.slug}`);
+    } else {
+      navigate('/shop');
+    }
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
       <Helmet>
@@ -158,26 +171,38 @@ export const ProductDetail: React.FC = () => {
         <meta name="description" content={product.description.slice(0, 160)} />
       </Helmet>
 
-      {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-xs text-slate font-serif italic">
-        <Link to="/" className="hover:text-blue-600 transition-colors">
-          Home
-        </Link>
-        <span>/</span>
-        <Link to="/shop" className="hover:text-blue-600 transition-colors">
-          Catalog
-        </Link>
-        {school?.name && (
-          <>
-            <span>/</span>
-            <Link to={`/school/${school.slug}`} className="hover:text-blue-600 transition-colors">
-              {school.name}
-            </Link>
-          </>
-        )}
-        <span>/</span>
-        <span className="text-navy-800 truncate max-w-xs font-sans not-italic font-medium">{product.name}</span>
-      </nav>
+      {/* Back button & Breadcrumb Navigation */}
+      <div className="flex flex-wrap items-center gap-3">
+        <button
+          type="button"
+          onClick={handleBack}
+          aria-label="Go back to previous page"
+          className="inline-flex items-center gap-1.5 text-xs font-serif font-semibold text-navy-800 bg-sand-200/80 hover:bg-sand-300 border border-sand-300 px-3 py-1.5 rounded-[8px] transition-colors btn-tactile min-h-[36px] shrink-0"
+        >
+          <ArrowLeft className="w-3.5 h-3.5 text-navy-800" />
+          <span>Back</span>
+        </button>
+
+        <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-slate font-serif italic overflow-x-auto py-1">
+          <Link to="/" className="hover:text-blue-600 transition-colors shrink-0">
+            Home
+          </Link>
+          <span>/</span>
+          <Link to="/shop" className="hover:text-blue-600 transition-colors shrink-0">
+            Catalog
+          </Link>
+          {school?.name && (
+            <>
+              <span>/</span>
+              <Link to={`/school/${school.slug}`} className="hover:text-blue-600 transition-colors shrink-0 truncate max-w-[140px] sm:max-w-none">
+                {school.name}
+              </Link>
+            </>
+          )}
+          <span>/</span>
+          <span className="text-navy-800 truncate max-w-[150px] sm:max-w-xs font-sans not-italic font-medium">{product.name}</span>
+        </nav>
+      </div>
 
       {/* Product Details Section */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">

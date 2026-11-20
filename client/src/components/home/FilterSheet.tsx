@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { X, Check, RotateCcw, SlidersHorizontal } from 'lucide-react';
 import {
   IBrowseFacets,
@@ -35,6 +35,8 @@ export const FilterSheet: React.FC<FilterSheetProps> = ({
   const [draftMaxPrice, setDraftMaxPrice] = useState<number | undefined>(filters.maxPrice);
   const [draftInStock, setDraftInStock] = useState<boolean>(Boolean(filters.inStock));
 
+  const closedByPopstateRef = useRef(false);
+
   useEffect(() => {
     if (isOpen) {
       setDraftGender(filters.gender);
@@ -48,16 +50,42 @@ export const FilterSheet: React.FC<FilterSheetProps> = ({
     }
   }, [isOpen, filters]);
 
+  // Sync bottom sheet with browser history so pressing mobile Back button
+  // dismisses the filter sheet instead of navigating away or closing the page!
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
+    if (!isOpen) return;
+
+    closedByPopstateRef.current = false;
+    const stateObj = { sheet: 'filters', timestamp: Date.now() };
+    window.history.pushState(stateObj, '', window.location.href);
+
+    const handlePopState = () => {
+      closedByPopstateRef.current = true;
+      onClose();
     };
-  }, [isOpen]);
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    window.addEventListener('keydown', handleKeyDown);
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+
+      if (!closedByPopstateRef.current && window.history.state?.sheet === 'filters') {
+        window.history.back();
+      }
+    };
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -74,6 +102,7 @@ export const FilterSheet: React.FC<FilterSheetProps> = ({
   };
 
   const handleApply = () => {
+    closedByPopstateRef.current = true;
     onApply({
       gender: draftGender,
       season: draftSeason,
@@ -88,6 +117,7 @@ export const FilterSheet: React.FC<FilterSheetProps> = ({
   };
 
   const handleReset = () => {
+    closedByPopstateRef.current = true;
     setDraftGender([]);
     setDraftSeason([]);
     setDraftTypeGroup([]);
@@ -109,7 +139,7 @@ export const FilterSheet: React.FC<FilterSheetProps> = ({
     >
       <div className="flex-1" onClick={onClose} />
 
-      <div className="bg-cream-50 rounded-t-3xl max-h-[85vh] flex flex-col shadow-2xl border-t border-sand-300 animate-in slide-in-from-bottom duration-300 text-ink">
+      <div className="bg-cream-50 rounded-t-3xl max-h-[85dvh] flex flex-col shadow-2xl border-t border-sand-300 animate-in slide-in-from-bottom duration-300 text-ink">
         <div className="flex items-center justify-between px-5 py-4 border-b border-sand-300 bg-cream-50">
           <div className="flex items-center gap-2">
             <SlidersHorizontal className="w-4 h-4 text-blue-600" />
@@ -126,7 +156,7 @@ export const FilterSheet: React.FC<FilterSheetProps> = ({
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto px-5 py-4 space-y-6">
+        <div className="flex-1 overflow-y-auto overscroll-contain px-5 py-4 space-y-6">
           {/* In-Stock Toggle */}
           <div className="flex items-center justify-between p-3 rounded-[10px] bg-sand-200/50 border border-sand-300">
             <span className="text-xs font-bold text-navy-800">
@@ -351,7 +381,10 @@ export const FilterSheet: React.FC<FilterSheetProps> = ({
           )}
         </div>
 
-        <div className="p-4 border-t border-sand-300 bg-sand-200/50 flex items-center gap-3">
+        <div
+          className="p-4 border-t border-sand-300 bg-sand-200/50 flex items-center gap-3"
+          style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom, 0px))' }}
+        >
           <button
             type="button"
             onClick={handleReset}

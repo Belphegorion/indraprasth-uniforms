@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Sparkles, ShoppingBag, ArrowRight, Award } from 'lucide-react';
+import { Sparkles, ShoppingBag, ArrowRight, Award, ArrowLeft } from 'lucide-react';
 import { useSchools, useProducts } from '../../api';
 import { ProductCard } from '../../components/product/ProductCard';
 import { Modal } from '../../components/ui/Modal';
@@ -11,6 +11,7 @@ import toast from 'react-hot-toast';
 import { getSchoolLogoUrl } from '../../utils/schoolLogos';
 
 export const SchoolPage: React.FC = () => {
+  const navigate = useNavigate();
   const { slug } = useParams<{ slug: string }>();
   const { data: schools } = useSchools();
   const school = schools?.find((s) => s.slug === slug || s.code.toLowerCase() === slug?.toLowerCase());
@@ -82,8 +83,18 @@ export const SchoolPage: React.FC = () => {
 
   const fullSetTotal = products.reduce((sum, p) => sum + p.price, 0);
 
+  const handleBack = () => {
+    if (window.history.state && window.history.state.idx > 0) {
+      navigate(-1);
+    } else if (window.history.length > 2) {
+      navigate(-1);
+    } else {
+      navigate('/shop');
+    }
+  };
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       <Helmet>
         <title>{`${school ? school.name : 'School'} Uniforms | Indraprasth Uniforms Bhopal`}</title>
         <meta
@@ -91,6 +102,33 @@ export const SchoolPage: React.FC = () => {
           content={`Official uniform catalogue for ${school?.name || 'Bhopal schools'}. Purchase complete sets with home delivery across Bhopal.`}
         />
       </Helmet>
+
+      {/* Back button & Breadcrumb Navigation */}
+      <div className="flex flex-wrap items-center gap-3">
+        <button
+          type="button"
+          onClick={handleBack}
+          aria-label="Go back to previous page"
+          className="inline-flex items-center gap-1.5 text-xs font-serif font-semibold text-navy-800 bg-sand-200/80 hover:bg-sand-300 border border-sand-300 px-3 py-1.5 rounded-[8px] transition-colors btn-tactile min-h-[36px] shrink-0"
+        >
+          <ArrowLeft className="w-3.5 h-3.5 text-navy-800" />
+          <span>Back</span>
+        </button>
+
+        <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-slate font-serif italic overflow-x-auto py-1">
+          <Link to="/" className="hover:text-blue-600 transition-colors shrink-0">
+            Home
+          </Link>
+          <span>/</span>
+          <Link to="/shop" className="hover:text-blue-600 transition-colors shrink-0">
+            Catalog
+          </Link>
+          <span>/</span>
+          <span className="text-navy-800 truncate max-w-[200px] sm:max-w-none font-sans not-italic font-medium">
+            {school?.name || 'School Uniforms'}
+          </span>
+        </nav>
+      </div>
 
       {/* School Header Banner — Academic Heraldry */}
       <div className="relative rounded-[10px] bg-navy-900 border border-navy-700 text-cream-50 p-6 sm:p-12 overflow-hidden shadow-2xl">

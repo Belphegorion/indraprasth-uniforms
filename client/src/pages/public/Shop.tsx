@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Filter, X, SlidersHorizontal } from 'lucide-react';
@@ -19,6 +19,44 @@ export const Shop: React.FC = () => {
   const page = Number(searchParams.get('page')) || 1;
 
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
+  const closedByPopstateRef = useRef(false);
+
+  // Sync mobile filter drawer with browser history so that pressing the mobile Back button
+  // dismisses the filter drawer instead of exiting or closing the page!
+  useEffect(() => {
+    if (!mobileFilterOpen) return;
+
+    closedByPopstateRef.current = false;
+    const stateObj = { drawer: 'mobileFilter', timestamp: Date.now() };
+    window.history.pushState(stateObj, '', window.location.href);
+
+    const handlePopState = () => {
+      closedByPopstateRef.current = true;
+      setMobileFilterOpen(false);
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMobileFilterOpen(false);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    window.addEventListener('keydown', handleKeyDown);
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+
+      if (!closedByPopstateRef.current && window.history.state?.drawer === 'mobileFilter') {
+        window.history.back();
+      }
+    };
+  }, [mobileFilterOpen]);
 
   const { data: schools } = useSchools();
   const { data: categories } = useCategories();
@@ -413,8 +451,8 @@ export const Shop: React.FC = () => {
             onClick={() => setMobileFilterOpen(false)}
             aria-hidden="true"
           />
-          <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-            <div className="w-screen max-w-xs bg-cream-50 shadow-2xl p-6 flex flex-col justify-between overflow-y-auto border-l border-sand-300 text-ink">
+          <div className="fixed inset-y-0 right-0 max-w-full flex pl-0 sm:pl-10">
+            <div className="w-full sm:w-80 max-w-xs bg-cream-50 shadow-2xl p-5 sm:p-6 flex flex-col justify-between overflow-y-auto overscroll-contain border-l border-sand-300 text-ink h-[100dvh] max-h-[100dvh]">
               <div className="space-y-6">
                 <div className="flex items-center justify-between pb-3 border-b border-sand-300">
                   <h3 className="font-serif font-bold text-lg text-navy-800">Refine Catalog</h3>
@@ -503,7 +541,10 @@ export const Shop: React.FC = () => {
                 </div>
               </div>
 
-              <div className="pt-6 border-t border-sand-300 space-y-2">
+              <div
+                className="pt-6 border-t border-sand-300 space-y-2"
+                style={{ paddingBottom: 'max(1.5rem, env(safe-area-inset-bottom, 0px))' }}
+              >
                 <button
                   onClick={() => setMobileFilterOpen(false)}
                   className="w-full py-3 bg-navy-800 hover:bg-navy-700 text-cream-50 rounded-[8px] font-serif font-bold text-sm shadow-md btn-tactile min-h-[44px]"

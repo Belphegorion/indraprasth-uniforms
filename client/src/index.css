@@ -8,6 +8,13 @@
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  /* Prevent 300ms tap delay and touch double-tap zoom on buttons and interactive elements */
+  button, a, input, select, textarea, [role="button"] {
+    touch-action: manipulation;
   }
 
   body {

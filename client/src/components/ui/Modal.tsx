@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 
 interface ModalProps {
@@ -16,21 +16,39 @@ export const Modal: React.FC<ModalProps> = ({
   children,
   maxWidth = 'max-w-xl',
 }) => {
+  const closedByPopstateRef = useRef(false);
+
   useEffect(() => {
+    if (!isOpen) return;
+
+    closedByPopstateRef.current = false;
+    const stateObj = { modal: title || 'dialog', timestamp: Date.now() };
+    window.history.pushState(stateObj, '', window.location.href);
+
+    const handlePopState = () => {
+      closedByPopstateRef.current = true;
+      onClose();
+    };
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', handleKeyDown);
-    } else {
-      document.body.style.overflow = 'unset';
-    }
+
+    window.addEventListener('popstate', handlePopState);
+    window.addEventListener('keydown', handleKeyDown);
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
     return () => {
-      document.body.style.overflow = 'unset';
+      window.removeEventListener('popstate', handlePopState);
       window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+
+      if (!closedByPopstateRef.current && window.history.state?.modal) {
+        window.history.back();
+      }
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, title]);
 
   if (!isOpen) return null;
 
@@ -45,7 +63,7 @@ export const Modal: React.FC<ModalProps> = ({
 
       {/* Modal Dialog Box */}
       <div
-        className={`relative w-full ${maxWidth} bg-cream-50 rounded-[10px] shadow-2xl border border-sand-300 z-10 overflow-hidden transform transition-all max-h-[90vh] flex flex-col text-ink`}
+        className={`relative w-full ${maxWidth} bg-cream-50 rounded-[10px] shadow-2xl border border-sand-300 z-10 overflow-hidden transform transition-all max-h-[90dvh] flex flex-col text-ink`}
         role="dialog"
         aria-modal="true"
         aria-labelledby={title ? 'modal-dialog-title' : undefined}
@@ -63,7 +81,7 @@ export const Modal: React.FC<ModalProps> = ({
         </div>
 
         {/* Content */}
-        <div className="p-6 overflow-y-auto flex-1">{children}</div>
+        <div className="p-6 overflow-y-auto overscroll-contain flex-1">{children}</div>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   ShoppingBag,
@@ -23,15 +23,58 @@ export const Header: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [schoolsDropdownOpen, setSchoolsDropdownOpen] = useState(false);
+  const menuClosedByPopstateRef = useRef(false);
 
   const totalCartCount = getTotalItems();
+
+  // Sync mobile hamburger menu with browser history so pressing the mobile device Back button
+  // dismisses the menu drawer instead of navigating away or closing the page!
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    menuClosedByPopstateRef.current = false;
+    const stateObj = { drawer: 'mobileMenu', timestamp: Date.now() };
+    window.history.pushState(stateObj, '', window.location.href);
+
+    const handlePopState = () => {
+      menuClosedByPopstateRef.current = true;
+      setMobileMenuOpen(false);
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    window.addEventListener('keydown', handleKeyDown);
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+
+      if (!menuClosedByPopstateRef.current && window.history.state?.drawer === 'mobileMenu') {
+        window.history.back();
+      }
+    };
+  }, [mobileMenuOpen]);
+
+  const closeMobileMenu = () => {
+    menuClosedByPopstateRef.current = true;
+    setMobileMenuOpen(false);
+  };
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
+      closeMobileMenu();
       navigate(`/shop?q=${encodeURIComponent(searchQuery.trim())}`);
       setSearchQuery('');
-      setMobileMenuOpen(false);
     }
   };
 
@@ -213,7 +256,10 @@ export const Header: React.FC = () => {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-sand-300 bg-cream-50 px-4 pt-4 pb-6 space-y-4">
+        <div
+          className="md:hidden border-t border-sand-300 bg-cream-50 px-4 pt-4 pb-6 space-y-4 max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain"
+          style={{ paddingBottom: 'max(1.5rem, env(safe-area-inset-bottom, 0px))' }}
+        >
           <form onSubmit={handleSearchSubmit} className="relative">
             <input
               type="text"
@@ -228,14 +274,14 @@ export const Header: React.FC = () => {
           <nav className="flex flex-col space-y-1 text-base font-medium text-ink">
             <Link
               to="/"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={closeMobileMenu}
               className="px-3 py-2 rounded-[8px] hover:bg-sand-200 font-serif font-medium text-navy-800"
             >
               Home
             </Link>
             <Link
               to="/shop"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={closeMobileMenu}
               className="px-3 py-2 rounded-[8px] hover:bg-sand-200"
             >
               Shop Uniforms
@@ -251,7 +297,7 @@ export const Header: React.FC = () => {
                     <Link
                       key={s.code}
                       to={`/school/${s.slug}`}
-                      onClick={() => setMobileMenuOpen(false)}
+                      onClick={closeMobileMenu}
                       title={s.name}
                       aria-label={`View uniforms for ${s.name}`}
                       className="text-xs font-serif font-medium text-ink bg-cream-50 hover:bg-sand-200 p-2 rounded-[8px] border border-sand-300 flex items-center gap-2.5 min-h-[44px] transition-colors btn-tactile"
@@ -280,28 +326,28 @@ export const Header: React.FC = () => {
             </div>
             <Link
               to="/bulk-inquiry"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={closeMobileMenu}
               className="px-3 py-2 rounded-[8px] hover:bg-sand-200 text-brass-text font-serif font-semibold"
             >
               Bulk & Institutional Inquiries
             </Link>
             <Link
               to="/track-order"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={closeMobileMenu}
               className="px-3 py-2 rounded-[8px] hover:bg-sand-200"
             >
               Track Order
             </Link>
             <Link
               to="/about"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={closeMobileMenu}
               className="px-3 py-2 rounded-[8px] hover:bg-sand-200"
             >
               Heritage & Craft Since 1975
             </Link>
             <Link
               to="/contact"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={closeMobileMenu}
               className="px-3 py-2 rounded-[8px] hover:bg-sand-200"
             >
               Bhopal Branches & Hours
