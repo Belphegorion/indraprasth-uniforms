@@ -3,6 +3,7 @@ import { Order } from '../models/Order';
 import { createOrder, updateOrderStatus } from '../services/orderService';
 import { Parser } from 'json2csv';
 import { AuthRequest } from '../middleware/auth';
+import { escapeRegex } from './productController';
 
 export const createPublicOrder = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -90,7 +91,8 @@ export const getAdminOrders = async (req: Request, res: Response): Promise<void>
   const filter: any = {};
 
   if (q && typeof q === 'string' && q.trim().length > 0) {
-    const searchRegex = new RegExp(q.trim(), 'i');
+    const sanitizedQ = escapeRegex(q.trim().slice(0, 80));
+    const searchRegex = new RegExp(sanitizedQ, 'i');
     filter.$or = [
       { orderNumber: searchRegex },
       { 'customer.phone': searchRegex },

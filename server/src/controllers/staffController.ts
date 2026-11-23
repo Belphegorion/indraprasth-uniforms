@@ -23,6 +23,20 @@ export const createStaff = async (req: AuthRequest, res: Response): Promise<void
     return;
   }
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(String(email).trim())) {
+    res.status(400).json({ success: false, error: 'Please enter a valid email address' });
+    return;
+  }
+
+  if (typeof password !== 'string' || password.length < 8 || password.length > 100) {
+    res.status(400).json({
+      success: false,
+      error: 'Password must be between 8 and 100 characters',
+    });
+    return;
+  }
+
   try {
     const existing = await Admin.findOne({ email: email.toLowerCase().trim() });
     if (existing) {
