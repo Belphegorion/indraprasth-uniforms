@@ -12,59 +12,59 @@ export default {
       colors: {
         // Brand Structure: Navy Hierarchy
         navy: {
-          950: 'var(--color-navy-900)',
-          900: 'var(--color-navy-900)',
-          800: 'var(--color-navy-800)',
-          700: 'var(--color-navy-700)',
-          600: 'var(--color-navy-700)',
-          500: 'var(--color-blue-600)',
+          950: '#0A1F3A',
+          900: '#0A1F3A',
+          800: '#0E2747',
+          700: '#14407A',
+          600: '#14407A',
+          500: '#1860A8',
         },
         // Brand Primary: Royal Blue (Logo Wordmark)
         blue: {
-          600: 'var(--color-blue-600)',
-          100: 'var(--color-blue-100)',
-          50: 'var(--color-blue-100)',
-          500: 'var(--color-blue-600)',
+          600: '#1860A8',
+          100: '#DCE8F5',
+          50: '#DCE8F5',
+          500: '#1860A8',
         },
         // Brand Accent: Crimson (Logo Crown)
         crimson: {
-          800: 'var(--color-crimson-800)',
-          700: 'var(--color-crimson-700)',
-          600: 'var(--color-crimson-600)',
-          400: 'var(--color-crimson-400)',
-          100: 'var(--color-crimson-100)',
+          800: '#7F1428',
+          700: '#A51B33',
+          600: '#C8233F',
+          400: '#E5566D',
+          100: '#F8DDE2',
         },
         // Surfaces: Warm Beige & Cream (~60% of canvas)
         cream: {
-          50: 'var(--color-cream-50)',
-          100: 'var(--color-cream-100)',
+          50: '#FBF8F2',
+          100: '#F7F2E8',
         },
         sand: {
-          200: 'var(--color-sand-200)',
-          300: 'var(--color-sand-300)',
+          200: '#EDE3D2',
+          300: '#DCCDB4',
         },
         taupe: {
-          500: 'var(--color-taupe-500)',
+          500: '#766650',
         },
         // Antique Brass Accents
         brass: {
-          DEFAULT: 'var(--color-brass)',
-          text: 'var(--color-brass-text)',
+          DEFAULT: '#A8863C',
+          text: '#7A5F22',
         },
         // Typography Ink & Slate
-        ink: 'var(--color-ink)',
+        ink: '#1B2430',
         slate: {
-          DEFAULT: 'var(--color-slate)',
+          DEFAULT: '#5B6676',
           50: '#F8FAFC',
           100: '#F1F5F9',
           200: '#E2E8F0',
           300: '#CBD5E1',
           400: '#94A3B8',
-          500: 'var(--color-slate)',
-          600: 'var(--color-slate)',
-          700: 'var(--color-ink)',
-          800: 'var(--color-navy-800)',
-          900: 'var(--color-navy-900)',
+          500: '#5B6676',
+          600: '#475569',
+          700: '#334155',
+          800: '#0E2747',
+          900: '#0A1F3A',
         },
         // Semantic Tokens
         success: {

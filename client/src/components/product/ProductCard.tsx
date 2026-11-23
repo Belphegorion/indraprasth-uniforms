@@ -39,7 +39,18 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const minPrice = allPrices.length > 0 ? Math.min(...allPrices) : product.price;
   const maxPrice = allPrices.length > 0 ? Math.max(...allPrices) : product.price;
   const hasVariablePrice = minPrice !== maxPrice || hasVariants || (product.sizes && product.sizes.length > 1 && allPrices.length > 1);
-  const displayPrice = minPrice || product.price;
+
+  const currentSizeObj = !hasVariants && selectedSize
+    ? product.sizes?.find((s) => s.label === selectedSize)
+    : null;
+
+  const selectedSizePrice =
+    currentSizeObj && typeof currentSizeObj.price === 'number' && currentSizeObj.price > 0
+      ? currentSizeObj.price
+      : null;
+
+  const displayPrice = selectedSizePrice !== null ? selectedSizePrice : (minPrice || product.price);
+  const showFromPrefix = (hasVariants || !selectedSizePrice) && hasVariablePrice;
 
   // Calculate discount percentage if MRP exists
   const discountPercent =
@@ -232,7 +243,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <div>
             <div className="flex items-baseline gap-1.5">
               <span className="text-base sm:text-lg font-serif font-bold text-navy-800 tracking-tight">
-                {hasVariablePrice ? 'From ' : ''}₹{displayPrice.toLocaleString('en-IN')}
+                {showFromPrefix ? 'From ' : ''}₹{displayPrice.toLocaleString('en-IN')}
               </span>
               {product.mrp && product.mrp > displayPrice && (
                 <span className="text-xs text-taupe-500 line-through font-sans">

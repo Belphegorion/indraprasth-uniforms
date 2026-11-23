@@ -151,7 +151,7 @@ export const Home: React.FC = () => {
           />
           {/* Atelier Gradient Scrim for Legibility & Contrast */}
           <div
-            className="absolute inset-0 bg-gradient-to-b from-cream-100/95 via-cream-100/90 to-cream-100/60 lg:bg-gradient-to-r lg:from-cream-100 lg:via-cream-100/95 lg:via-60% lg:to-transparent"
+            className="absolute inset-0 bg-gradient-to-b from-cream-100/95 via-cream-100/90 to-cream-100/75 lg:bg-gradient-to-r lg:from-cream-100 lg:via-cream-100/95 lg:via-60% lg:to-transparent"
             aria-hidden="true"
           />
           <div className="absolute inset-0 bg-navy-950/[0.02]" aria-hidden="true" />
@@ -164,7 +164,7 @@ export const Home: React.FC = () => {
             onClick={toggleVideoPlayback}
             aria-label={isPlaying ? 'Pause background hero video' : 'Play background hero video'}
             title={isPlaying ? 'Pause background video' : 'Play background video'}
-            className="inline-flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-cream-50/90 hover:bg-cream-50 text-navy-800 border border-sand-300 shadow-md backdrop-blur-sm transition-colors focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:outline-none"
+            className="inline-flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-cream-50 hover:bg-cream-100 text-navy-800 border border-sand-300 shadow-md backdrop-blur-sm transition-colors focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:outline-none"
           >
             {isPlaying ? (
               <Pause className="w-4 h-4 text-navy-800" aria-hidden="true" />
@@ -176,20 +176,20 @@ export const Home: React.FC = () => {
 
         {/* Hero Content (Foreground) */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-2xl space-y-6 text-center lg:text-left p-6 sm:p-8 lg:p-0 rounded-2xl lg:rounded-none bg-cream-50/90 lg:bg-transparent backdrop-blur-md lg:backdrop-blur-none border border-sand-300/80 lg:border-none shadow-xl lg:shadow-none">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cream-50/90 backdrop-blur-sm border border-sand-300 text-brass-text text-xs font-serif font-semibold uppercase tracking-wider shadow-subtle">
+          <div className="max-w-2xl space-y-6 text-center lg:text-left p-6 sm:p-8 lg:p-0 rounded-2xl lg:rounded-none bg-cream-50/95 lg:bg-transparent backdrop-blur-md lg:backdrop-blur-none border border-sand-300 lg:border-none shadow-xl lg:shadow-none">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cream-50 border border-sand-300 text-brass-text text-xs font-serif font-semibold uppercase tracking-wider shadow-subtle">
               <Sparkles className="w-3.5 h-3.5 text-brass" />
               <span>The Uniform Icons Since 1975</span>
             </div>
 
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-bold text-navy-800 tracking-tight leading-[1.08]">
+            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-serif font-bold text-navy-800 tracking-tight leading-[1.12]">
               Crafted for Character &{' '}
               <span className="font-serif italic font-normal text-brass-text">
                 Academic Distinction
               </span>
             </h1>
 
-            <p className="text-base sm:text-lg text-slate font-sans max-w-xl mx-auto lg:mx-0 leading-relaxed">
+            <p className="text-sm sm:text-base lg:text-lg text-slate-700 font-sans max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
               Trusted by Bhopal's premier schools, colleges, medical faculties, and corporations for half a century.
               Official regulation dye-lots, certified shrink-resistant woollens, and master tailoring designed to outlast the academic year.
             </p>
@@ -209,7 +209,7 @@ export const Home: React.FC = () => {
 
               <Link
                 to="/bulk-inquiry"
-                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-[8px] bg-cream-50/80 backdrop-blur-sm hover:bg-navy-800 hover:text-cream-50 text-navy-800 border-[1.5px] border-navy-800 font-medium text-sm sm:text-base btn-tactile focus-visible:ring-2 focus-visible:ring-blue-600 shadow-sm"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-[8px] bg-cream-50 hover:bg-navy-800 hover:text-cream-50 text-navy-800 border-[1.5px] border-navy-800 font-semibold text-sm sm:text-base btn-tactile focus-visible:ring-2 focus-visible:ring-blue-600 shadow-sm transition-colors"
               >
                 <Building className="w-4 h-4 text-brass" />
                 <span>Institutional & Bulk Orders</span>
@@ -217,18 +217,18 @@ export const Home: React.FC = () => {
             </div>
 
             {/* Trust Indicators */}
-            <div className="grid grid-cols-3 gap-6 pt-8 border-t border-sand-300 max-w-lg mx-auto lg:mx-0 text-left">
+            <div className="grid grid-cols-3 gap-3 sm:gap-6 pt-6 sm:pt-8 border-t border-sand-300 max-w-lg mx-auto lg:mx-0 text-center sm:text-left">
               <div>
-                <span className="block text-2xl sm:text-3xl font-serif font-bold text-navy-800">50+</span>
-                <span className="text-xs text-slate font-serif italic">Years of Heritage</span>
+                <span className="block text-xl sm:text-3xl font-serif font-bold text-navy-800">50+</span>
+                <span className="text-[11px] sm:text-xs text-slate-600 font-serif italic">Years of Heritage</span>
               </div>
               <div>
-                <span className="block text-2xl sm:text-3xl font-serif font-bold text-navy-800">4</span>
-                <span className="text-xs text-slate font-serif italic">Bhopal Retail Branches</span>
+                <span className="block text-xl sm:text-3xl font-serif font-bold text-navy-800">4</span>
+                <span className="text-[11px] sm:text-xs text-slate-600 font-serif italic">Bhopal Retail Branches</span>
               </div>
               <div>
-                <span className="block text-2xl sm:text-3xl font-serif font-bold text-navy-800">100%</span>
-                <span className="text-xs text-slate font-serif italic">Regulation Conformity</span>
+                <span className="block text-xl sm:text-3xl font-serif font-bold text-navy-800">100%</span>
+                <span className="text-[11px] sm:text-xs text-slate-600 font-serif italic">Regulation Conformity</span>
               </div>
             </div>
           </div>
